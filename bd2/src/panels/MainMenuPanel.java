@@ -22,34 +22,36 @@ public class MainMenuPanel extends JPanel {
         JButton connectToServerBtn = new JButton("connect to server");
         connectToServerBtn.setFont(new Font(Font.SERIF, Font.BOLD, 40));
         connectToServerBtn.setAlignmentX(CENTER_ALIGNMENT);
-        connectToServerBtn.setMaximumSize(new Dimension(400, 40));
+        connectToServerBtn.setMaximumSize(new Dimension(400, 50));
 
         JLabel infoLabel = new JLabel("Enter your data to connect to localhost");
         infoLabel.setFont(new Font(Font.SERIF, Font.BOLD, 22));
         infoLabel.setAlignmentX(CENTER_ALIGNMENT);
-        infoLabel.setMaximumSize(new Dimension(400, 40));
+        infoLabel.setMaximumSize(new Dimension(400, 50));
 
-        JTextField usernameTxt = new JTextField("Username");
-        usernameTxt.setFont(new Font(Font.SERIF, Font.BOLD, 40));
+        JTextField usernameTxt = new JTextField("username");
+        usernameTxt.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         usernameTxt.setAlignmentX(CENTER_ALIGNMENT);
-        usernameTxt.setMaximumSize(new Dimension(400, 40));
+        usernameTxt.setMaximumSize(new Dimension(400, 50));
 
-        JPasswordField passwordTxt = new JPasswordField("Password");
-        passwordTxt.setFont(new Font(Font.SERIF, Font.BOLD, 40));
+        JPasswordField passwordTxt = new JPasswordField("");
+        passwordTxt.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         passwordTxt.setAlignmentX(CENTER_ALIGNMENT);
-        passwordTxt.setMaximumSize(new Dimension(400, 40));
+        passwordTxt.setMaximumSize(new Dimension(400, 50));
 
         JButton connectToLocalhostBtn = new JButton("connect to localhost");
         connectToLocalhostBtn.setFont(new Font(Font.SERIF, Font.BOLD, 40));
         connectToLocalhostBtn.setAlignmentX(CENTER_ALIGNMENT);
-        connectToLocalhostBtn.setMaximumSize(new Dimension(400, 40));
-
+        connectToLocalhostBtn.setMaximumSize(new Dimension(400, 50));
 
         connectToServerBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                mainMenuPresenter.connectToServer("84.237.50.81", "1521", "18204_Gomer", "artemgonka2000");
+                mainMenuPresenter.connectToServer("84.237.50.81",
+                        "1521",
+                        "18204_Gomer",
+                        "artemgonka2000");
             }
         });
 
@@ -57,7 +59,10 @@ public class MainMenuPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                mainMenuPresenter.connectToServer("127.0.0.1", "1521", usernameTxt.getText(), new String(passwordTxt.getPassword()));
+                mainMenuPresenter.connectToServer("127.0.0.1",
+                        "1521",
+                        usernameTxt.getText(),
+                        new String(passwordTxt.getPassword()));
             }
         });
 

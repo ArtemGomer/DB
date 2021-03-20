@@ -1,6 +1,6 @@
 package presenters;
 
-import Database.DatabaseApi;
+import database.DatabaseApi;
 import panels.DataTablePanel;
 import panels.TablesPanel;
 
@@ -31,9 +31,9 @@ public class DataTablePresenter {
         tablesPanel.requestFocus();
     }
 
-    public void getAllDataFrom(String tableName) {
+    public void getAllDataFrom(String sorting, String sortingBy, String tableName) {
         try {
-            ResultSet set = DatabaseApi.getInstance().getDataFrom(tableName);
+            ResultSet set = DatabaseApi.getInstance().getDataFrom(sorting, sortingBy, tableName);
             Vector<String> columns = new Vector<>();
             for (int i = 1; i <= set.getMetaData().getColumnCount(); i++) {
                 columns.add(set.getMetaData().getColumnName(i));
@@ -48,6 +48,7 @@ public class DataTablePresenter {
             }
             dataTablePanel.setDataTable(data, columns);
         } catch (Exception ex) {
+            ex.printStackTrace();
             onError("Can not execute query");
         }
     }
@@ -56,4 +57,24 @@ public class DataTablePresenter {
         dataTablePanel.showMessageDialog(message);
     }
 
+    public JComboBox<String> setSortingByData(String tableName) {
+        if (tableName.equalsIgnoreCase("goods_type")) {
+            return dataTablePanel.setSortingByComboBox(new String[]{"type_id", "type"});
+        } else {
+            return dataTablePanel.setSortingByComboBox(new String[]{"param1", "param2", "param3"});
+        }
+    }
+
+    public int updateItem(String tableName,
+                          String keyName,
+                          String newValue,
+                          String columnName,
+                          String id) {
+        try {
+            return DatabaseApi.getInstance().updateItem(tableName, keyName, newValue, columnName, id);
+        } catch (Exception ex) {
+            dataTablePanel.showMessageDialog("Can not update item");
+            return 0;
+        }
+    }
 }

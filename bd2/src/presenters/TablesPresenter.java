@@ -1,6 +1,6 @@
 package presenters;
 
-import Database.DatabaseApi;
+import database.DatabaseApi;
 import panels.DataTablePanel;
 import panels.MainMenuPanel;
 

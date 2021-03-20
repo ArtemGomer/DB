@@ -1,7 +1,8 @@
 package panels;
-import Database.DatabaseApi;
+import database.DatabaseApi;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 

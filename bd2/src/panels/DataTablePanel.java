@@ -1,22 +1,24 @@
 package panels;
 
+import customTables.DataTable;
 import presenters.DataTablePresenter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Objects;
 import java.util.Vector;
 
 public class DataTablePanel extends JPanel {
 
     private final DataTablePresenter dataTablePresenter;
     private JScrollPane dataTable;
+    private final String tableName;
 
     public DataTablePanel(Container container, String tableName) {
-        //TODO different constructors
+        this.tableName = tableName;
         dataTablePresenter = new DataTablePresenter(container, this);
-        dataTable = new JScrollPane(new JTable());
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         initViews(tableName);
     }
@@ -29,9 +31,12 @@ public class DataTablePanel extends JPanel {
         label.setFont(new Font(Font.SERIF, Font.BOLD, 15));
         optionPanel.add(label);
 
-        //TODO items in JComboBox
-        optionPanel.add(new JComboBox<>(new String[]{"item1", "item2"}));
-        optionPanel.add(new JComboBox<>(new String[]{"item3", "item4"}));
+        JComboBox<String> sortingComboBox = new JComboBox<>(new String[]{"no", "asc", "desc"});
+        JComboBox<String> sortingByComboBox = dataTablePresenter.setSortingByData(tableName);
+        sortingComboBox.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        sortingByComboBox.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        optionPanel.add(sortingComboBox);
+        optionPanel.add(sortingByComboBox);
 
         JButton findBtn = new JButton("Find");
         findBtn.setFont(new Font(Font.SERIF, Font.BOLD, 15));
@@ -40,7 +45,9 @@ public class DataTablePanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 //TODO queries
                 super.mouseClicked(e);
-                dataTablePresenter.getAllDataFrom(tableName);
+                dataTablePresenter.getAllDataFrom(Objects.requireNonNull(sortingComboBox.getSelectedItem()).toString(),
+                        Objects.requireNonNull(sortingByComboBox.getSelectedItem()).toString(),
+                        tableName);
             }
         });
 
@@ -56,9 +63,7 @@ public class DataTablePanel extends JPanel {
 
         optionPanel.add(findBtn);
         optionPanel.add(backBtn);
-
         add(optionPanel);
-        add(dataTable);
     }
 
     public void showMessageDialog(String message) {
@@ -66,12 +71,18 @@ public class DataTablePanel extends JPanel {
     }
 
     public void setDataTable(Vector<Vector<String>> data, Vector<String> columns) {
-        remove(dataTable);
-        JTable table = new JTable(data, columns);
+        if (dataTable != null) {
+            remove(dataTable);
+        }
+        JTable table = new DataTable(tableName, data, columns, dataTablePresenter);
         table.getTableHeader().setReorderingAllowed(false);
-        dataTable = new JScrollPane(new JTable(data, columns));
+        dataTable = new JScrollPane(table);
         add(dataTable);
         revalidate();
+    }
+
+    public JComboBox<String> setSortingByComboBox(String[] data) {
+        return new JComboBox<>(data);
     }
 
 }

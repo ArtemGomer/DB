@@ -1,4 +1,4 @@
-package Database;
+package database;
 
 import java.sql.*;
 import java.util.Locale;
@@ -17,8 +17,25 @@ public class DatabaseApi {
         return instance;
     }
 
-    public ResultSet getDataFrom(String tableName) throws SQLException {
-        String query = "SELECT * FROM " + tableName;
+    public int updateItem(String tableName,
+                          String keyName,
+                          String newValue,
+                          String columnName,
+                          String id) throws SQLException {
+        String valueToUpdate = " = '" + newValue + "'";
+        String query = "UPDATE " + tableName + " SET " + columnName + valueToUpdate + "WHERE " + keyName + "=" + id;
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        return preparedStatement.executeUpdate();
+    }
+
+    public ResultSet getDataFrom(String sorting, String sortingBy, String tableName) throws SQLException {
+        String query;
+        if (sorting.equalsIgnoreCase("no")) {
+            query = "SELECT * FROM " + tableName;
+        } else {
+            query = "SELECT * FROM " + tableName + " ORDER BY " + sortingBy + " " + sorting;
+        }
+
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         return preparedStatement.executeQuery();
     }
