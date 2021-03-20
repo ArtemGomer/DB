@@ -21,6 +21,7 @@ public class DataTablePanel extends JPanel {
         dataTablePresenter = new DataTablePresenter(container, this);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         initViews(tableName);
+        dataTablePresenter.getAllDataFrom(null, null, tableName);
     }
 
     private void initViews(String tableName) {

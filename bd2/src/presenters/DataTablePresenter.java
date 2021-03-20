@@ -31,6 +31,7 @@ public class DataTablePresenter {
         tablesPanel.requestFocus();
     }
 
+
     public void getAllDataFrom(String sorting, String sortingBy, String tableName) {
         try {
             ResultSet set = DatabaseApi.getInstance().getDataFrom(sorting, sortingBy, tableName);

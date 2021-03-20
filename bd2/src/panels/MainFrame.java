@@ -23,9 +23,10 @@ public class MainFrame extends JFrame {
         });
         setMainMenu();
         setVisible(true);
+        setMainMenu();
     }
 
-    public void setMainMenu() {
+    private void setMainMenu() {
         getContentPane().removeAll();
         JPanel mainMenuPanel = new MainMenuPanel(getContentPane());
         getContentPane().add(mainMenuPanel);

@@ -28,9 +28,11 @@ public class DatabaseApi {
         return preparedStatement.executeUpdate();
     }
 
-    public ResultSet getDataFrom(String sorting, String sortingBy, String tableName) throws SQLException {
+    public ResultSet getDataFrom(String sorting,
+                                 String sortingBy,
+                                 String tableName) throws SQLException {
         String query;
-        if (sorting.equalsIgnoreCase("no")) {
+        if (sorting == null || sortingBy == null || sorting.equalsIgnoreCase("no")) {
             query = "SELECT * FROM " + tableName;
         } else {
             query = "SELECT * FROM " + tableName + " ORDER BY " + sortingBy + " " + sorting;
@@ -40,7 +42,10 @@ public class DatabaseApi {
         return preparedStatement.executeQuery();
     }
 
-    public void connectToDatabase(String ip, String port, String username, String password) throws ClassNotFoundException, SQLException {
+    public void connectToDatabase(String ip,
+                                  String port,
+                                  String username,
+                                  String password) throws ClassNotFoundException, SQLException {
         Class.forName("oracle.jdbc.driver.OracleDriver");
         TimeZone timeZone = TimeZone.getTimeZone("GMT+7");
         TimeZone.setDefault(timeZone);
