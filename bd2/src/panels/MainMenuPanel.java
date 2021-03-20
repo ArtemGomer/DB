@@ -29,12 +29,12 @@ public class MainMenuPanel extends JPanel {
         infoLabel.setAlignmentX(CENTER_ALIGNMENT);
         infoLabel.setMaximumSize(new Dimension(400, 50));
 
-        JTextField usernameTxt = new JTextField("username");
+        JTextField usernameTxt = new JTextField("18204_Gomer");
         usernameTxt.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         usernameTxt.setAlignmentX(CENTER_ALIGNMENT);
         usernameTxt.setMaximumSize(new Dimension(400, 50));
 
-        JPasswordField passwordTxt = new JPasswordField("");
+        JPasswordField passwordTxt = new JPasswordField("artemgonka2000");
         passwordTxt.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         passwordTxt.setAlignmentX(CENTER_ALIGNMENT);
         passwordTxt.setMaximumSize(new Dimension(400, 50));

@@ -13,10 +13,12 @@ public class DataTablePresenter {
 
     private final Container container;
     private final DataTablePanel dataTablePanel;
+    private final DatabaseApi api;
 
     public DataTablePresenter(Container container, DataTablePanel dataTablePanel) {
         this.container = container;
         this.dataTablePanel = dataTablePanel;
+        this.api = DatabaseApi.getInstance();
     }
 
     public void back() {
@@ -34,7 +36,7 @@ public class DataTablePresenter {
 
     public void getAllDataFrom(String sorting, String sortingBy, String tableName) {
         try {
-            ResultSet set = DatabaseApi.getInstance().getDataFrom(sorting, sortingBy, tableName);
+            ResultSet set = api.getDataFrom(sorting, sortingBy, tableName);
             Vector<String> columns = new Vector<>();
             for (int i = 1; i <= set.getMetaData().getColumnCount(); i++) {
                 columns.add(set.getMetaData().getColumnName(i));
@@ -72,10 +74,14 @@ public class DataTablePresenter {
                           String columnName,
                           String id) {
         try {
-            return DatabaseApi.getInstance().updateItem(tableName, keyName, newValue, columnName, id);
+            return DatabaseApi.getInstance().updateItemIn(tableName, keyName, newValue, columnName, id);
         } catch (Exception ex) {
             dataTablePanel.showMessageDialog("Can not update item");
             return 0;
         }
+    }
+
+    public void openAddFrame(Vector<String> columnNames) {
+        dataTablePanel.openAddFrame(columnNames);
     }
 }

@@ -1,6 +1,7 @@
 package panels;
 
 import customTables.DataTable;
+import frames.AddFrame;
 import presenters.DataTablePresenter;
 
 import javax.swing.*;
@@ -15,6 +16,7 @@ public class DataTablePanel extends JPanel {
     private final DataTablePresenter dataTablePresenter;
     private JScrollPane dataTable;
     private final String tableName;
+    private Vector<String> columnNames;
 
     public DataTablePanel(Container container, String tableName) {
         this.tableName = tableName;
@@ -52,6 +54,17 @@ public class DataTablePanel extends JPanel {
             }
         });
 
+        JButton addBtn = new JButton("Add");
+        addBtn.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        addBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //TODO queries
+                super.mouseClicked(e);
+                dataTablePresenter.openAddFrame(columnNames);
+            }
+        });
+
         JButton backBtn = new JButton("Back");
         backBtn.setFont(new Font(Font.SERIF, Font.BOLD, 15));
         backBtn.addMouseListener(new MouseAdapter() {
@@ -63,6 +76,7 @@ public class DataTablePanel extends JPanel {
         });
 
         optionPanel.add(findBtn);
+        optionPanel.add(addBtn);
         optionPanel.add(backBtn);
         add(optionPanel);
     }
@@ -75,6 +89,7 @@ public class DataTablePanel extends JPanel {
         if (dataTable != null) {
             remove(dataTable);
         }
+        columnNames = columns;
         JTable table = new DataTable(tableName, data, columns, dataTablePresenter);
         table.getTableHeader().setReorderingAllowed(false);
         dataTable = new JScrollPane(table);
@@ -86,4 +101,7 @@ public class DataTablePanel extends JPanel {
         return new JComboBox<>(data);
     }
 
+    public void openAddFrame(Vector<String> columnNames) {
+        AddFrame addFrame = new AddFrame(tableName, columnNames);
+    }
 }

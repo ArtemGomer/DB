@@ -1,6 +1,7 @@
 package database;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -17,14 +18,25 @@ public class DatabaseApi {
         return instance;
     }
 
-    public int updateItem(String tableName,
-                          String keyName,
-                          String newValue,
-                          String columnName,
-                          String id) throws SQLException {
+    public int updateItemIn(String tableName,
+                            String keyName,
+                            String newValue,
+                            String columnName,
+                            String id) throws SQLException {
         String valueToUpdate = " = '" + newValue + "'";
         String query = "UPDATE " + tableName + " SET " + columnName + valueToUpdate + "WHERE " + keyName + "=" + id;
         PreparedStatement preparedStatement = connection.prepareStatement(query);
+        return preparedStatement.executeUpdate();
+    }
+
+    public int addDataTo(String tableName, ArrayList<String> fields) throws SQLException {
+        StringBuilder query = new StringBuilder("INSERT INTO " + tableName + " VALUES(");
+        for (String field: fields) {
+            query.append("'").append(field).append("'").append(",");
+        }
+        query.replace(query.length() - 1, query.length(), ")");
+        System.out.println(query.toString());
+        PreparedStatement preparedStatement = connection.prepareStatement(query.toString());
         return preparedStatement.executeUpdate();
     }
 

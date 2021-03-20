@@ -12,8 +12,10 @@ public class MainMenuPresenter {
 
     private final Container container;
     private final MainMenuPanel mainMenuPanel;
+    private final DatabaseApi api;
 
     public MainMenuPresenter(Container container, MainMenuPanel mainMenuPanel) {
+        this.api = DatabaseApi.getInstance();
         this.container = container;
         this.mainMenuPanel = mainMenuPanel;
     }
@@ -21,7 +23,7 @@ public class MainMenuPresenter {
     public void connectToServer(String ip, String port, String username, String password) {
         try {
             if (checkValidData(username, password)) {
-                DatabaseApi.getInstance().connectToDatabase(ip, port, username, password);
+                api.connectToDatabase(ip, port, username, password);
                 onConnected();
             } else {
                 onError("Please, fill in all gaps");

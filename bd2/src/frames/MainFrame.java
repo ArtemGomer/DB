@@ -1,8 +1,8 @@
-package panels;
+package frames;
 import database.DatabaseApi;
+import panels.MainMenuPanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
