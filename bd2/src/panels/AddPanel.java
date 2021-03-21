@@ -1,6 +1,7 @@
 package panels;
 
 import presenters.AddPresenter;
+import presenters.DataTablePresenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +13,12 @@ public class AddPanel extends JPanel {
 
     private final AddPresenter addPresenter;
     private final String tableName;
+    private final DataTablePresenter dataTablePresenter;
 
-    public AddPanel(String tableName, Vector<String> columnNames) {
+    public AddPanel(String tableName, Vector<String> columnNames, DataTablePresenter dataTablePresenter) {
         addPresenter = new AddPresenter(this);
         this.tableName = tableName;
+        this.dataTablePresenter = dataTablePresenter;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         initViews(columnNames);
     }
@@ -49,7 +52,7 @@ public class AddPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                addPresenter.addData(tableName);
+                addPresenter.addData(tableName, dataTablePresenter);
             }
         });
 
@@ -60,5 +63,7 @@ public class AddPanel extends JPanel {
     public void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(null, message, "Failure", JOptionPane.ERROR_MESSAGE);
     }
+
+
 
 }

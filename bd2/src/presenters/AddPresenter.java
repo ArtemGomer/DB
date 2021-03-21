@@ -4,7 +4,6 @@ import database.DatabaseApi;
 import panels.AddPanel;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.Vector;
 
 public class AddPresenter {
@@ -23,9 +22,9 @@ public class AddPresenter {
         textFields.add(textField);
     }
 
-    public void addData(String tableName) {
+    public void addData(String tableName, DataTablePresenter dataTablePresenter) {
         try {
-            ArrayList<String> data = new ArrayList<>();
+            Vector<String> data = new Vector<>();
             for (JTextField textField : textFields) {
                 data.add(textField.getText());
             }
@@ -33,6 +32,7 @@ public class AddPresenter {
             if (number == 0) {
                 onError("Can not add item");
             }
+            dataTablePresenter.addRow(data);
         } catch (Exception ex) {
             onError("Can not add item");
         }

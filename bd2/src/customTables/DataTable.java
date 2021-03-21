@@ -26,8 +26,10 @@ public class DataTable extends JTable {
         String id = model.getValueAt(row, 0).toString();
         String keyName = model.getColumnName(0);
         String columnName = model.getColumnName(column);
-        if (presenter.updateItem(tableName, keyName, aValue.toString(), columnName, id) > 0) {
+        if (presenter.updateItem(keyName, aValue.toString(), columnName, id) > 0) {
             super.setValueAt(aValue, row, column);
         }
     }
+
+
 }

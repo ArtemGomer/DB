@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.Vector;
 
 public class DatabaseApi {
 
@@ -29,7 +30,13 @@ public class DatabaseApi {
         return preparedStatement.executeUpdate();
     }
 
-    public int addDataTo(String tableName, ArrayList<String> fields) throws SQLException {
+    public int deleteDataFrom(String tableName, String keyName, String key) throws SQLException {
+        String query = "DELETE FROM " + tableName + " WHERE " + keyName + " = " + key;
+        PreparedStatement preparedStatement = connection.prepareStatement(query.toString());
+        return preparedStatement.executeUpdate();
+    }
+
+    public int addDataTo(String tableName, Vector<String> fields) throws SQLException {
         StringBuilder query = new StringBuilder("INSERT INTO " + tableName + " VALUES(");
         for (String field: fields) {
             query.append("'").append(field).append("'").append(",");

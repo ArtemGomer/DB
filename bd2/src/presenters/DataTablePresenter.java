@@ -5,18 +5,21 @@ import panels.DataTablePanel;
 import panels.TablesPanel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.ResultSet;
 import java.util.Vector;
 
 public class DataTablePresenter {
 
+    private final String tableName;
     private final Container container;
     private final DataTablePanel dataTablePanel;
     private final DatabaseApi api;
 
-    public DataTablePresenter(Container container, DataTablePanel dataTablePanel) {
+    public DataTablePresenter(Container container, DataTablePanel dataTablePanel, String tableName) {
         this.container = container;
+        this.tableName = tableName;
         this.dataTablePanel = dataTablePanel;
         this.api = DatabaseApi.getInstance();
     }
@@ -60,16 +63,12 @@ public class DataTablePresenter {
         dataTablePanel.showMessageDialog(message);
     }
 
-    public JComboBox<String> setSortingByData(String tableName) {
-        if (tableName.equalsIgnoreCase("goods_type")) {
-            return dataTablePanel.setSortingByComboBox(new String[]{"type_id", "type"});
-        } else {
-            return dataTablePanel.setSortingByComboBox(new String[]{"param1", "param2", "param3"});
-        }
+    public JComboBox<String> setSortingByData(Vector<String> columnNames) {
+        String[] strings = columnNames.toArray(new String[0]);
+        return dataTablePanel.setSortingByComboBox(strings);
     }
 
-    public int updateItem(String tableName,
-                          String keyName,
+    public int updateItem(String keyName,
                           String newValue,
                           String columnName,
                           String id) {
@@ -84,4 +83,20 @@ public class DataTablePresenter {
     public void openAddFrame(Vector<String> columnNames) {
         dataTablePanel.openAddFrame(columnNames);
     }
+
+    public void addRow(Vector<String> data) {
+        ((DefaultTableModel)dataTablePanel.dataTable.getModel()).addRow(data);
+    }
+
+    public void deleteSelectedRows(int[] selectedRows) {
+        try {
+            for (int row: selectedRows) {
+                api.deleteDataFrom(tableName, dataTablePanel.dataTable.getColumnName(0), dataTablePanel.dataTable.getValueAt(row, 0).toString());
+                ((DefaultTableModel)dataTablePanel.dataTable.getModel()).removeRow(row);
+            }
+        } catch (Exception ex) {
+            onError("Can not delete items");
+        }
+    }
+
 }
