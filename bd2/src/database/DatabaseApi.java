@@ -1,17 +1,20 @@
 package database;
 
+import org.apache.ibatis.jdbc.ScriptRunner;
+
+import java.io.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.TimeZone;
-import java.util.Vector;
+import java.util.*;
 
 public class DatabaseApi {
 
     private Connection connection;
 
     private static DatabaseApi instance = null;
-    private DatabaseApi() {}
+
+    private DatabaseApi() {
+    }
+
     public static DatabaseApi getInstance() {
         if (instance == null) {
             instance = new DatabaseApi();
@@ -32,17 +35,16 @@ public class DatabaseApi {
 
     public int deleteDataFrom(String tableName, String keyName, String key) throws SQLException {
         String query = "DELETE FROM " + tableName + " WHERE " + keyName + " = " + key;
-        PreparedStatement preparedStatement = connection.prepareStatement(query.toString());
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
         return preparedStatement.executeUpdate();
     }
 
     public int addDataTo(String tableName, Vector<String> fields) throws SQLException {
         StringBuilder query = new StringBuilder("INSERT INTO " + tableName + " VALUES(");
-        for (String field: fields) {
+        for (String field : fields) {
             query.append("'").append(field).append("'").append(",");
         }
         query.replace(query.length() - 1, query.length(), ")");
-        System.out.println(query.toString());
         PreparedStatement preparedStatement = connection.prepareStatement(query.toString());
         return preparedStatement.executeUpdate();
     }
@@ -71,6 +73,14 @@ public class DatabaseApi {
         Locale.setDefault(Locale.ENGLISH);
         String url = "jdbc:oracle:thin:@" + ip + ":" + port + ":";
         connection = DriverManager.getConnection(url, username, password);
+    }
+
+    public void recreateTables() {
+        InputStream create = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateScript");
+        InputStream add = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/AddDataScript");
+        ScriptRunner scriptRunner = new ScriptRunner(connection);
+        scriptRunner.runScript(new InputStreamReader(create));
+        scriptRunner.runScript(new InputStreamReader(add));
     }
 
     public void disconnect() {

@@ -30,11 +30,11 @@ public class AddPanel extends JPanel {
             panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
             JLabel label = new JLabel(columnName);
-            label.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+            label.setFont(new Font(Font.SERIF, Font.BOLD, 20));
             label.setMaximumSize(new Dimension(200, 50));
 
             JTextField textField = new JTextField();
-            textField.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+            textField.setFont(new Font(Font.SERIF, Font.BOLD, 20));
             textField.setMaximumSize(new Dimension(200, 50));
 
             panel.add(label);

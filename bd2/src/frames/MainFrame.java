@@ -21,6 +21,7 @@ public class MainFrame extends JFrame {
                 DatabaseApi.getInstance().disconnect();
             }
         });
+        setResizable(false);
         setMainMenu();
         setVisible(true);
         setMainMenu();

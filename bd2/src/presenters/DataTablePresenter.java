@@ -91,8 +91,12 @@ public class DataTablePresenter {
     public void deleteSelectedRows(int[] selectedRows) {
         try {
             for (int row: selectedRows) {
-                api.deleteDataFrom(tableName, dataTablePanel.dataTable.getColumnName(0), dataTablePanel.dataTable.getValueAt(row, 0).toString());
-                ((DefaultTableModel)dataTablePanel.dataTable.getModel()).removeRow(row);
+                int num = api.deleteDataFrom(tableName, dataTablePanel.dataTable.getColumnName(0), dataTablePanel.dataTable.getValueAt(row, 0).toString());
+                if (num == 0) {
+                    onError("Can not delete items");
+                } else {
+                    ((DefaultTableModel) dataTablePanel.dataTable.getModel()).removeRow(row);
+                }
             }
         } catch (Exception ex) {
             onError("Can not delete items");

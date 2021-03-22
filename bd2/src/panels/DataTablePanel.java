@@ -35,7 +35,7 @@ public class DataTablePanel extends JPanel {
         JComboBox<String> sortingComboBox = new JComboBox<>(new String[]{"no", "asc", "desc"});
         JComboBox<String> sortingByComboBox = dataTablePresenter.setSortingByData(columnNames);
         sortingComboBox.setFont(new Font(Font.SERIF, Font.BOLD, 15));
-        sortingByComboBox.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        sortingByComboBox.setFont(new Font(Font.SERIF, Font.BOLD, 10));
         optionPanel.add(sortingComboBox);
         optionPanel.add(sortingByComboBox);
 
@@ -102,7 +102,7 @@ public class DataTablePanel extends JPanel {
     public void setDataTable(Vector<Vector<String>> data, Vector<String> columns) {
         if (dataTable == null) {
             columnNames = columns;
-            dataTable = new DataTable(tableName, data, columnNames, dataTablePresenter);
+            dataTable = new DataTable(data, columnNames, dataTablePresenter);
             dataTable.getTableHeader().setReorderingAllowed(false);
             dataTableScrollPane = new JScrollPane(dataTable);
         } else {

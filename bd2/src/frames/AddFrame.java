@@ -16,6 +16,8 @@ public class AddFrame extends JFrame {
         this.tableName = tableName;
         this.dataTablePresenter = dataTablePresenter;
         setSize(new Dimension(400, 300));
+        setResizable(false);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         initViews(columnNames);
         setVisible(true);

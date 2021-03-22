@@ -4,20 +4,21 @@ import presenters.DataTablePresenter;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
+import java.awt.*;
 import java.util.Vector;
 
 public class DataTable extends JTable {
 
     private final DataTablePresenter presenter;
-    private final String tableName;
 
-    public DataTable(String tableName,
-                     Vector<Vector<String>> data,
+    public DataTable(Vector<Vector<String>> data,
                      Vector<String> columnNames,
                      DataTablePresenter presenter) {
         super(data, columnNames);
         this.presenter = presenter;
-        this.tableName = tableName;
+        setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        getTableHeader().setFont(new Font(Font.SERIF, Font.BOLD, 10));
+        setRowHeight(20);
     }
 
     @Override
