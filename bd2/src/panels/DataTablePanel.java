@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -20,11 +21,13 @@ public class DataTablePanel extends JPanel {
     private Vector<String> columnNames;
     private JScrollPane dataTableScrollPane;
 
-    public DataTablePanel(Container container, String tableName) {
+    public DataTablePanel(Container container, String tableName) throws SQLException {
         this.tableName = tableName;
         dataTablePresenter = new DataTablePresenter(container, this, tableName);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        dataTablePresenter.getAllDataFrom(null, null, tableName);
+        if (!dataTablePresenter.getAllDataFrom(null, null, tableName)) {
+            throw new SQLException("Table does not exists");
+        }
         initViews(tableName);
     }
 

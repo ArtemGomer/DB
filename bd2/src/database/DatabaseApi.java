@@ -77,9 +77,15 @@ public class DatabaseApi {
 
     public void recreateTables() {
         InputStream create = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateScript");
+        InputStream createTg = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateTriggersScript");
+        InputStream dropSeq = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/DropSeqScript");
         InputStream add = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/AddDataScript");
         ScriptRunner scriptRunner = new ScriptRunner(connection);
         scriptRunner.runScript(new InputStreamReader(create));
+        scriptRunner.setSendFullScript(true);
+        scriptRunner.runScript(new InputStreamReader(dropSeq));
+        scriptRunner.runScript(new InputStreamReader(createTg));
+        scriptRunner.setSendFullScript(false);
         scriptRunner.runScript(new InputStreamReader(add));
     }
 

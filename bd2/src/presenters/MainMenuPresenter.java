@@ -29,6 +29,7 @@ public class MainMenuPresenter {
                 onError("Please, fill in all gaps");
             }
         } catch (Exception ex) {
+            ex.printStackTrace();
             onError("Can not connect to server");
         }
     }

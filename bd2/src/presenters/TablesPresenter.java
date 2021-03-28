@@ -34,11 +34,15 @@ public class TablesPresenter {
     }
 
     public void openDataTable(String tableName) {
-        container.removeAll();
-        JPanel dataTablePanel = new DataTablePanel(container, tableName);
-        container.add(dataTablePanel);
-        container.revalidate();
-        dataTablePanel.requestFocus();
+        try {
+            JPanel dataTablePanel = new DataTablePanel(container, tableName);
+            container.removeAll();
+            container.add(dataTablePanel);
+            container.revalidate();
+            dataTablePanel.requestFocus();
+        } catch (Exception ex) {
+            onError(ex.getMessage());
+        }
     }
 
     public void exit() {

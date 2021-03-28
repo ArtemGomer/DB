@@ -1,0 +1,43 @@
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE SEQUENCE sq_fee
+        START WITH 1
+        INCREMENT BY 1
+        NOMAXVALUE';
+    EXECUTE IMMEDIATE 'CREATE SEQUENCE sq_goods_type
+        START WITH 1
+        INCREMENT BY 1
+        NOMAXVALUE';
+    EXECUTE IMMEDIATE 'CREATE SEQUENCE sq_delivered_goods
+        START WITH 1
+        INCREMENT BY 1
+        NOMAXVALUE';
+    EXECUTE IMMEDIATE 'CREATE SEQUENCE sq_dealers
+        START WITH 1
+        INCREMENT BY 1
+        NOMAXVALUE';
+
+    EXECUTE IMMEDIATE 'CREATE OR REPLACE TRIGGER tr_incr_fee BEFORE INSERT ON FEE FOR EACH ROW
+    BEGIN
+        SELECT sq_fee.NEXTVAL
+        INTO :NEW.id
+        FROM dual;
+    END;';
+    EXECUTE IMMEDIATE 'CREATE OR REPLACE TRIGGER tr_incr_goods_type BEFORE INSERT ON GOODS_TYPE FOR EACH ROW
+    BEGIN
+        SELECT sq_goods_type.NEXTVAL
+        INTO :NEW.id
+        FROM dual;
+    END;';
+    EXECUTE IMMEDIATE 'CREATE OR REPLACE TRIGGER tr_incr_delivered_goods BEFORE INSERT ON DELIVERED_GOODS FOR EACH ROW
+    BEGIN
+        SELECT sq_delivered_goods.NEXTVAL
+        INTO :NEW.id
+        FROM dual;
+    END;';
+    EXECUTE IMMEDIATE 'CREATE OR REPLACE TRIGGER tr_incr_dealers BEFORE INSERT ON DEALERS FOR EACH ROW
+    BEGIN
+        SELECT sq_dealers.NEXTVAL
+        INTO :NEW.id
+        FROM dual;
+    END;';
+END;

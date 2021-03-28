@@ -37,7 +37,7 @@ public class DataTablePresenter {
     }
 
 
-    public void getAllDataFrom(String sorting, String sortingBy, String tableName) {
+    public boolean getAllDataFrom(String sorting, String sortingBy, String tableName) {
         try {
             ResultSet set = api.getDataFrom(sorting, sortingBy, tableName);
             Vector<String> columns = new Vector<>();
@@ -56,7 +56,9 @@ public class DataTablePresenter {
         } catch (Exception ex) {
             ex.printStackTrace();
             onError("Can not execute query");
+            return false;
         }
+        return true;
     }
 
     public void onError(String message) {
