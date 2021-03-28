@@ -77,10 +77,10 @@ public class TablesPanel extends JPanel {
             }
         });
 
-        JButton exitBtn = new JButton("Exit");
-        exitBtn.setAlignmentX(CENTER_ALIGNMENT);
-        exitBtn.setFont(new Font(Font.SERIF, Font.BOLD, 30));
-        exitBtn.addMouseListener(new MouseAdapter() {
+        JButton disconnectBtn = new JButton("Disconnect");
+        disconnectBtn.setAlignmentX(CENTER_ALIGNMENT);
+        disconnectBtn.setFont(new Font(Font.SERIF, Font.BOLD, 30));
+        disconnectBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -94,7 +94,7 @@ public class TablesPanel extends JPanel {
         tablesPanel.add(feeBtn);
 
         optionsPanel.add(recreateTablesBtn);
-        optionsPanel.add(exitBtn);
+        optionsPanel.add(disconnectBtn);
 
         mainPanel.add(tablesPanel);
         mainPanel.add(optionsPanel);

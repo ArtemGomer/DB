@@ -22,6 +22,11 @@ public class DataTable extends JTable {
     }
 
     @Override
+    public boolean isCellEditable(int row, int column) {
+        return column != 0;
+    }
+
+    @Override
     public void setValueAt(Object aValue, int row, int column) {
         TableModel model = getModel();
         String id = model.getValueAt(row, 0).toString();

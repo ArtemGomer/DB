@@ -81,6 +81,7 @@ public class DatabaseApi {
         InputStream dropSeq = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/DropSeqScript");
         InputStream add = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/AddDataScript");
         ScriptRunner scriptRunner = new ScriptRunner(connection);
+        scriptRunner.setRemoveCRs(true);
         scriptRunner.runScript(new InputStreamReader(create));
         scriptRunner.setSendFullScript(true);
         scriptRunner.runScript(new InputStreamReader(dropSeq));
