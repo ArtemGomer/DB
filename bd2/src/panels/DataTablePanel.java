@@ -42,9 +42,9 @@ public class DataTablePanel extends JPanel {
         optionPanel.add(sortingComboBox);
         optionPanel.add(sortingByComboBox);
 
-        JButton findBtn = new JButton("Find");
-        findBtn.setFont(new Font(Font.SERIF, Font.BOLD, 15));
-        findBtn.addMouseListener(new MouseAdapter() {
+        JButton refreshBtn = new JButton("Refresh");
+        refreshBtn.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        refreshBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -89,7 +89,7 @@ public class DataTablePanel extends JPanel {
         label.setFont(new Font(Font.SERIF, Font.BOLD, 15));
         namePanel.add(label);
 
-        optionPanel.add(findBtn);
+        optionPanel.add(refreshBtn);
         optionPanel.add(addBtn);
         optionPanel.add(deleteBtn);
         optionPanel.add(backBtn);
@@ -121,7 +121,7 @@ public class DataTablePanel extends JPanel {
     }
 
     public void openAddFrame(Vector<String> columnNames) {
-        AddFrame addFrame = new AddFrame(tableName, columnNames, dataTablePresenter);
+        AddFrame addFrame = new AddFrame(tableName, columnNames);
     }
 
 }

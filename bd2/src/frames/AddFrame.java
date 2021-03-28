@@ -10,11 +10,9 @@ import java.util.Vector;
 public class AddFrame extends JFrame {
 
     private final String tableName;
-    private final DataTablePresenter dataTablePresenter;
 
-    public AddFrame(String tableName, Vector<String> columnNames, DataTablePresenter dataTablePresenter) {
+    public AddFrame(String tableName, Vector<String> columnNames) {
         this.tableName = tableName;
-        this.dataTablePresenter = dataTablePresenter;
         setSize(new Dimension(400, 300));
         setResizable(false);
         setLocationRelativeTo(null);
@@ -24,7 +22,7 @@ public class AddFrame extends JFrame {
     }
 
     private void initViews(Vector<String> columnNames) {
-        AddPanel addPanel = new AddPanel(tableName, columnNames, dataTablePresenter);
+        AddPanel addPanel = new AddPanel(tableName, columnNames);
         add(new JScrollPane(addPanel));
     }
 

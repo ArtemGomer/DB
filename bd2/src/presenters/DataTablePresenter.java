@@ -75,7 +75,7 @@ public class DataTablePresenter {
                           String columnName,
                           String id) {
         try {
-            return DatabaseApi.getInstance().updateItemIn(tableName, keyName, newValue, columnName, id);
+            return api.updateItemIn(tableName, keyName, newValue, columnName, id);
         } catch (Exception ex) {
             dataTablePanel.showMessageDialog("Can not update item");
             return 0;
@@ -84,10 +84,6 @@ public class DataTablePresenter {
 
     public void openAddFrame(Vector<String> columnNames) {
         dataTablePanel.openAddFrame(columnNames);
-    }
-
-    public void addRow(Vector<String> data) {
-        ((DefaultTableModel)dataTablePanel.dataTable.getModel()).addRow(data);
     }
 
     public void deleteSelectedRows(int[] selectedRows) {

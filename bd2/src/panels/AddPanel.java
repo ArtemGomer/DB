@@ -13,23 +13,21 @@ public class AddPanel extends JPanel {
 
     private final AddPresenter addPresenter;
     private final String tableName;
-    private final DataTablePresenter dataTablePresenter;
 
-    public AddPanel(String tableName, Vector<String> columnNames, DataTablePresenter dataTablePresenter) {
+    public AddPanel(String tableName, Vector<String> columnNames) {
         addPresenter = new AddPresenter(this);
         this.tableName = tableName;
-        this.dataTablePresenter = dataTablePresenter;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         initViews(columnNames);
     }
 
     public void initViews(Vector<String> columnNames) {
-        for (String columnName: columnNames) {
+        for (int i = 1; i < columnNames.size(); i++) {
             JPanel panel = new JPanel();
             panel.setMaximumSize(new Dimension(400, 50));
             panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
-            JLabel label = new JLabel(columnName);
+            JLabel label = new JLabel(columnNames.get(i));
             label.setFont(new Font(Font.SERIF, Font.BOLD, 20));
             label.setMaximumSize(new Dimension(200, 50));
 
@@ -52,7 +50,7 @@ public class AddPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                addPresenter.addData(tableName, dataTablePresenter);
+                addPresenter.addData(tableName, columnNames);
             }
         });
 

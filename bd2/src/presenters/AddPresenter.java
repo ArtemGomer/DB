@@ -22,17 +22,16 @@ public class AddPresenter {
         textFields.add(textField);
     }
 
-    public void addData(String tableName, DataTablePresenter dataTablePresenter) {
+    public void addData(String tableName, Vector<String> columnNames) {
         try {
             Vector<String> data = new Vector<>();
             for (JTextField textField : textFields) {
                 data.add(textField.getText());
             }
-            int number = api.addDataTo(tableName, data);
+            int number = api.addDataTo(tableName, columnNames, data);
             if (number == 0) {
                 onError("Can not add item");
             }
-            dataTablePresenter.addRow(data);
         } catch (Exception ex) {
             onError("Can not add item");
         }

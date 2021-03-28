@@ -39,8 +39,14 @@ public class DatabaseApi {
         return preparedStatement.executeUpdate();
     }
 
-    public int addDataTo(String tableName, Vector<String> fields) throws SQLException {
-        StringBuilder query = new StringBuilder("INSERT INTO " + tableName + " VALUES(");
+    public int addDataTo(String tableName, Vector<String> columnNames, Vector<String> fields) throws SQLException {
+        StringBuilder query = new StringBuilder();
+        query.append("INSERT INTO ").append(tableName).append("(");
+        for (int i = 1; i < columnNames.size(); i++) {
+            query.append(columnNames.get(i)).append(",");
+        }
+        query.replace(query.length() - 1, query.length(), ")");
+        query.append(" VALUES(");
         for (String field : fields) {
             query.append("'").append(field).append("'").append(",");
         }
