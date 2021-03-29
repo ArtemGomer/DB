@@ -1,7 +1,6 @@
 package panels;
 
 import presenters.AddPresenter;
-import presenters.DataTablePresenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,7 +60,5 @@ public class AddPanel extends JPanel {
     public void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(null, message, "Failure", JOptionPane.ERROR_MESSAGE);
     }
-
-
 
 }

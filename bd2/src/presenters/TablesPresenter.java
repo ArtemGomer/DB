@@ -1,7 +1,7 @@
 package presenters;
 
 import database.DatabaseApi;
-import panels.DataTablePanel;
+import frames.TableFrame;
 import panels.MainMenuPanel;
 import panels.TablesPanel;
 
@@ -35,18 +35,14 @@ public class TablesPresenter {
 
     public void openDataTable(String tableName) {
         try {
-            JPanel dataTablePanel = new DataTablePanel(container, tableName);
-            container.removeAll();
-            container.add(dataTablePanel);
-            container.revalidate();
-            dataTablePanel.requestFocus();
+            TableFrame tableFrame = new TableFrame(tableName);
         } catch (Exception ex) {
-            onError(ex.getMessage());
+            onError("Can not get table!");
         }
     }
 
     public void exit() {
-        DatabaseApi.getInstance().disconnect();
+        databaseApi.disconnect();
         onExit();
     }
 

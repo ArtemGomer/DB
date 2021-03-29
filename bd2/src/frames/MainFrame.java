@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 
 public class MainFrame extends JFrame {
     public MainFrame() {
+        super("Details shop");
         initViews();
     }
 
@@ -22,7 +23,6 @@ public class MainFrame extends JFrame {
             }
         });
         setResizable(false);
-        setMainMenu();
         setVisible(true);
         setMainMenu();
     }

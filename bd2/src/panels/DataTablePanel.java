@@ -21,9 +21,9 @@ public class DataTablePanel extends JPanel {
     private Vector<String> columnNames;
     private JScrollPane dataTableScrollPane;
 
-    public DataTablePanel(Container container, String tableName) throws SQLException {
+    public DataTablePanel(String tableName) throws SQLException {
         this.tableName = tableName;
-        dataTablePresenter = new DataTablePresenter(container, this, tableName);
+        dataTablePresenter = new DataTablePresenter(this, tableName);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         if (!dataTablePresenter.getAllDataFrom(null, null, tableName)) {
             throw new SQLException("Table does not exists");
@@ -74,16 +74,6 @@ public class DataTablePanel extends JPanel {
             }
         });
 
-        JButton backBtn = new JButton("Back");
-        backBtn.setFont(new Font(Font.SERIF, Font.BOLD, 15));
-        backBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                dataTablePresenter.back();
-            }
-        });
-
         JPanel namePanel = new JPanel(new FlowLayout());
         JLabel label = new JLabel(tableName);
         label.setFont(new Font(Font.SERIF, Font.BOLD, 15));
@@ -92,7 +82,6 @@ public class DataTablePanel extends JPanel {
         optionPanel.add(refreshBtn);
         optionPanel.add(addBtn);
         optionPanel.add(deleteBtn);
-        optionPanel.add(backBtn);
         add(optionPanel);
         add(namePanel);
         add(dataTableScrollPane);

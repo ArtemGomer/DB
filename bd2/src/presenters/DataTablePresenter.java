@@ -13,29 +13,14 @@ import java.util.Vector;
 public class DataTablePresenter {
 
     private final String tableName;
-    private final Container container;
     private final DataTablePanel dataTablePanel;
     private final DatabaseApi api;
 
-    public DataTablePresenter(Container container, DataTablePanel dataTablePanel, String tableName) {
-        this.container = container;
+    public DataTablePresenter(DataTablePanel dataTablePanel, String tableName) {
         this.tableName = tableName;
         this.dataTablePanel = dataTablePanel;
         this.api = DatabaseApi.getInstance();
     }
-
-    public void back() {
-        onBack();
-    }
-
-    private void onBack() {
-        container.removeAll();
-        JPanel tablesPanel = new TablesPanel(container);
-        container.add(tablesPanel);
-        container.revalidate();
-        tablesPanel.requestFocus();
-    }
-
 
     public boolean getAllDataFrom(String sorting, String sortingBy, String tableName) {
         try {
