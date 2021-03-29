@@ -12,6 +12,7 @@ public class AddPanel extends JPanel {
 
     private final AddPresenter addPresenter;
     private final String tableName;
+    private final Font font = new Font(Font.SERIF, Font.BOLD, 20);
 
     public AddPanel(String tableName, Vector<String> columnNames) {
         addPresenter = new AddPresenter(this);
@@ -27,11 +28,11 @@ public class AddPanel extends JPanel {
             panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 
             JLabel label = new JLabel(columnNames.get(i));
-            label.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+            label.setFont(font);
             label.setMaximumSize(new Dimension(200, 50));
 
             JTextField textField = new JTextField();
-            textField.setFont(new Font(Font.SERIF, Font.BOLD, 20));
+            textField.setFont(font);
             textField.setMaximumSize(new Dimension(200, 50));
 
             panel.add(label);

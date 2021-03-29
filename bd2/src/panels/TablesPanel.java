@@ -104,7 +104,17 @@ public class TablesPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 tablesPresenter.recreateTables();
-//                tablesPresenter.openDataTable("Goods_type");
+            }
+        });
+
+        JButton infoBtn = new JButton("Information");
+        infoBtn.setFont(font);
+        infoBtn.setAlignmentX(CENTER_ALIGNMENT);
+        infoBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                tablesPresenter.openInfoFrame();
             }
         });
 
@@ -128,6 +138,7 @@ public class TablesPanel extends JPanel {
         tablesPanel.add(cellBtn);
 
         optionsPanel.add(recreateTablesBtn);
+        optionsPanel.add(infoBtn);
         optionsPanel.add(disconnectBtn);
 
         mainPanel.add(tablesPanel);

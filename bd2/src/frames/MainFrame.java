@@ -13,7 +13,7 @@ public class MainFrame extends JFrame {
     }
 
     private void initViews() {
-        setSize(500, 350);
+        setSize(500, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new WindowAdapter() {

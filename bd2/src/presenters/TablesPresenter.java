@@ -1,6 +1,7 @@
 package presenters;
 
 import database.DatabaseApi;
+import frames.InfoFrame;
 import frames.TableFrame;
 import panels.MainMenuPanel;
 import panels.TablesPanel;
@@ -39,6 +40,10 @@ public class TablesPresenter {
         } catch (Exception ex) {
             onError("Can not get table!");
         }
+    }
+
+    public void openInfoFrame() {
+        InfoFrame infoFrame = new InfoFrame();
     }
 
     public void exit() {

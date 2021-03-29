@@ -21,6 +21,8 @@ public class DataTablePanel extends JPanel {
     private Vector<String> columnNames;
     private JScrollPane dataTableScrollPane;
 
+    private final Font fontBig = new Font(Font.SERIF, Font.BOLD, 15);
+
     public DataTablePanel(String tableName) throws SQLException {
         this.tableName = tableName;
         dataTablePresenter = new DataTablePresenter(this, tableName);
@@ -37,13 +39,13 @@ public class DataTablePanel extends JPanel {
 
         JComboBox<String> sortingComboBox = new JComboBox<>(new String[]{"no", "asc", "desc"});
         JComboBox<String> sortingByComboBox = dataTablePresenter.setSortingByData(columnNames);
-        sortingComboBox.setFont(new Font(Font.SERIF, Font.BOLD, 15));
-        sortingByComboBox.setFont(new Font(Font.SERIF, Font.BOLD, 10));
+        sortingComboBox.setFont(fontBig);
+        sortingByComboBox.setFont(fontBig);
         optionPanel.add(sortingComboBox);
         optionPanel.add(sortingByComboBox);
 
         JButton refreshBtn = new JButton("Refresh");
-        refreshBtn.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        refreshBtn.setFont(fontBig);
         refreshBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -55,7 +57,7 @@ public class DataTablePanel extends JPanel {
         });
 
         JButton addBtn = new JButton("Add");
-        addBtn.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        addBtn.setFont(fontBig);
         addBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -65,7 +67,7 @@ public class DataTablePanel extends JPanel {
         });
 
         JButton deleteBtn = new JButton("Delete");
-        deleteBtn.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        deleteBtn.setFont(fontBig);
         deleteBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -76,7 +78,7 @@ public class DataTablePanel extends JPanel {
 
         JPanel namePanel = new JPanel(new FlowLayout());
         JLabel label = new JLabel(tableName);
-        label.setFont(new Font(Font.SERIF, Font.BOLD, 15));
+        label.setFont(fontBig);
         namePanel.add(label);
 
         optionPanel.add(refreshBtn);
