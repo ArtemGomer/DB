@@ -3,22 +3,26 @@ package frames;
 import panels.InfoPanel;
 
 import javax.swing.*;
-import java.awt.*;
+import java.sql.SQLException;
 
 public class InfoFrame extends JFrame {
 
-    public InfoFrame() {
-        super("Information");
-        setSize(new Dimension(700, 800));
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    private final String tableName;
+
+    public InfoFrame(String tableName) throws SQLException {
+        super(tableName);
+        this.tableName = tableName;
+        setSize(600, 400);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         initViews();
         setVisible(true);
     }
 
-    private void initViews() {
-        InfoPanel infoPanel = new InfoPanel();
-        add(infoPanel);
+    public void initViews() throws SQLException {
+        InfoPanel panel = new InfoPanel(tableName);
+        add(panel);
     }
 
 }

@@ -5,11 +5,11 @@ BEGIN
     INSERT INTO Fee(COUNTRY, PERCENT) VALUES('UK', 4);
     INSERT INTO Fee(COUNTRY, PERCENT) VALUES('USA', 2);
 
-    INSERT INTO Dealers(fee_id, type) VALUES(1, 'dealer');
-    INSERT INTO Dealers(fee_id, type) VALUES(2, 'shop');
-    INSERT INTO Dealers(fee_id, type) VALUES(3, 'factory');
-    INSERT INTO Dealers(fee_id, type) VALUES(4, 'dealer');
-    INSERT INTO Dealers(fee_id, type) VALUES(5, 'shop');
+    INSERT INTO Dealers(name, fee_id, type) VALUES('dealer1', 1, 'dealer');
+    INSERT INTO Dealers(name,fee_id, type) VALUES('dealer2',2, 'shop');
+    INSERT INTO Dealers(name,fee_id, type) VALUES('dealer3',3, 'factory');
+    INSERT INTO Dealers(name,fee_id, type) VALUES('dealer4',4, 'dealer');
+    INSERT INTO Dealers(name,fee_id, type) VALUES('dealer5',5, 'shop');
 
     INSERT INTO Goods_type(type, good_size) VALUES('bolt', 1);
     INSERT INTO Goods_type(type, good_size) VALUES('vint', 2);

@@ -9,6 +9,7 @@ import java.util.*;
 public class DatabaseApi {
 
     private Connection connection;
+    private Statement statement;
 
     private static DatabaseApi instance = null;
 
@@ -29,17 +30,19 @@ public class DatabaseApi {
                             String id) throws SQLException {
         String valueToUpdate = " = '" + newValue + "'";
         String query = "UPDATE " + tableName + " SET " + columnName + valueToUpdate + "WHERE " + keyName + "=" + id;
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        return preparedStatement.executeUpdate();
+        return statement.executeUpdate(query);
     }
 
-    public int deleteDataFrom(String tableName, String keyName, String key) throws SQLException {
+    public int deleteDataFrom(String tableName,
+                              String keyName,
+                              String key) throws SQLException {
         String query = "DELETE FROM " + tableName + " WHERE " + keyName + " = " + key;
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        return preparedStatement.executeUpdate();
+        return statement.executeUpdate(query);
     }
 
-    public int addDataTo(String tableName, Vector<String> columnNames, Vector<String> fields) throws SQLException {
+    public int addDataTo(String tableName,
+                         Vector<String> columnNames,
+                         Vector<String> fields) throws SQLException {
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ").append(tableName).append("(");
         for (int i = 1; i < columnNames.size(); i++) {
@@ -51,8 +54,7 @@ public class DatabaseApi {
             query.append("'").append(field).append("'").append(",");
         }
         query.replace(query.length() - 1, query.length(), ")");
-        PreparedStatement preparedStatement = connection.prepareStatement(query.toString());
-        return preparedStatement.executeUpdate();
+        return statement.executeUpdate(query.toString());
     }
 
     public ResultSet getDataFrom(String sorting,
@@ -65,8 +67,7 @@ public class DatabaseApi {
             query = "SELECT * FROM " + tableName + " ORDER BY " + sortingBy + " " + sorting;
         }
 
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        return preparedStatement.executeQuery();
+        return statement.executeQuery(query);
     }
 
     public void connectToDatabase(String ip,
@@ -79,6 +80,7 @@ public class DatabaseApi {
         Locale.setDefault(Locale.ENGLISH);
         String url = "jdbc:oracle:thin:@" + ip + ":" + port + ":";
         connection = DriverManager.getConnection(url, username, password);
+        statement = connection.createStatement();
     }
 
     public void recreateTables() {
@@ -95,10 +97,36 @@ public class DatabaseApi {
         scriptRunner.runScript(new InputStreamReader(add));
     }
 
+    public ResultSet getDealersInfo(String type) throws SQLException {
+        type = "'" + type + "'";
+        String query = "SELECT name, type, country, percent FROM Dealers" +
+                " INNER JOIN Fee ON Dealers.fee_id = Fee.id" +
+                " WHERE type = " + type;
+        System.out.println(query);
+        return statement.executeQuery(query);
+    }
+
+    public ResultSet getDeliveredGoodsInfo(String type) throws SQLException {
+        type = "'" + type + "'";
+        String query = "SELECT Goods_type.type as Good_type, Dealers.type as Dealer_type," +
+                " Dealers.name as Dealer_name, cost FROM Delivered_goods" +
+                " INNER JOIN Goods_type ON Delivered_goods.goods_type_id = Goods_type.id" +
+                " INNER JOIN Dealers ON Delivered_goods.dealer_id = Dealers.id " +
+                " WHERE Goods_type.type = " + type;
+        System.out.println(query);
+        return statement.executeQuery(query);
+    }
+
+    public ResultSet getTypes(String tableName) throws SQLException {
+        String query = "SELECT DISTINCT type FROM " + tableName;
+        return statement.executeQuery(query);
+    }
+
     public void disconnect() {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
+                statement.close();
             }
         } catch (Exception ex) {
             ex.printStackTrace();

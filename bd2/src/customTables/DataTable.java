@@ -9,6 +9,7 @@ import java.util.Vector;
 
 public class DataTable extends JTable {
 
+    private boolean editable = true;
     private final DataTablePresenter presenter;
 
     public DataTable(Vector<Vector<String>> data,
@@ -16,14 +17,23 @@ public class DataTable extends JTable {
                      DataTablePresenter presenter) {
         super(data, columnNames);
         this.presenter = presenter;
-        setFont(new Font(Font.SERIF, Font.BOLD, 15));
-        getTableHeader().setFont(new Font(Font.SERIF, Font.BOLD, 10));
+        setFont(new Font(Font.SERIF, Font.BOLD, 18));
+        getTableHeader().setFont(new Font(Font.SERIF, Font.BOLD, 15));
         setRowHeight(20);
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+        rowSelectionAllowed = editable;
     }
 
     @Override
     public boolean isCellEditable(int row, int column) {
-        return column != 0;
+        if (editable) {
+            return column != 0;
+        } else {
+            return false;
+        }
     }
 
     @Override

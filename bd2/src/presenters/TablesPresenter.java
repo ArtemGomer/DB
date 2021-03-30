@@ -1,7 +1,7 @@
 package presenters;
 
 import database.DatabaseApi;
-import frames.InfoFrame;
+import frames.InfoOptionsFrame;
 import frames.TableFrame;
 import panels.MainMenuPanel;
 import panels.TablesPanel;
@@ -43,7 +43,7 @@ public class TablesPresenter {
     }
 
     public void openInfoFrame() {
-        InfoFrame infoFrame = new InfoFrame();
+        InfoOptionsFrame infoOptionsFrame = new InfoOptionsFrame();
     }
 
     public void exit() {

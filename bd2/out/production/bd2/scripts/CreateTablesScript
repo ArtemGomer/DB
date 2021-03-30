@@ -14,6 +14,7 @@ CREATE TABLE Fee(
 
 CREATE TABLE Dealers(
     id INTEGER PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
     fee_id INTEGER NOT NULL,
     type VARCHAR(100) NOT NULL,
     CONSTRAINT dealers_fee_fk FOREIGN KEY (fee_id) REFERENCES Fee(id)
