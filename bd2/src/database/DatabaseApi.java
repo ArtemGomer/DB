@@ -1,6 +1,7 @@
 package database;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
+import utils.ColumnNameType;
 
 import java.io.*;
 import java.sql.*;
@@ -10,6 +11,7 @@ public class DatabaseApi {
 
     private Connection connection;
     private Statement statement;
+    private ScriptRunner scriptRunner;
 
     private static DatabaseApi instance = null;
 
@@ -41,19 +43,24 @@ public class DatabaseApi {
     }
 
     public int addDataTo(String tableName,
-                         Vector<String> columnNames,
-                         Vector<String> fields) throws SQLException {
+                         Vector<ColumnNameType> columnNameTypes,
+                         Vector<String> data) throws SQLException {
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ").append(tableName).append("(");
-        for (int i = 1; i < columnNames.size(); i++) {
-            query.append(columnNames.get(i)).append(",");
+        for (int i = 1; i < columnNameTypes.size(); i++) {
+            query.append(columnNameTypes.get(i).getName()).append(",");
         }
         query.replace(query.length() - 1, query.length(), ")");
         query.append(" VALUES(");
-        for (String field : fields) {
-            query.append("'").append(field).append("'").append(",");
+        for (int i = 1; i < columnNameTypes.size(); i++) {
+            if (columnNameTypes.get(i).getType() == Types.TIMESTAMP) {
+                query.append("TO_DATE(").append("'").append(data.get(i - 1).replaceAll("-","")).append("', 'MMDDYY'),");
+            } else {
+                query.append("'").append(data.get(i - 1)).append("'").append(",");
+            }
         }
         query.replace(query.length() - 1, query.length(), ")");
+        System.out.println(query);
         return statement.executeUpdate(query.toString());
     }
 
@@ -80,7 +87,8 @@ public class DatabaseApi {
         Locale.setDefault(Locale.ENGLISH);
         String url = "jdbc:oracle:thin:@" + ip + ":" + port + ":";
         connection = DriverManager.getConnection(url, username, password);
-        statement = connection.createStatement();
+        statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+        scriptRunner = new ScriptRunner(connection);
     }
 
     public void recreateTables() {
@@ -88,7 +96,7 @@ public class DatabaseApi {
         InputStream createTg = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateTriggersScript");
         InputStream dropSeq = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateSeqScript");
         InputStream add = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/AddDataScript");
-        ScriptRunner scriptRunner = new ScriptRunner(connection);
+        scriptRunner = new ScriptRunner(connection);
         scriptRunner.setRemoveCRs(true);
         scriptRunner.runScript(new InputStreamReader(create));
         scriptRunner.runScript(new InputStreamReader(dropSeq));
@@ -97,12 +105,17 @@ public class DatabaseApi {
         scriptRunner.runScript(new InputStreamReader(add));
     }
 
+    public void deleteDatabase() {
+        InputStream delete = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/DeleteScript");
+        scriptRunner = new ScriptRunner(connection);
+        scriptRunner.runScript(new InputStreamReader(delete));
+    }
+
     public ResultSet getDealersInfo(String type) throws SQLException {
         type = "'" + type + "'";
         String query = "SELECT name, type, country, percent FROM Dealers" +
                 " INNER JOIN Fee ON Dealers.fee_id = Fee.id" +
                 " WHERE type = " + type;
-        System.out.println(query);
         return statement.executeQuery(query);
     }
 
@@ -113,7 +126,6 @@ public class DatabaseApi {
                 " INNER JOIN Goods_type ON Delivered_goods.goods_type_id = Goods_type.id" +
                 " INNER JOIN Dealers ON Delivered_goods.dealer_id = Dealers.id " +
                 " WHERE Goods_type.type = " + type;
-        System.out.println(query);
         return statement.executeQuery(query);
     }
 

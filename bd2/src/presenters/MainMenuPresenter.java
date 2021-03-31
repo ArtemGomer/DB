@@ -2,7 +2,7 @@ package presenters;
 
 import database.DatabaseApi;
 import panels.MainMenuPanel;
-import panels.TablesPanel;
+import panels.data.TablesPanel;
 
 import javax.swing.*;
 import java.awt.*;

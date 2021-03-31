@@ -22,8 +22,7 @@ CREATE TABLE Dealers(
 
 CREATE TABLE Goods_type(
     id INTEGER PRIMARY KEY,
-    type VARCHAR(100) NOT NULL UNIQUE,
-    good_size INTEGER NOT NULL CHECK(good_size > 0)
+    type VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE Delivered_goods(
@@ -31,6 +30,7 @@ CREATE TABLE Delivered_goods(
     dealer_id INTEGER NOT NULL,
     goods_type_id INTEGER NOT NULL,
     cost INTEGER NOT NULL CHECK(cost > 0),
+    good_size INTEGER NOT NULL CHECK(good_size > 0),
     CONSTRAINT delivered_dealers_fk FOREIGN KEY (dealer_id) REFERENCES Dealers(id),
     CONSTRAINT delivered_goods_type_fk FOREIGN KEY (goods_type_id) REFERENCES Goods_type(id)
 );
@@ -46,14 +46,14 @@ CREATE TABLE Delivers(
 
 CREATE TABLE Orders(
     id INTEGER PRIMARY KEY,
-    goods_type_id INTEGER NOT NULL,
+    type VARCHAR(100) NOT NULL,
     amount INTEGER CHECK(amount > 0),
     order_date DATE NOT NULL
 );
 
 CREATE TABLE Cells(
     id INTEGER PRIMARY KEY,
-    goods_type_id INTEGER NOt NULL,
+    goods_type_id INTEGER NOT NULL,
     amount INTEGER CHECK(amount > 0),
     CONSTRAINT cell_goods_type_fk FOREIGN KEY (goods_type_id) REFERENCES Goods_type(id)
 );

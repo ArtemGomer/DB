@@ -11,17 +11,17 @@ BEGIN
     INSERT INTO Dealers(name,fee_id, type) VALUES('dealer4',4, 'dealer');
     INSERT INTO Dealers(name,fee_id, type) VALUES('dealer5',5, 'shop');
 
-    INSERT INTO Goods_type(type, good_size) VALUES('bolt', 1);
-    INSERT INTO Goods_type(type, good_size) VALUES('vint', 2);
-    INSERT INTO Goods_type(type, good_size) VALUES('hammer', 2);
-    INSERT INTO Goods_type(type, good_size) VALUES('nail', 1);
-    INSERT INTO Goods_type(type, good_size) VALUES('drill`', 2);
+    INSERT INTO Goods_type(type) VALUES('bolt');
+    INSERT INTO Goods_type(type) VALUES('vint');
+    INSERT INTO Goods_type(type) VALUES('hammer');
+    INSERT INTO Goods_type(type) VALUES('nail');
+    INSERT INTO Goods_type(type) VALUES('drill');
 
-    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost) VALUES(1, 5, 200);
-    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost) VALUES(2, 4, 100);
-    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost) VALUES(3, 3, 150);
-    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost) VALUES(4, 2, 80);
-    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost) VALUES(5, 1, 120);
+    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost, good_size) VALUES(1, 5, 200, 2);
+    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost, good_size) VALUES(2, 4, 100, 7);
+    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost, good_size) VALUES(3, 3, 150, 3);
+    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost, good_size) VALUES(4, 2, 80, 7);
+    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost, good_size) VALUES(5, 1, 120, 4);
 
     INSERT INTO Delivers(delivered_goods_id, amount, deliver_date, defective) VALUES(1, 4, TO_DATE('072219', 'MMDDYY'), 0);
     INSERT INTO Delivers(delivered_goods_id, amount, deliver_date, defective) VALUES(2, 2, TO_DATE('072219', 'MMDDYY'), 0);
@@ -29,11 +29,11 @@ BEGIN
     INSERT INTO Delivers(delivered_goods_id, amount, deliver_date, defective) VALUES(4, 5, TO_DATE('072219', 'MMDDYY'), 0);
     INSERT INTO Delivers(delivered_goods_id, amount, deliver_date, defective) VALUES(5, 10, TO_DATE('072219', 'MMDDYY'), 0);
 
-    INSERT INTO Orders(goods_type_id, amount, order_date) VALUES(1, 5, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Orders(goods_type_id, amount, order_date) VALUES(2, 4, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Orders(goods_type_id, amount, order_date) VALUES(3, 3, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Orders(goods_type_id, amount, order_date) VALUES(4, 2, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Orders(goods_type_id, amount, order_date) VALUES(5, 7, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Orders(type, amount, order_date) VALUES('bolt', 5, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Orders(type, amount, order_date) VALUES('vint', 4, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Orders(type, amount, order_date) VALUES('hammer', 3, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Orders(type, amount, order_date) VALUES('nail', 2, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Orders(type, amount, order_date) VALUES('drill', 7, TO_DATE('072219', 'MMDDYY'));
 
     INSERT INTO Cells(goods_type_id, amount) VALUES(1, 5);
     INSERT INTO Cells(goods_type_id, amount) VALUES(2, 3);
