@@ -14,7 +14,7 @@ public class InfoOptionsPanel extends JPanel {
 
     public InfoOptionsPanel() {
         this.presenter = new InfoOptionsPresenter(this);
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new GridLayout(4, 4));
         initViews();
     }
 
@@ -41,8 +41,20 @@ public class InfoOptionsPanel extends JPanel {
             }
         });
 
+        JButton sellsInfoBtn = new JButton("Sells info");
+        sellsInfoBtn.setAlignmentX(CENTER_ALIGNMENT);
+        sellsInfoBtn.setFont(font);
+        sellsInfoBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                presenter.openInfoFrame("Sells");
+            }
+        });
+
         add(dealersInfoBtn);
         add(detailsInfoBtn);
+        add(sellsInfoBtn);
 
     }
 

@@ -10,6 +10,9 @@ import java.awt.event.MouseEvent;
 public class MainMenuPanel extends JPanel {
 
     MainMenuPresenter mainMenuPresenter;
+    private JLabel connecting;
+    private JButton connectToServerBtn;
+    private JButton connectToLocalhostBtn;
 
     public MainMenuPanel(Container container) {
         mainMenuPresenter = new MainMenuPresenter(container, this);
@@ -19,7 +22,7 @@ public class MainMenuPanel extends JPanel {
 
     private void initViews() {
 
-        JButton connectToServerBtn = new JButton("connect to server");
+        connectToServerBtn = new JButton("connect to server");
         connectToServerBtn.setFont(new Font(Font.SERIF, Font.BOLD, 40));
         connectToServerBtn.setAlignmentX(CENTER_ALIGNMENT);
         connectToServerBtn.setMaximumSize(new Dimension(400, 50));
@@ -39,7 +42,7 @@ public class MainMenuPanel extends JPanel {
         passwordTxt.setAlignmentX(CENTER_ALIGNMENT);
         passwordTxt.setMaximumSize(new Dimension(400, 50));
 
-        JButton connectToLocalhostBtn = new JButton("connect to localhost");
+        connectToLocalhostBtn = new JButton("connect to localhost");
         connectToLocalhostBtn.setFont(new Font(Font.SERIF, Font.BOLD, 40));
         connectToLocalhostBtn.setAlignmentX(CENTER_ALIGNMENT);
         connectToLocalhostBtn.setMaximumSize(new Dimension(400, 50));
@@ -82,15 +85,28 @@ public class MainMenuPanel extends JPanel {
             }
         });
 
+        connecting = new JLabel("Connecting...");
+        connecting.setFont(new Font(Font.SERIF, Font.BOLD, 35));
+        connecting.setForeground(Color.LIGHT_GRAY);
+        connecting.setAlignmentX(CENTER_ALIGNMENT);
+        connecting.setVisible(false);
+
         add(connectToServerBtn);
         add(infoLabel);
         add(usernameTxt);
         add(passwordTxt);
         add(connectToLocalhostBtn);
+        add(connecting);
     }
 
     public void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(null, message, "Failure", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void setIsConnecting(boolean connecting) {
+        this.connecting.setVisible(connecting);
+        this.connectToLocalhostBtn.setEnabled(!connecting);
+        this.connectToServerBtn.setEnabled(!connecting);
     }
 
 }

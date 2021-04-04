@@ -21,20 +21,26 @@ public class MainMenuPresenter {
     }
 
     public void connectToServer(String ip, String port, String username, String password) {
-        try {
-            if (checkValidData(username, password)) {
-                api.connectToDatabase(ip, port, username, password);
-                onConnected();
-            } else {
-                onError("Please, fill in all gaps");
+        Runnable connect = () -> {
+            try {
+                mainMenuPanel.setIsConnecting(true);
+                if (checkValidData(username, password)) {
+                    api.connectToDatabase(ip, port, username, password);
+                    onConnected();
+                } else {
+                    onError("Please, fill in all gaps");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                onError("Can not connect to server");
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            onError("Can not connect to server");
-        }
+        };
+        Thread connectionThread = new Thread(connect);
+        connectionThread.start();
     }
 
     private void onConnected() {
+        mainMenuPanel.setIsConnecting(false);
         container.removeAll();
         JPanel tablesPanel = new TablesPanel(container);
         container.add(tablesPanel);
@@ -47,6 +53,7 @@ public class MainMenuPresenter {
     }
 
     public void onError(String message) {
+        mainMenuPanel.setIsConnecting(false);
         mainMenuPanel.showMessageDialog(message);
     }
 

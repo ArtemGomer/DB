@@ -5,6 +5,7 @@ DROP SEQUENCE sq_goods_type;
 DROP SEQUENCE sq_delivers;
 DROP SEQUENCE sq_orders;
 DROP SEQUENCE sq_cells;
+DROP SEQUENCE sq_sells;
 
 DROP TRIGGER tr_incr_fee;
 DROP TRIGGER tr_incr_goods_type;
@@ -13,12 +14,14 @@ DROP TRIGGER tr_incr_dealers;
 DROP TRIGGER tr_incr_delivers;
 DROP TRIGGER tr_incr_orders;
 DROP TRIGGER tr_incr_cells;
+DROP TRIGGER tr_incr_sells;
 DROP TRIGGER tr_add_goods_type;
 
 DROP TABLE Delivers;
 DROP TABLE Delivered_goods;
 DROP TABLE Dealers;
 DROP TABLE Cells;
+DROP TABLE Sells;
 DROP TABLE Orders;
 DROP TABLE Fee;
 DROP TABLE Goods_type;

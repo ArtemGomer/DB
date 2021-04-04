@@ -4,7 +4,10 @@ import customTables.DataTable;
 import presenters.info.InfoPresenter;
 
 import javax.swing.*;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.NumberFormatter;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -32,10 +35,22 @@ public class InfoPanel extends JPanel {
         add(new JScrollPane(dataTable));
     }
 
-    public void openTypeChooser(Vector<String> items) throws SQLException {
+    public void openDealersAndDetailsTypeChooser(Vector<String> items) throws SQLException {
         JComboBox<String> comboBox = new JComboBox<>(items);
         JOptionPane.showConfirmDialog(null, comboBox, "Choose type", JOptionPane.DEFAULT_OPTION);
-        presenter.setDealersTable(Objects.requireNonNull(comboBox.getSelectedItem()).toString(), tableName);
+        presenter.setOneItemTable(Objects.requireNonNull(comboBox.getSelectedItem()).toString(), tableName);
+    }
+
+    public void openSellsChooser(Vector<String> items) throws SQLException {
+        JComboBox<String> comboBox1 = new JComboBox<>(items);
+        JFormattedTextField jFormattedTextField1 = new JFormattedTextField();
+        jFormattedTextField1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getIntegerInstance())));
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(comboBox1);
+        panel.add(jFormattedTextField1);
+        JOptionPane.showConfirmDialog(null, panel, "Choose type", JOptionPane.DEFAULT_OPTION);
+        presenter.setTwoItemsTable(Objects.requireNonNull(comboBox1.getSelectedItem()).toString(), jFormattedTextField1.getText(), tableName);
     }
 
 }

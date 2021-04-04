@@ -13,15 +13,15 @@ public class TablesPanel extends JPanel {
     private final Font font = new Font(Font.SERIF, Font.BOLD, 30);
 
     public TablesPanel(Container container) {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         tablesPresenter = new TablesPresenter(container, this);
         initViews();
     }
 
     private void initViews() {
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         JPanel tablesPanel = new JPanel(new GridLayout(4, 2));
+        tablesPanel.setBackground(Color.DARK_GRAY);
 
         JButton deliveredGoodsBtn = new JButton("Delivered goods");
         deliveredGoodsBtn.setFont(font);
@@ -83,6 +83,16 @@ public class TablesPanel extends JPanel {
             }
         });
 
+        JButton sellsBtn = new JButton("Sells");
+        sellsBtn.setFont(font);
+        sellsBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                tablesPresenter.openDataTable("Sells");
+            }
+        });
+
         JButton cellBtn = new JButton("Cells");
         cellBtn.setFont(font);
         cellBtn.addMouseListener(new MouseAdapter() {
@@ -97,6 +107,7 @@ public class TablesPanel extends JPanel {
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
 
         JButton recreateTablesBtn = new JButton("Recreate tables");
+        recreateTablesBtn.setMaximumSize(new Dimension(300, 40));
         recreateTablesBtn.setAlignmentX(CENTER_ALIGNMENT);
         recreateTablesBtn.setFont(font);
         recreateTablesBtn.addMouseListener(new MouseAdapter() {
@@ -108,6 +119,7 @@ public class TablesPanel extends JPanel {
         });
 
         JButton deleteDatabase = new JButton("Delete database");
+        deleteDatabase.setMaximumSize(new Dimension(300, 40));
         deleteDatabase.setAlignmentX(CENTER_ALIGNMENT);
         deleteDatabase.setFont(font);
         deleteDatabase.addMouseListener(new MouseAdapter() {
@@ -119,6 +131,7 @@ public class TablesPanel extends JPanel {
         });
 
         JButton infoBtn = new JButton("Information");
+        infoBtn.setMaximumSize(new Dimension(300, 40));
         infoBtn.setFont(font);
         infoBtn.setAlignmentX(CENTER_ALIGNMENT);
         infoBtn.addMouseListener(new MouseAdapter() {
@@ -130,6 +143,7 @@ public class TablesPanel extends JPanel {
         });
 
         JButton disconnectBtn = new JButton("Disconnect");
+        disconnectBtn.setMaximumSize(new Dimension(300, 40));
         disconnectBtn.setAlignmentX(CENTER_ALIGNMENT);
         disconnectBtn.setFont(font);
         disconnectBtn.addMouseListener(new MouseAdapter() {
@@ -145,6 +159,7 @@ public class TablesPanel extends JPanel {
         tablesPanel.add(goodsTypeBtn);
         tablesPanel.add(feeBtn);
         tablesPanel.add(deliversBtn);
+        tablesPanel.add(sellsBtn);
         tablesPanel.add(ordersBtn);
         tablesPanel.add(cellBtn);
 
@@ -153,10 +168,8 @@ public class TablesPanel extends JPanel {
         optionsPanel.add(infoBtn);
         optionsPanel.add(disconnectBtn);
 
-        mainPanel.add(tablesPanel);
-        mainPanel.add(optionsPanel);
-
-        add(mainPanel);
+        add(tablesPanel);
+        add(optionsPanel);
     }
 
     public void showMessageDialog(String message) {

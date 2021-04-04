@@ -32,7 +32,6 @@ public class DataTablePresenter {
             ResultSetMetaData metaData = set.getMetaData();
             Vector<ColumnNameType> columnNameTypes = new Vector<>();
             for (int i = 1; i <= metaData.getColumnCount(); i++) {
-                System.out.println(metaData.getColumnName(i));
                 columnNameTypes.add(new ColumnNameType(metaData.getColumnName(i), metaData.getColumnType(i)));
             }
             Vector<Vector<String>> data = new Vector<>();

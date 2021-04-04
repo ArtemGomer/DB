@@ -22,12 +22,16 @@ public class TablesPresenter {
     }
 
     public void recreateTables() {
-        try {
-            databaseApi.recreateTables();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            onError("Can not create tables");
-        }
+        Runnable runnable = () -> {
+            try {
+                databaseApi.recreateTables();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                onError("Can not create tables");
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 
     public void onError(String message) {
@@ -35,15 +39,27 @@ public class TablesPresenter {
     }
 
     public void openDataTable(String tableName) {
-        try {
-            TableFrame tableFrame = new TableFrame(tableName);
-        } catch (Exception ex) {
-            onError("Can not get table!");
-        }
+        Runnable runnable = () -> {
+            try {
+                TableFrame tableFrame = new TableFrame(tableName);
+            } catch (Exception ex) {
+                onError("Can not get table!");
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 
     public void openInfoFrame() {
-        InfoOptionsFrame infoOptionsFrame = new InfoOptionsFrame();
+        Runnable runnable = () -> {
+            try {
+                InfoOptionsFrame infoOptionsFrame = new InfoOptionsFrame();
+            } catch (Exception ex) {
+                onError("Can not open info frame!");
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 
     public void exit() {
@@ -60,10 +76,14 @@ public class TablesPresenter {
     }
 
     public void deleteDatabase() {
-        try {
-            databaseApi.deleteDatabase();
-        } catch (Exception ex) {
-            onError("Can not delete database");
-        }
+        Runnable runnable = () -> {
+            try {
+                databaseApi.deleteDatabase();
+            } catch (Exception ex) {
+                onError("Can not delete database");
+            }
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
     }
 }

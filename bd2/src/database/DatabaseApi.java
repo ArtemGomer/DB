@@ -129,6 +129,17 @@ public class DatabaseApi {
         return statement.executeQuery(query);
     }
 
+    public ResultSet getSellsInfo(String type, String amount) throws SQLException {
+        type = "'" + type + "'";
+        if (amount.isEmpty()) {
+            amount = "0";
+        }
+        String query = "SELECT name, type, amount, sell_date FROM SELLS" +
+                " INNER JOIN ORDERS ON SELLS.order_id = ORDERS.id WHERE type = " +
+                type + " AND amount > " + amount;
+        return statement.executeQuery(query);
+    }
+
     public ResultSet getTypes(String tableName) throws SQLException {
         String query = "SELECT DISTINCT type FROM " + tableName;
         return statement.executeQuery(query);

@@ -41,6 +41,12 @@ BEGIN
             INTO :NEW.id
             FROM dual;
         END;';
+    EXECUTE IMMEDIATE 'CREATE OR REPLACE TRIGGER tr_incr_sells BEFORE INSERT ON SELLS FOR EACH ROW
+    BEGIN
+        SELECT sq_cells.NEXTVAL
+        INTO :NEW.id
+        FROM dual;
+    END;';
 
     EXECUTE IMMEDIATE 'CREATE OR REPLACE TRIGGER tr_add_goods_type BEFORE INSERT ON ORDERS FOR EACH ROW
         DECLARE
