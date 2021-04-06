@@ -1,7 +1,7 @@
+DROP TABLE Cells;
 DROP TABLE Delivers;
 DROP TABLE Delivered_goods;
 DROP TABLE Dealers;
-DROP TABLE Cells;
 DROP TABLE Sells;
 DROP TABLE Orders;
 DROP TABLE Fee;
@@ -70,7 +70,7 @@ CREATE TABLE Sells
 CREATE TABLE Cells
 (
     id            INTEGER PRIMARY KEY,
-    goods_type_id INTEGER NOT NULL,
+    delivered_goods_id INTEGER NOT NULL,
     amount        INTEGER CHECK (amount > 0),
-    CONSTRAINT cell_goods_type_fk FOREIGN KEY (goods_type_id) REFERENCES Goods_type (id)
+    CONSTRAINT cell_delivered_goods_fk FOREIGN KEY (delivered_goods_id) REFERENCES Delivered_goods (id)
 );

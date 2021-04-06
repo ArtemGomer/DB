@@ -9,8 +9,6 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Types;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 public class DataTablePresenter {
@@ -18,7 +16,6 @@ public class DataTablePresenter {
     private final String tableName;
     private final DataTablePanel dataTablePanel;
     private final DatabaseApi api;
-    private ResultSet set;
 
     public DataTablePresenter(DataTablePanel dataTablePanel, String tableName) {
         this.tableName = tableName;
@@ -28,7 +25,7 @@ public class DataTablePresenter {
 
     public boolean getAllDataFrom(String sorting, String sortingBy, String tableName) {
         try {
-            set = api.getDataFrom(sorting, sortingBy, tableName);
+            ResultSet set = api.getDataFrom(sorting, sortingBy, tableName);
             ResultSetMetaData metaData = set.getMetaData();
             Vector<ColumnNameType> columnNameTypes = new Vector<>();
             for (int i = 1; i <= metaData.getColumnCount(); i++) {

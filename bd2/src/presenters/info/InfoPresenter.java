@@ -27,6 +27,8 @@ public class InfoPresenter {
             panel.openDealersAndDetailsTypeChooser(this.getType("Goods_type"));
         } else if (tableName.equalsIgnoreCase("sells")) {
             panel.openSellsChooser(this.getType("Goods_type"));
+        } else if (tableName.equalsIgnoreCase("cells")) {
+            setTable(api.getCellsInfo());
         }
     }
 

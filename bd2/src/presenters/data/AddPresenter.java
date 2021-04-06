@@ -5,7 +5,6 @@ import panels.data.AddPanel;
 import utils.ColumnNameType;
 
 import javax.swing.*;
-import java.util.ArrayList;
 import java.util.Vector;
 
 public class AddPresenter {

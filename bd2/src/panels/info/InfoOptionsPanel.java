@@ -52,9 +52,21 @@ public class InfoOptionsPanel extends JPanel {
             }
         });
 
+        JButton cellsInfoBtn = new JButton("Cells info");
+        cellsInfoBtn.setAlignmentX(CENTER_ALIGNMENT);
+        cellsInfoBtn.setFont(font);
+        cellsInfoBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                presenter.openInfoFrame("Cells");
+            }
+        });
+
         add(dealersInfoBtn);
         add(detailsInfoBtn);
         add(sellsInfoBtn);
+        add(cellsInfoBtn);
 
     }
 

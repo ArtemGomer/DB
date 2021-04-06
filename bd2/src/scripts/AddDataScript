@@ -43,10 +43,4 @@ BEGIN
     INSERT INTO SELLS(order_id, sell_date) VALUES (1, TO_DATE('072619', 'MMDDYY'));
     INSERT INTO SELLS(order_id, sell_date) VALUES (2, TO_DATE('082619', 'MMDDYY'));
     INSERT INTO SELLS(order_id, sell_date) VALUES (3, TO_DATE('091619', 'MMDDYY'));
-
-    INSERT INTO Cells(goods_type_id, amount) VALUES (1, 5);
-    INSERT INTO Cells(goods_type_id, amount) VALUES (2, 3);
-    INSERT INTO Cells(goods_type_id, amount) VALUES (3, 4);
-    INSERT INTO Cells(goods_type_id, amount) VALUES (4, 1);
-    INSERT INTO Cells(goods_type_id, amount) VALUES (5, 2);
 END;

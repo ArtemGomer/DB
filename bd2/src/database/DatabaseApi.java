@@ -140,6 +140,13 @@ public class DatabaseApi {
         return statement.executeQuery(query);
     }
 
+    public ResultSet getCellsInfo() throws SQLException {
+        String query = "SELECT Cells.id, Goods_type.type, Cells.amount, Delivered_goods.good_size * Cells.amount AS fullness, 20 AS capacity" +
+                " FROM Cells INNER JOIN Delivered_goods ON Delivered_goods.id = Cells.delivered_goods_id" +
+                " INNER JOIN Goods_type ON Delivered_goods.goods_type_id = Goods_type.id";
+        return statement.executeQuery(query);
+    }
+
     public ResultSet getTypes(String tableName) throws SQLException {
         String query = "SELECT DISTINCT type FROM " + tableName;
         return statement.executeQuery(query);
