@@ -92,10 +92,10 @@ public class DatabaseApi {
     }
 
     public void recreateTables() {
-        InputStream create = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateTablesScript");
-        InputStream createTg = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateTriggersScript");
-        InputStream dropSeq = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateSeqScript");
-        InputStream add = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/AddDataScript");
+        InputStream create = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateTablesScript.sql");
+        InputStream createTg = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateTriggersScript.sql");
+        InputStream dropSeq = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/CreateSeqScript.sql");
+        InputStream add = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/AddDataScript.sql");
         scriptRunner = new ScriptRunner(connection);
         scriptRunner.setRemoveCRs(true);
         scriptRunner.runScript(new InputStreamReader(create));
@@ -106,7 +106,7 @@ public class DatabaseApi {
     }
 
     public void deleteDatabase() {
-        InputStream delete = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/DeleteScript");
+        InputStream delete = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/DeleteScript.sql");
         scriptRunner = new ScriptRunner(connection);
         scriptRunner.runScript(new InputStreamReader(delete));
     }

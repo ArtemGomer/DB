@@ -43,7 +43,7 @@ BEGIN
         END;';
     EXECUTE IMMEDIATE 'CREATE OR REPLACE TRIGGER tr_incr_sells BEFORE INSERT ON SELLS FOR EACH ROW
     BEGIN
-        SELECT sq_cells.NEXTVAL
+        SELECT sq_sells.NEXTVAL
         INTO :NEW.id
         FROM dual;
     END;';
@@ -56,5 +56,28 @@ BEGIN
             IF cnt = 0 THEN
                 INSERT INTO GOODS_TYPE(type) VALUES(:NEW.type);
             END IF;
+        END;';
+
+    EXECUTE IMMEDIATE 'CREATE OR REPLACE TRIGGER tr_add_cells_from_delivers AFTER INSERT ON DELIVERS FOR EACH ROW
+        DECLARE
+         good_size_new INTEGER;
+         deliver_size_new INTEGER;
+         good_amount_new INTEGER;
+        BEGIN
+         IF :NEW.defective = 0 THEN
+             SELECT good_size into good_size_new FROM Delivered_goods WHERE id = :NEW.delivered_goods_id;
+             good_amount_new := TRUNC(20 / good_size_new);
+             deliver_size_new := good_size_new * :NEW.amount;
+             WHILE deliver_size_new > 0
+             LOOP
+                 IF deliver_size_new >= good_amount_new * good_size_new THEN
+                     INSERT INTO CELLS(delivered_goods_id, amount) VALUES(:NEW.delivered_goods_id, good_amount_new);
+                     deliver_size_new := deliver_size_new - good_amount_new * good_size_new;
+                 ELSE
+                     INSERT INTO CELLS(delivered_goods_id, amount) VALUES(:NEW.delivered_goods_id, deliver_size_new / good_size_new);
+                     deliver_size_new := deliver_size_new - good_amount_new * good_size_new;
+                 END IF;
+             END LOOP;
+         END IF;
         END;';
 END;

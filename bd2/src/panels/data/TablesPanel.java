@@ -12,6 +12,17 @@ public class TablesPanel extends JPanel {
     private final TablesPresenter tablesPresenter;
     private final Font font = new Font(Font.SERIF, Font.BOLD, 30);
 
+    private JButton deliveredGoodsBtn;
+    private JButton dealersBtn;
+    private JButton goodsTypeBtn;
+    private JButton feeBtn;
+    private JButton deliversBtn;
+    private JButton ordersBtn;
+    private JButton sellsBtn;
+    private JButton cellBtn;
+    private JButton recreateTablesBtn;
+    private JButton deleteDatabase;
+
     public TablesPanel(Container container) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         tablesPresenter = new TablesPresenter(container, this);
@@ -23,7 +34,7 @@ public class TablesPanel extends JPanel {
         JPanel tablesPanel = new JPanel(new GridLayout(4, 2));
         tablesPanel.setBackground(Color.DARK_GRAY);
 
-        JButton deliveredGoodsBtn = new JButton("Delivered goods");
+        deliveredGoodsBtn = new JButton("Delivered goods");
         deliveredGoodsBtn.setFont(font);
         deliveredGoodsBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -33,7 +44,7 @@ public class TablesPanel extends JPanel {
             }
         });
 
-        JButton dealersBtn = new JButton("Dealers");
+        dealersBtn = new JButton("Dealers");
         dealersBtn.setFont(font);
         dealersBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -43,7 +54,7 @@ public class TablesPanel extends JPanel {
             }
         });
 
-        JButton goodsTypeBtn = new JButton("Goods_type");
+        goodsTypeBtn = new JButton("Goods_type");
         goodsTypeBtn.setFont(font);
         goodsTypeBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -53,7 +64,7 @@ public class TablesPanel extends JPanel {
             }
         });
 
-        JButton feeBtn = new JButton("Fee");
+        feeBtn = new JButton("Fee");
         feeBtn.setFont(font);
         feeBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -63,7 +74,7 @@ public class TablesPanel extends JPanel {
             }
         });
 
-        JButton deliversBtn = new JButton("Delivers");
+        deliversBtn = new JButton("Delivers");
         deliversBtn.setFont(font);
         deliversBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -73,7 +84,7 @@ public class TablesPanel extends JPanel {
             }
         });
 
-        JButton ordersBtn = new JButton("Orders");
+        ordersBtn = new JButton("Orders");
         ordersBtn.setFont(font);
         ordersBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -83,7 +94,7 @@ public class TablesPanel extends JPanel {
             }
         });
 
-        JButton sellsBtn = new JButton("Sells");
+        sellsBtn = new JButton("Sells");
         sellsBtn.setFont(font);
         sellsBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -93,7 +104,7 @@ public class TablesPanel extends JPanel {
             }
         });
 
-        JButton cellBtn = new JButton("Cells");
+        cellBtn = new JButton("Cells");
         cellBtn.setFont(font);
         cellBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -106,7 +117,7 @@ public class TablesPanel extends JPanel {
         JPanel optionsPanel = new JPanel();
         optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
 
-        JButton recreateTablesBtn = new JButton("Recreate tables");
+        recreateTablesBtn = new JButton("Recreate tables");
         recreateTablesBtn.setMaximumSize(new Dimension(300, 40));
         recreateTablesBtn.setAlignmentX(CENTER_ALIGNMENT);
         recreateTablesBtn.setFont(font);
@@ -118,7 +129,7 @@ public class TablesPanel extends JPanel {
             }
         });
 
-        JButton deleteDatabase = new JButton("Delete database");
+        deleteDatabase = new JButton("Delete database");
         deleteDatabase.setMaximumSize(new Dimension(300, 40));
         deleteDatabase.setAlignmentX(CENTER_ALIGNMENT);
         deleteDatabase.setFont(font);
@@ -174,5 +185,18 @@ public class TablesPanel extends JPanel {
 
     public void showMessageDialog(String message) {
         JOptionPane.showMessageDialog(null, message, "Failure", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void setIsLoading(boolean isLoading) {
+        deliveredGoodsBtn.setEnabled(!isLoading);
+        goodsTypeBtn.setEnabled(!isLoading);
+        feeBtn.setEnabled(!isLoading);
+        dealersBtn.setEnabled(!isLoading);
+        deliversBtn.setEnabled(!isLoading);
+        ordersBtn.setEnabled(!isLoading);
+        sellsBtn.setEnabled(!isLoading);
+        cellBtn.setEnabled(!isLoading);
+        recreateTablesBtn.setEnabled(!isLoading);
+        deleteDatabase.setEnabled(!isLoading);
     }
 }

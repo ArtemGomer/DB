@@ -24,7 +24,9 @@ public class TablesPresenter {
     public void recreateTables() {
         Runnable runnable = () -> {
             try {
+                tablesPanel.setIsLoading(true);
                 databaseApi.recreateTables();
+                tablesPanel.setIsLoading(false);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 onError("Can not create tables");
@@ -35,6 +37,7 @@ public class TablesPresenter {
     }
 
     public void onError(String message) {
+        tablesPanel.setIsLoading(false);
         tablesPanel.showMessageDialog(message);
     }
 
@@ -78,7 +81,9 @@ public class TablesPresenter {
     public void deleteDatabase() {
         Runnable runnable = () -> {
             try {
+                tablesPanel.setIsLoading(true);
                 databaseApi.deleteDatabase();
+                tablesPanel.setIsLoading(false);
             } catch (Exception ex) {
                 onError("Can not delete database");
             }

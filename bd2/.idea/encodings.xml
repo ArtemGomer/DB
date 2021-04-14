@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/scripts/AddDataScript" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/scripts/CreateSeqScript" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/scripts/CreateTablesScript" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/scripts/CreateTriggersScript" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/scripts/AddDataScript.sql" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/scripts/CreateSeqScript.sql" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/scripts/CreateTablesScript.sql" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/scripts/CreateTriggersScript.sql" charset="UTF-8" />
   </component>
 </project>

@@ -13,6 +13,7 @@ public class InfoOptionsFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         initViews();
+        setResizable(false);
         setVisible(true);
     }
 
