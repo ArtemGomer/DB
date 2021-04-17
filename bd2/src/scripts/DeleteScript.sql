@@ -20,7 +20,7 @@ DROP TRIGGER tr_add_cells_from_delivers;
 
 DROP TABLE Ячейки;
 DROP TABLE Поставки;
-DROP TABLE Поставляемые_товары;
+DROP TABLE Поставляемые;
 DROP TABLE Поставщики;
 DROP TABLE Продажи;
 DROP TABLE Заказы;
