@@ -1,76 +1,76 @@
-DROP TABLE Cells;
-DROP TABLE Delivers;
-DROP TABLE Delivered_goods;
-DROP TABLE Dealers;
-DROP TABLE Sells;
-DROP TABLE Orders;
-DROP TABLE Fee;
-DROP TABLE Goods_type;
+DROP TABLE Ячейки;
+DROP TABLE Поставки;
+DROP TABLE Поставляемые;
+DROP TABLE Поставщики;
+DROP TABLE Продажи;
+DROP TABLE Заказы;
+DROP TABLE Пошлина;
+DROP TABLE Типы_товаров;
 
-CREATE TABLE Fee
+CREATE TABLE Пошлина
 (
     id      INTEGER PRIMARY KEY,
-    country VARCHAR(100) NOT NULL UNIQUE,
-    percent INTEGER      NOT NULL CHECK (percent > 0)
+    страна VARCHAR(100) NOT NULL UNIQUE,
+    пошлина INTEGER      NOT NULL CHECK (пошлина > 0)
 );
 
-CREATE TABLE Dealers
+CREATE TABLE Поставщики
 (
     id     INTEGER PRIMARY KEY,
-    name   VARCHAR(100) NOT NULL,
-    fee_id INTEGER      NOT NULL,
-    type   VARCHAR(100) NOT NULL,
-    CONSTRAINT dealers_fee_fk FOREIGN KEY (fee_id) REFERENCES Fee (id)
+    имя   VARCHAR(100) NOT NULL,
+    пошлина_id INTEGER      NOT NULL,
+    тип   VARCHAR(100) NOT NULL,
+    CONSTRAINT dealers_fee_fk FOREIGN KEY (пошлина_id) REFERENCES Пошлина (id) ON DELETE CASCADE
 );
 
-CREATE TABLE Goods_type
+CREATE TABLE Типы_товаров
 (
     id   INTEGER PRIMARY KEY,
-    type VARCHAR(100) NOT NULL UNIQUE
+    тип VARCHAR(100) NOT NULL UNIQUE
 );
 
-CREATE TABLE Delivered_goods
+CREATE TABLE Поставляемые
 (
     id            INTEGER PRIMARY KEY,
-    dealer_id     INTEGER NOT NULL,
-    goods_type_id INTEGER NOT NULL,
-    cost          INTEGER NOT NULL CHECK (cost > 0),
-    good_size     INTEGER NOT NULL CHECK (good_size > 0),
-    CONSTRAINT delivered_dealers_fk FOREIGN KEY (dealer_id) REFERENCES Dealers (id),
-    CONSTRAINT delivered_goods_type_fk FOREIGN KEY (goods_type_id) REFERENCES Goods_type (id)
+    поставщики_id     INTEGER NOT NULL,
+    типы_товаров_id INTEGER NOT NULL,
+    цена          INTEGER NOT NULL CHECK (цена > 0),
+    размер_товара     INTEGER NOT NULL CHECK (размер_товара > 0),
+    CONSTRAINT delivered_dealers_fk FOREIGN KEY (поставщики_id) REFERENCES Поставщики (id) ON DELETE CASCADE,
+    CONSTRAINT delivered_goods_type_fk FOREIGN KEY (типы_товаров_id) REFERENCES Типы_товаров (id) ON DELETE CASCADE
 );
 
-CREATE TABLE Delivers
+CREATE TABLE Поставки
 (
     id                 INTEGER PRIMARY KEY,
-    delivered_goods_id INTEGER NOT NULL,
-    amount             INTEGER CHECK (amount > 0),
-    deliver_date       DATE    NOT NULL,
-    defective          INTEGER CHECK (defective >= 0 AND defective <= 1),
-    CONSTRAINT delivers_delivered_goods_fk FOREIGN KEY (delivered_goods_id) REFERENCES Delivered_goods (id)
+    поставляемые_id INTEGER NOT NULL,
+    количество             INTEGER CHECK (количество > 0),
+    дата_поставки       DATE    NOT NULL,
+    брак         INTEGER CHECK (брак >= 0 AND брак <= 1),
+    CONSTRAINT delivers_delivered_goods_fk FOREIGN KEY (поставляемые_id) REFERENCES Поставляемые (id) ON DELETE CASCADE
 );
 
-CREATE TABLE Orders
+CREATE TABLE Заказы
 (
     id         INTEGER PRIMARY KEY,
-    name       VARCHAR(100) NOT NULL,
-    type       VARCHAR(100) NOT NULL,
-    amount     INTEGER CHECK (amount > 0),
-    order_date DATE         NOT NULL
+    имя       VARCHAR(100) NOT NULL,
+    тип       VARCHAR(100) NOT NULL,
+    количество     INTEGER CHECK (количество > 0),
+    дата_заказа DATE         NOT NULL
 );
 
-CREATE TABLE Sells
+CREATE TABLE Продажи
 (
     id        INTEGER PRIMARY KEY,
-    order_id  INTEGER NOT NULL,
-    sell_date DATE    NOT NULL,
-    CONSTRAINT sells_orders_fk FOREIGN KEY (order_id) REFERENCES ORDERS (id)
+    заказы_id  INTEGER NOT NULL,
+    дата_продажи DATE    NOT NULL,
+    CONSTRAINT sells_orders_fk FOREIGN KEY (заказы_id) REFERENCES Заказы (id) ON DELETE CASCADE
 );
 
-CREATE TABLE Cells
+CREATE TABLE Ячейки
 (
     id            INTEGER PRIMARY KEY,
-    delivered_goods_id INTEGER NOT NULL,
-    amount        INTEGER CHECK (amount > 0),
-    CONSTRAINT cell_delivered_goods_fk FOREIGN KEY (delivered_goods_id) REFERENCES Delivered_goods (id)
+    поставляемые_id INTEGER NOT NULL,
+    количество        INTEGER CHECK (количество > 0),
+    CONSTRAINT cell_delivered_goods_fk FOREIGN KEY (поставляемые_id) REFERENCES Поставляемые (id) ON DELETE CASCADE
 );

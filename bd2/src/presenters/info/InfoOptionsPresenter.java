@@ -1,7 +1,10 @@
 package presenters.info;
 
-import frames.info.InfoFrame;
+import frames.info.MyInfoFrame;
 import panels.info.InfoOptionsPanel;
+import panels.info.InfoPanel;
+
+import java.awt.*;
 
 public class InfoOptionsPresenter {
 
@@ -13,10 +16,10 @@ public class InfoOptionsPresenter {
 
     public void openInfoFrame(String tableName) {
         try {
-            InfoFrame frame = new InfoFrame(tableName);
+            MyInfoFrame myInfoFrame = new MyInfoFrame(tableName, new Dimension(600, 400), new InfoPanel(tableName));
         } catch (Exception ex) {
             ex.printStackTrace();
-            onError("Can not open table");
+            onError("Невозможно открыть таблицу");
         }
 
     }

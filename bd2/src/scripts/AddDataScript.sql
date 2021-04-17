@@ -1,46 +1,46 @@
 BEGIN
-    INSERT INTO Fee(COUNTRY, PERCENT) VALUES ('Germany', 5);
-    INSERT INTO Fee(COUNTRY, PERCENT) VALUES ('France', 6);
-    INSERT INTO Fee(COUNTRY, PERCENT) VALUES ('Poland', 7);
-    INSERT INTO Fee(COUNTRY, PERCENT) VALUES ('UK', 4);
-    INSERT INTO Fee(COUNTRY, PERCENT) VALUES ('USA', 2);
+    INSERT INTO Пошлина(страна, пошлина) VALUES ('Германия', 5);
+    INSERT INTO Пошлина(страна, пошлина) VALUES ('Франция', 6);
+    INSERT INTO Пошлина(страна, пошлина) VALUES ('Польша', 7);
+    INSERT INTO Пошлина(страна, пошлина) VALUES ('Великобритания', 4);
+    INSERT INTO Пошлина(страна, пошлина) VALUES ('США', 2);
 
-    INSERT INTO Dealers(name, fee_id, type) VALUES ('dealer1', 1, 'dealer');
-    INSERT INTO Dealers(name, fee_id, type) VALUES ('dealer2', 2, 'shop');
-    INSERT INTO Dealers(name, fee_id, type) VALUES ('dealer3', 3, 'factory');
-    INSERT INTO Dealers(name, fee_id, type) VALUES ('dealer4', 4, 'dealer');
-    INSERT INTO Dealers(name, fee_id, type) VALUES ('dealer5', 5, 'shop');
+    INSERT INTO Поставщики(имя, пошлина_id, тип) VALUES ('производство1', 1, 'диллер');
+    INSERT INTO Поставщики(имя, пошлина_id, тип) VALUES ('производство2', 2, 'магазин');
+    INSERT INTO Поставщики(имя, пошлина_id, тип) VALUES ('производство3', 3, 'производство');
+    INSERT INTO Поставщики(имя, пошлина_id, тип) VALUES ('производство4', 4, 'диллер');
+    INSERT INTO Поставщики(имя, пошлина_id, тип) VALUES ('производство5', 5, 'магазин');
 
-    INSERT INTO Goods_type(type) VALUES ('bolt');
-    INSERT INTO Goods_type(type) VALUES ('vint');
-    INSERT INTO Goods_type(type) VALUES ('hammer');
-    INSERT INTO Goods_type(type) VALUES ('nail');
-    INSERT INTO Goods_type(type) VALUES ('drill');
+    INSERT INTO Типы_товаров(тип) VALUES ('болт');
+    INSERT INTO Типы_товаров(тип) VALUES ('винт');
+    INSERT INTO Типы_товаров(тип) VALUES ('молоток');
+    INSERT INTO Типы_товаров(тип) VALUES ('гвоздь');
+    INSERT INTO Типы_товаров(тип) VALUES ('дрель');
 
-    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost, good_size) VALUES (1, 5, 200, 2);
-    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost, good_size) VALUES (2, 4, 100, 7);
-    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost, good_size) VALUES (3, 3, 150, 3);
-    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost, good_size) VALUES (4, 2, 80, 7);
-    INSERT INTO Delivered_goods(dealer_id, goods_type_id, cost, good_size) VALUES (5, 1, 120, 4);
+    INSERT INTO Поставляемые(поставщики_id, типы_товаров_id, цена, размер_товара) VALUES (1, 5, 200, 2);
+    INSERT INTO Поставляемые(поставщики_id, типы_товаров_id, цена, размер_товара) VALUES (2, 4, 100, 7);
+    INSERT INTO Поставляемые(поставщики_id, типы_товаров_id, цена, размер_товара) VALUES (3, 3, 150, 3);
+    INSERT INTO Поставляемые(поставщики_id, типы_товаров_id, цена, размер_товара) VALUES (4, 2, 80, 7);
+    INSERT INTO Поставляемые(поставщики_id, типы_товаров_id, цена, размер_товара) VALUES (5, 1, 120, 4);
 
-    INSERT INTO Delivers(delivered_goods_id, amount, deliver_date, defective)
+    INSERT INTO Поставки(поставляемые_id, количество, дата_поставки, брак)
     VALUES (1, 4, TO_DATE('072219', 'MMDDYY'), 0);
-    INSERT INTO Delivers(delivered_goods_id, amount, deliver_date, defective)
+    INSERT INTO Поставки(поставляемые_id, количество, дата_поставки, брак)
     VALUES (2, 2, TO_DATE('072219', 'MMDDYY'), 0);
-    INSERT INTO Delivers(delivered_goods_id, amount, deliver_date, defective)
+    INSERT INTO Поставки(поставляемые_id, количество, дата_поставки, брак)
     VALUES (3, 1, TO_DATE('072219', 'MMDDYY'), 0);
-    INSERT INTO Delivers(delivered_goods_id, amount, deliver_date, defective)
+    INSERT INTO Поставки(поставляемые_id, количество, дата_поставки, брак)
     VALUES (4, 5, TO_DATE('072219', 'MMDDYY'), 0);
-    INSERT INTO Delivers(delivered_goods_id, amount, deliver_date, defective)
+    INSERT INTO Поставки(поставляемые_id, количество, дата_поставки, брак)
     VALUES (5, 10, TO_DATE('072219', 'MMDDYY'), 0);
 
-    INSERT INTO Orders(name, type, amount, order_date) VALUES ('vasiliy', 'bolt', 5, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Orders(name, type, amount, order_date) VALUES ('petr', 'vint', 4, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Orders(name, type, amount, order_date) VALUES ('vania', 'hammer', 3, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Orders(name, type, amount, order_date) VALUES ('artem', 'nail', 2, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Orders(name, type, amount, order_date) VALUES ('maxim', 'drill', 7, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Василий', 'болт', 5, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Петр', 'винт', 4, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Иван', 'молоток', 3, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Артем', 'гвоздь', 2, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Максим', 'дрель', 7, TO_DATE('072219', 'MMDDYY'));
 
-    INSERT INTO SELLS(order_id, sell_date) VALUES (1, TO_DATE('072619', 'MMDDYY'));
-    INSERT INTO SELLS(order_id, sell_date) VALUES (2, TO_DATE('082619', 'MMDDYY'));
-    INSERT INTO SELLS(order_id, sell_date) VALUES (3, TO_DATE('091619', 'MMDDYY'));
+    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (1, TO_DATE('072619', 'MMDDYY'));
+    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (2, TO_DATE('082619', 'MMDDYY'));
+    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (3, TO_DATE('091619', 'MMDDYY'));
 END;

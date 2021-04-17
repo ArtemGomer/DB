@@ -29,7 +29,7 @@ public class DataTablePanel extends JPanel {
         dataTablePresenter = new DataTablePresenter(this, tableName);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         if (!dataTablePresenter.getAllDataFrom(null, null, tableName)) {
-            throw new SQLException("Table does not exists");
+            throw new SQLException("Таблица не существует");
         }
         initViews(tableName);
     }
@@ -45,7 +45,7 @@ public class DataTablePanel extends JPanel {
         optionPanel.add(sortingComboBox);
         optionPanel.add(sortingByComboBox);
 
-        JButton refreshBtn = new JButton("Refresh");
+        JButton refreshBtn = new JButton("Обновить");
         refreshBtn.setFont(fontBig);
         refreshBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -57,7 +57,7 @@ public class DataTablePanel extends JPanel {
             }
         });
 
-        JButton addBtn = new JButton("Add");
+        JButton addBtn = new JButton("Добавить");
         addBtn.setFont(fontBig);
         addBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -67,7 +67,7 @@ public class DataTablePanel extends JPanel {
             }
         });
 
-        JButton deleteBtn = new JButton("Delete");
+        JButton deleteBtn = new JButton("Удалить");
         deleteBtn.setFont(fontBig);
         deleteBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -91,7 +91,7 @@ public class DataTablePanel extends JPanel {
     }
 
     public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message, "Failure", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
     public void setDataTable(Vector<Vector<String>> data, Vector<ColumnNameType> columnNameTypes) {

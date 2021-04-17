@@ -4,6 +4,7 @@ import org.apache.ibatis.jdbc.ScriptRunner;
 import utils.ColumnNameType;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.*;
 
@@ -98,11 +99,11 @@ public class DatabaseApi {
         InputStream add = DatabaseApi.class.getClassLoader().getResourceAsStream("scripts/AddDataScript.sql");
         scriptRunner = new ScriptRunner(connection);
         scriptRunner.setRemoveCRs(true);
-        scriptRunner.runScript(new InputStreamReader(create));
-        scriptRunner.runScript(new InputStreamReader(dropSeq));
+        scriptRunner.runScript(new InputStreamReader(create, StandardCharsets.UTF_8));
+        scriptRunner.runScript(new InputStreamReader(dropSeq, StandardCharsets.UTF_8));
         scriptRunner.setSendFullScript(true);
-        scriptRunner.runScript(new InputStreamReader(createTg));
-        scriptRunner.runScript(new InputStreamReader(add));
+        scriptRunner.runScript(new InputStreamReader(createTg, StandardCharsets.UTF_8));
+        scriptRunner.runScript(new InputStreamReader(add, StandardCharsets.UTF_8));
     }
 
     public void deleteDatabase() {
@@ -113,19 +114,19 @@ public class DatabaseApi {
 
     public ResultSet getDealersInfo(String type) throws SQLException {
         type = "'" + type + "'";
-        String query = "SELECT name, type, country, percent FROM Dealers" +
-                " INNER JOIN Fee ON Dealers.fee_id = Fee.id" +
-                " WHERE type = " + type;
+        String query = "SELECT имя, тип, страна, пошлина FROM Поставщики" +
+                " INNER JOIN Пошлина ON Поставщики.пошлина_id = Пошлина.id" +
+                " WHERE тип = " + type;
         return statement.executeQuery(query);
     }
 
     public ResultSet getDeliveredGoodsInfo(String type) throws SQLException {
         type = "'" + type + "'";
-        String query = "SELECT Goods_type.type as Good_type, Dealers.type as Dealer_type," +
-                " Dealers.name as Dealer_name, cost FROM Delivered_goods" +
-                " INNER JOIN Goods_type ON Delivered_goods.goods_type_id = Goods_type.id" +
-                " INNER JOIN Dealers ON Delivered_goods.dealer_id = Dealers.id " +
-                " WHERE Goods_type.type = " + type;
+        String query = "SELECT Типы_товаров.тип as Тип_товара, Поставщики.тип as Тип_поставщика," +
+                " Поставщики.имя as Имя_поставщика, цена FROM Поставляемые" +
+                " INNER JOIN Типы_товаров ON Поставляемые.типы_товаров_id = Типы_товаров.id" +
+                " INNER JOIN Поставщики ON Поставляемые.поставщики_id = поставщики.id " +
+                " WHERE Типы_товаров.тип = " + type;
         return statement.executeQuery(query);
     }
 
@@ -134,21 +135,21 @@ public class DatabaseApi {
         if (amount.isEmpty()) {
             amount = "0";
         }
-        String query = "SELECT name, type, amount, sell_date FROM SELLS" +
-                " INNER JOIN ORDERS ON SELLS.order_id = ORDERS.id WHERE type = " +
-                type + " AND amount > " + amount;
+        String query = "SELECT имя, тип, количество, дата_продажи FROM Продажи" +
+                " INNER JOIN Заказы ON Продажи.заказы_id = Заказы.id WHERE тип = " +
+                type + " AND количество > " + amount;
         return statement.executeQuery(query);
     }
 
     public ResultSet getCellsInfo() throws SQLException {
-        String query = "SELECT Cells.id, Goods_type.type, Cells.amount, Delivered_goods.good_size * Cells.amount AS fullness, 20 AS capacity" +
-                " FROM Cells INNER JOIN Delivered_goods ON Delivered_goods.id = Cells.delivered_goods_id" +
-                " INNER JOIN Goods_type ON Delivered_goods.goods_type_id = Goods_type.id";
+        String query = "SELECT Ячейки.id, Типы_товаров.тип, Ячейки.количество, Поставляемые.размер_товара * Ячейки.количество AS заполненность, 20 AS вместимость" +
+                " FROM Ячейки INNER JOIN Поставляемые ON Поставляемые.id = Ячейки.поставляемые_id" +
+                " INNER JOIN Типы_товаров ON Поставляемые.типы_товаров_id = Типы_товаров.id";
         return statement.executeQuery(query);
     }
 
     public ResultSet getTypes(String tableName) throws SQLException {
-        String query = "SELECT DISTINCT type FROM " + tableName;
+        String query = "SELECT DISTINCT тип FROM " + tableName;
         return statement.executeQuery(query);
     }
 

@@ -5,7 +5,6 @@ import utils.ColumnNameType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Map;
 import java.util.Vector;
 
 public class AddFrame extends JFrame {

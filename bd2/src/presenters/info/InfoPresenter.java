@@ -21,36 +21,36 @@ public class InfoPresenter {
     }
 
     public void setTable(String tableName) throws SQLException {
-        if (tableName.equalsIgnoreCase("dealers")) {
+        if (tableName.equalsIgnoreCase("Поставщики")) {
             panel.openDealersAndDetailsTypeChooser(this.getType(tableName));
-        } else if (tableName.equalsIgnoreCase("delivered_goods")) {
-            panel.openDealersAndDetailsTypeChooser(this.getType("Goods_type"));
-        } else if (tableName.equalsIgnoreCase("sells")) {
-            panel.openSellsChooser(this.getType("Goods_type"));
-        } else if (tableName.equalsIgnoreCase("cells")) {
-            setTable(api.getCellsInfo());
+        } else if (tableName.equalsIgnoreCase("Поставляемые")) {
+            panel.openDealersAndDetailsTypeChooser(this.getType("Типы_товаров"));
+        } else if (tableName.equalsIgnoreCase("Продажи")) {
+            panel.openSellsChooser(this.getType("Типы_товаров"));
+        } else if (tableName.equalsIgnoreCase("Ячейки")) {
+            this.convertData(api.getCellsInfo());
         }
     }
 
     public void setOneItemTable(String item, String tableName) throws SQLException {
         ResultSet set = null;
-        if (tableName.equalsIgnoreCase("dealers")) {
+        if (tableName.equalsIgnoreCase("Поставщики")) {
             set = api.getDealersInfo(item);
-        } else if (tableName.equalsIgnoreCase("delivered_goods")) {
+        } else if (tableName.equalsIgnoreCase("Поставляемые")) {
             set = api.getDeliveredGoodsInfo(item);
         }
-        setTable(set);
+        convertData(set);
     }
 
     public void setTwoItemsTable(String item1, String item2, String tableName) throws SQLException {
         ResultSet set = null;
-        if (tableName.equalsIgnoreCase("sells")) {
+        if (tableName.equalsIgnoreCase("Продажи")) {
             set = api.getSellsInfo(item1, item2);
         }
-        setTable(set);
+        convertData(set);
     }
 
-    private void setTable(ResultSet set) throws SQLException {
+    private void convertData(ResultSet set) throws SQLException {
         ResultSetMetaData metaData = set.getMetaData();
         Vector<ColumnNameType> columnNameTypes = new Vector<>();
         for (int i = 1; i <= metaData.getColumnCount(); i++) {

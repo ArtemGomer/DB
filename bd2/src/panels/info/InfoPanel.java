@@ -28,7 +28,6 @@ public class InfoPanel extends JPanel {
     }
 
     public void setDataTable(Vector<Vector<String>> data, Vector<String> columnNames) {
-        System.out.println(columnNames);
         DataTable dataTable = new DataTable(data, columnNames, null);
         dataTable.setEditable(false);
         dataTable.getTableHeader().setReorderingAllowed(false);
@@ -37,7 +36,7 @@ public class InfoPanel extends JPanel {
 
     public void openDealersAndDetailsTypeChooser(Vector<String> items) throws SQLException {
         JComboBox<String> comboBox = new JComboBox<>(items);
-        JOptionPane.showConfirmDialog(null, comboBox, "Choose type", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showConfirmDialog(null, comboBox, "Выберите тип", JOptionPane.DEFAULT_OPTION);
         presenter.setOneItemTable(Objects.requireNonNull(comboBox.getSelectedItem()).toString(), tableName);
     }
 
@@ -49,7 +48,7 @@ public class InfoPanel extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(comboBox1);
         panel.add(jFormattedTextField1);
-        JOptionPane.showConfirmDialog(null, panel, "Choose type", JOptionPane.DEFAULT_OPTION);
+        JOptionPane.showConfirmDialog(null, panel, "Выберите", JOptionPane.DEFAULT_OPTION);
         presenter.setTwoItemsTable(Objects.requireNonNull(comboBox1.getSelectedItem()).toString(), jFormattedTextField1.getText(), tableName);
     }
 

@@ -2,6 +2,7 @@ package presenters;
 
 import database.DatabaseApi;
 import panels.MainMenuPanel;
+import panels.data.OptionsPanel;
 import panels.data.TablesPanel;
 
 import javax.swing.*;
@@ -28,11 +29,11 @@ public class MainMenuPresenter {
                     api.connectToDatabase(ip, port, username, password);
                     onConnected();
                 } else {
-                    onError("Please, fill in all gaps");
+                    onError("Заполните все поля");
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                onError("Can not connect to server");
+                onError("Невозможно подключиться к серверу");
             }
         };
         Thread connectionThread = new Thread(connect);
@@ -42,7 +43,7 @@ public class MainMenuPresenter {
     private void onConnected() {
         mainMenuPanel.setIsConnecting(false);
         container.removeAll();
-        JPanel tablesPanel = new TablesPanel(container);
+        JPanel tablesPanel = new OptionsPanel(container);
         container.add(tablesPanel);
         container.revalidate();
         tablesPanel.requestFocus();
@@ -56,6 +57,5 @@ public class MainMenuPresenter {
         mainMenuPanel.setIsConnecting(false);
         mainMenuPanel.showMessageDialog(message);
     }
-
 
 }

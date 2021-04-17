@@ -22,13 +22,13 @@ public class MainMenuPanel extends JPanel {
 
     private void initViews() {
 
-        connectToServerBtn = new JButton("connect to server");
-        connectToServerBtn.setFont(new Font(Font.SERIF, Font.BOLD, 40));
+        connectToServerBtn = new JButton("Подключиться к серверу");
+        connectToServerBtn.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         connectToServerBtn.setAlignmentX(CENTER_ALIGNMENT);
         connectToServerBtn.setMaximumSize(new Dimension(400, 50));
 
-        JLabel infoLabel = new JLabel("Enter your data to connect to localhost");
-        infoLabel.setFont(new Font(Font.SERIF, Font.BOLD, 22));
+        JLabel infoLabel = new JLabel("Введите данные для localhost");
+        infoLabel.setFont(new Font(Font.SERIF, Font.BOLD, 25));
         infoLabel.setAlignmentX(CENTER_ALIGNMENT);
         infoLabel.setMaximumSize(new Dimension(400, 50));
 
@@ -42,8 +42,8 @@ public class MainMenuPanel extends JPanel {
         passwordTxt.setAlignmentX(CENTER_ALIGNMENT);
         passwordTxt.setMaximumSize(new Dimension(400, 50));
 
-        connectToLocalhostBtn = new JButton("connect to localhost");
-        connectToLocalhostBtn.setFont(new Font(Font.SERIF, Font.BOLD, 40));
+        connectToLocalhostBtn = new JButton("Подключиться к localhost");
+        connectToLocalhostBtn.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         connectToLocalhostBtn.setAlignmentX(CENTER_ALIGNMENT);
         connectToLocalhostBtn.setMaximumSize(new Dimension(400, 50));
 
@@ -85,7 +85,7 @@ public class MainMenuPanel extends JPanel {
             }
         });
 
-        connecting = new JLabel("Connecting...");
+        connecting = new JLabel("Подключение...");
         connecting.setFont(new Font(Font.SERIF, Font.BOLD, 35));
         connecting.setForeground(Color.LIGHT_GRAY);
         connecting.setAlignmentX(CENTER_ALIGNMENT);
@@ -100,7 +100,7 @@ public class MainMenuPanel extends JPanel {
     }
 
     public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message, "Failure", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
     public void setIsConnecting(boolean connecting) {

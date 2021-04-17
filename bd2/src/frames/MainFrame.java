@@ -8,12 +8,12 @@ import java.awt.event.WindowEvent;
 
 public class MainFrame extends JFrame {
     public MainFrame() {
-        super("Details shop");
+        super("Магазин деталей");
         initViews();
     }
 
     private void initViews() {
-        setSize(500, 500);
+        setSize(500, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new WindowAdapter() {

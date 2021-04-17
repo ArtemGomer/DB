@@ -31,11 +31,11 @@ public class AddPresenter {
             }
             int number = api.addDataTo(tableName, columnNameTypes, data);
             if (number == 0) {
-                onError("Can not add item");
+                onError("Невозможно добавить элемент");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            onError("Can not add item");
+            onError("Невозможно добавить элемент");
         }
     }
 

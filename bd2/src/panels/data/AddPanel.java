@@ -9,8 +9,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Types;
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.Vector;
 
 public class AddPanel extends JPanel {
@@ -66,11 +64,6 @@ public class AddPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-//                Vector<String> vectorColumnNames = new Vector<>();
-//                for (ColumnNameType columnNameType: columnNameTypes) {
-//                    vectorColumnNames.add(columnNameType.getName());
-//                }
-//                vectorColumnNames.remove(0);
                 addPresenter.addData(tableName, columnNameTypes);
             }
         });

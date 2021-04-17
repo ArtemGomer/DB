@@ -46,7 +46,7 @@ public class DataTablePresenter {
             dataTablePanel.setDataTable(data, columnNameTypes);
         } catch (Exception ex) {
             ex.printStackTrace();
-            onError("Can not execute query");
+            onError("Невозможно выполнить запрос");
             return false;
         }
         return true;
@@ -72,7 +72,7 @@ public class DataTablePresenter {
         try {
             return api.updateItemIn(tableName, keyName, newValue, columnName, id);
         } catch (Exception ex) {
-            dataTablePanel.showMessageDialog("Can not update item");
+            dataTablePanel.showMessageDialog("Невозможно обновить элемент");
             return 0;
         }
     }
@@ -86,13 +86,14 @@ public class DataTablePresenter {
             for (int row: selectedRows) {
                 int num = api.deleteDataFrom(tableName, dataTablePanel.dataTable.getColumnName(0), dataTablePanel.dataTable.getValueAt(row, 0).toString());
                 if (num == 0) {
-                    onError("Can not delete items");
+                    onError("Невозможно удалить элемент");
                 } else {
                     ((DefaultTableModel) dataTablePanel.dataTable.getModel()).removeRow(row);
                 }
             }
         } catch (Exception ex) {
-            onError("Can not delete items");
+            onError("Невозможно удалить элемент");
+            ex.printStackTrace();
         }
     }
 

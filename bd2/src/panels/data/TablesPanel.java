@@ -10,193 +10,108 @@ import java.awt.event.MouseEvent;
 public class TablesPanel extends JPanel {
 
     private final TablesPresenter tablesPresenter;
-    private final Font font = new Font(Font.SERIF, Font.BOLD, 30);
+    private final Font font = new Font(Font.SERIF, Font.BOLD, 25);
 
-    private JButton deliveredGoodsBtn;
-    private JButton dealersBtn;
-    private JButton goodsTypeBtn;
-    private JButton feeBtn;
-    private JButton deliversBtn;
-    private JButton ordersBtn;
-    private JButton sellsBtn;
-    private JButton cellBtn;
-    private JButton recreateTablesBtn;
-    private JButton deleteDatabase;
-
-    public TablesPanel(Container container) {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        tablesPresenter = new TablesPresenter(container, this);
+    public TablesPanel() {
+        setLayout(new GridLayout(4, 2));
+        tablesPresenter = new TablesPresenter(this);
         initViews();
     }
 
     private void initViews() {
 
-        JPanel tablesPanel = new JPanel(new GridLayout(4, 2));
-        tablesPanel.setBackground(Color.DARK_GRAY);
-
-        deliveredGoodsBtn = new JButton("Delivered goods");
+        JButton deliveredGoodsBtn = new JButton("Поставляемые товары");
         deliveredGoodsBtn.setFont(font);
         deliveredGoodsBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Delivered_goods");
+                tablesPresenter.openDataTable("Поставляемые_товары");
             }
         });
 
-        dealersBtn = new JButton("Dealers");
+        JButton dealersBtn = new JButton("Поставщики");
         dealersBtn.setFont(font);
         dealersBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Dealers");
+                tablesPresenter.openDataTable("Поставщики");
             }
         });
 
-        goodsTypeBtn = new JButton("Goods_type");
+        JButton goodsTypeBtn = new JButton("Типы товаров");
         goodsTypeBtn.setFont(font);
         goodsTypeBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Goods_type");
+                tablesPresenter.openDataTable("Типы_товаров");
             }
         });
 
-        feeBtn = new JButton("Fee");
+        JButton feeBtn = new JButton("Пошлина");
         feeBtn.setFont(font);
         feeBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Fee");
+                tablesPresenter.openDataTable("Пошлина");
             }
         });
 
-        deliversBtn = new JButton("Delivers");
+        JButton deliversBtn = new JButton("Поставки");
         deliversBtn.setFont(font);
         deliversBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Delivers");
+                tablesPresenter.openDataTable("Поставки");
             }
         });
 
-        ordersBtn = new JButton("Orders");
+        JButton ordersBtn = new JButton("Заказы");
         ordersBtn.setFont(font);
         ordersBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Orders");
+                tablesPresenter.openDataTable("Заказы");
             }
         });
 
-        sellsBtn = new JButton("Sells");
+        JButton sellsBtn = new JButton("Продажи");
         sellsBtn.setFont(font);
         sellsBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Sells");
+                tablesPresenter.openDataTable("Продажи");
             }
         });
 
-        cellBtn = new JButton("Cells");
+        JButton cellBtn = new JButton("Ячейки");
         cellBtn.setFont(font);
         cellBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Cells");
+                tablesPresenter.openDataTable("Ячейки");
             }
         });
 
-        JPanel optionsPanel = new JPanel();
-        optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
-
-        recreateTablesBtn = new JButton("Recreate tables");
-        recreateTablesBtn.setMaximumSize(new Dimension(300, 40));
-        recreateTablesBtn.setAlignmentX(CENTER_ALIGNMENT);
-        recreateTablesBtn.setFont(font);
-        recreateTablesBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                tablesPresenter.recreateTables();
-            }
-        });
-
-        deleteDatabase = new JButton("Delete database");
-        deleteDatabase.setMaximumSize(new Dimension(300, 40));
-        deleteDatabase.setAlignmentX(CENTER_ALIGNMENT);
-        deleteDatabase.setFont(font);
-        deleteDatabase.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                tablesPresenter.deleteDatabase();
-            }
-        });
-
-        JButton infoBtn = new JButton("Information");
-        infoBtn.setMaximumSize(new Dimension(300, 40));
-        infoBtn.setFont(font);
-        infoBtn.setAlignmentX(CENTER_ALIGNMENT);
-        infoBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                tablesPresenter.openInfoFrame();
-            }
-        });
-
-        JButton disconnectBtn = new JButton("Disconnect");
-        disconnectBtn.setMaximumSize(new Dimension(300, 40));
-        disconnectBtn.setAlignmentX(CENTER_ALIGNMENT);
-        disconnectBtn.setFont(font);
-        disconnectBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                tablesPresenter.exit();
-            }
-        });
-
-        tablesPanel.add(deliveredGoodsBtn);
-        tablesPanel.add(dealersBtn);
-        tablesPanel.add(goodsTypeBtn);
-        tablesPanel.add(feeBtn);
-        tablesPanel.add(deliversBtn);
-        tablesPanel.add(sellsBtn);
-        tablesPanel.add(ordersBtn);
-        tablesPanel.add(cellBtn);
-
-        optionsPanel.add(recreateTablesBtn);
-        optionsPanel.add(deleteDatabase);
-        optionsPanel.add(infoBtn);
-        optionsPanel.add(disconnectBtn);
-
-        add(tablesPanel);
-        add(optionsPanel);
+        add(deliveredGoodsBtn);
+        add(dealersBtn);
+        add(goodsTypeBtn);
+        add(feeBtn);
+        add(deliversBtn);
+        add(sellsBtn);
+        add(ordersBtn);
+        add(cellBtn);
     }
 
     public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message, "Failure", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
-    public void setIsLoading(boolean isLoading) {
-        deliveredGoodsBtn.setEnabled(!isLoading);
-        goodsTypeBtn.setEnabled(!isLoading);
-        feeBtn.setEnabled(!isLoading);
-        dealersBtn.setEnabled(!isLoading);
-        deliversBtn.setEnabled(!isLoading);
-        ordersBtn.setEnabled(!isLoading);
-        sellsBtn.setEnabled(!isLoading);
-        cellBtn.setEnabled(!isLoading);
-        recreateTablesBtn.setEnabled(!isLoading);
-        deleteDatabase.setEnabled(!isLoading);
-    }
 }
