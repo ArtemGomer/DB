@@ -12,7 +12,7 @@ public class AddFrame extends JFrame {
     private final String tableName;
 
     public AddFrame(String tableName, Vector<ColumnNameType> columnNameTypes) {
-        super("Add data");
+        super("Добавить данные");
         this.tableName = tableName;
         setSize(new Dimension(400, 300));
         setResizable(false);

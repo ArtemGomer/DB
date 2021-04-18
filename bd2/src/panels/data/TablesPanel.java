@@ -26,7 +26,7 @@ public class TablesPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Поставляемые_товары");
+                tablesPresenter.openDataTable("Поставляемые");
             }
         });
 

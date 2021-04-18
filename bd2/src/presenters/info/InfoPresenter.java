@@ -29,6 +29,8 @@ public class InfoPresenter {
             panel.openSellsChooser(this.getType("Типы_товаров"));
         } else if (tableName.equalsIgnoreCase("Ячейки")) {
             this.convertData(api.getCellsInfo());
+        } else if (tableName.equalsIgnoreCase("Заказы")) {
+            this.convertData(api.getOrdersInfo());
         }
     }
 

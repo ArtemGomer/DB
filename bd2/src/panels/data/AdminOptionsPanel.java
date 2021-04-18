@@ -1,25 +1,24 @@
 package panels.data;
 
-import presenters.data.OptionsPresenter;
+import presenters.data.AdminOptionsPresenter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class OptionsPanel extends JPanel {
+public class AdminOptionsPanel extends JPanel {
 
-    private final OptionsPresenter optionsPresenter;
+    private final AdminOptionsPresenter adminOptionsPresenter;
     private final Font font = new Font(Font.SERIF, Font.BOLD, 25);
 
     private JButton recreateTablesBtn;
     private JButton deleteDatabaseBtn;
     private JButton openTablesBtn;
-    private JButton infoBtn;
 
-    public OptionsPanel(Container container) {
+    public AdminOptionsPanel(Container container) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        optionsPresenter = new OptionsPresenter(container, this);
+        adminOptionsPresenter = new AdminOptionsPresenter(container, this);
         initViews();
     }
 
@@ -33,7 +32,7 @@ public class OptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                optionsPresenter.openTables();
+                adminOptionsPresenter.openTables();
             }
         });
 
@@ -45,7 +44,7 @@ public class OptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                optionsPresenter.recreateTables();
+                adminOptionsPresenter.recreateTables();
             }
         });
 
@@ -57,21 +56,10 @@ public class OptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                optionsPresenter.deleteDatabase();
+                adminOptionsPresenter.deleteDatabase();
             }
         });
 
-        infoBtn = new JButton("Информация о магазине");
-        infoBtn.setMaximumSize(new Dimension(350, 40));
-        infoBtn.setFont(font);
-        infoBtn.setAlignmentX(CENTER_ALIGNMENT);
-        infoBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                optionsPresenter.openInfoFrame();
-            }
-        });
 
         JButton disconnectBtn = new JButton("Отключиться");
         disconnectBtn.setMaximumSize(new Dimension(350, 40));
@@ -81,12 +69,11 @@ public class OptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                optionsPresenter.exit();
+                adminOptionsPresenter.exit();
             }
         });
 
         add(openTablesBtn);
-        add(infoBtn);
         add(recreateTablesBtn);
         add(deleteDatabaseBtn);
         add(disconnectBtn);
@@ -100,7 +87,6 @@ public class OptionsPanel extends JPanel {
         openTablesBtn.setEnabled(!isLoading);
         recreateTablesBtn.setEnabled(!isLoading);
         deleteDatabaseBtn.setEnabled(!isLoading);
-        infoBtn.setEnabled(!isLoading);
     }
 
 }

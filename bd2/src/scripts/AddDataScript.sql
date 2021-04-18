@@ -24,23 +24,23 @@ BEGIN
     INSERT INTO Поставляемые(поставщики_id, типы_товаров_id, цена, размер_товара) VALUES (5, 1, 120, 4);
 
     INSERT INTO Поставки(поставляемые_id, количество, дата_поставки, брак)
-    VALUES (1, 4, TO_DATE('072219', 'MMDDYY'), 0);
+    VALUES (1, 4, TO_DATE('07222019', 'MMDDYYYY'), 0);
     INSERT INTO Поставки(поставляемые_id, количество, дата_поставки, брак)
-    VALUES (2, 2, TO_DATE('072219', 'MMDDYY'), 0);
+    VALUES (2, 2, TO_DATE('07222019', 'MMDDYYYY'), 0);
     INSERT INTO Поставки(поставляемые_id, количество, дата_поставки, брак)
-    VALUES (3, 1, TO_DATE('072219', 'MMDDYY'), 0);
+    VALUES (3, 1, TO_DATE('07222019', 'MMDDYYYY'), 0);
     INSERT INTO Поставки(поставляемые_id, количество, дата_поставки, брак)
-    VALUES (4, 5, TO_DATE('072219', 'MMDDYY'), 0);
+    VALUES (4, 5, TO_DATE('07222019', 'MMDDYYYY'), 0);
     INSERT INTO Поставки(поставляемые_id, количество, дата_поставки, брак)
-    VALUES (5, 10, TO_DATE('072219', 'MMDDYY'), 0);
+    VALUES (5, 10, TO_DATE('07222019', 'MMDDYYYY'), 0);
 
-    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Василий', 'болт', 5, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Петр', 'винт', 4, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Иван', 'молоток', 3, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Артем', 'гвоздь', 2, TO_DATE('072219', 'MMDDYY'));
-    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Максим', 'дрель', 7, TO_DATE('072219', 'MMDDYY'));
+    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Василий', 'болт', 5, TO_DATE('07222019', 'MMDDYYYY'));
+    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Петр', 'винт', 4, TO_DATE('07222019', 'MMDDYYYY'));
+    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Иван', 'молоток', 3, TO_DATE('07222019', 'MMDDYYYY'));
+    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Артем', 'гвоздь', 2, TO_DATE('07222019', 'MMDDYYYY'));
+    INSERT INTO Заказы(имя, тип, количество, дата_заказа) VALUES ('Максим', 'дрель', 7, TO_DATE('07222019', 'MMDDYYYY'));
 
-    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (1, TO_DATE('072619', 'MMDDYY'));
-    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (2, TO_DATE('082619', 'MMDDYY'));
-    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (3, TO_DATE('091619', 'MMDDYY'));
+    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (1, TO_DATE('07262019', 'MMDDYYYY'));
+    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (2, TO_DATE('08262019', 'MMDDYYYY'));
+    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (3, TO_DATE('09162019', 'MMDDYYYY'));
 END;

@@ -1,12 +1,16 @@
 package database;
 
+import com.sun.deploy.util.StringUtils;
 import org.apache.ibatis.jdbc.ScriptRunner;
 import utils.ColumnNameType;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 public class DatabaseApi {
 
@@ -55,7 +59,15 @@ public class DatabaseApi {
         query.append(" VALUES(");
         for (int i = 1; i < columnNameTypes.size(); i++) {
             if (columnNameTypes.get(i).getType() == Types.TIMESTAMP) {
-                query.append("TO_DATE(").append("'").append(data.get(i - 1).replaceAll("-","")).append("', 'MMDDYY'),");
+                if (data.get(i - 1).replaceAll("-", "").trim().isEmpty()) {
+                    Date date = new Date();
+                    String strDateFormat = "MMdy";
+                    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+                    String formattedDate= dateFormat.format(date);
+                    query.append("TO_DATE(").append("'").append(formattedDate).append("', 'MMDDYYYY'),");
+                } else {
+                    query.append("TO_DATE(").append("'").append(data.get(i - 1).replaceAll("-", "")).append("', 'MMDDYYYY'),");
+                }
             } else {
                 query.append("'").append(data.get(i - 1)).append("'").append(",");
             }
@@ -142,9 +154,15 @@ public class DatabaseApi {
     }
 
     public ResultSet getCellsInfo() throws SQLException {
-        String query = "SELECT Ячейки.id, Типы_товаров.тип, Ячейки.количество, Поставляемые.размер_товара * Ячейки.количество AS заполненность, 20 AS вместимость" +
+        String query = "SELECT Ячейки.id, Типы_товаров.тип, Поставщики.имя as производитель, Ячейки.количество, Поставляемые.размер_товара * Ячейки.количество AS заполненность, 20 AS вместимость" +
                 " FROM Ячейки INNER JOIN Поставляемые ON Поставляемые.id = Ячейки.поставляемые_id" +
+                " INNER JOIN Поставщики ON Поставщики.id = Поставляемые.поставщики_id" +
                 " INNER JOIN Типы_товаров ON Поставляемые.типы_товаров_id = Типы_товаров.id";
+        return statement.executeQuery(query);
+    }
+
+    public ResultSet getOrdersInfo() throws SQLException {
+        String query = "SELECT Заказы.имя, Заказы.тип, Заказы.количество FROM Заказы ";
         return statement.executeQuery(query);
     }
 

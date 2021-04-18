@@ -3,31 +3,31 @@ package presenters.data;
 import database.DatabaseApi;
 import frames.info.MyInfoFrame;
 import panels.MainMenuPanel;
-import panels.data.OptionsPanel;
+import panels.data.AdminOptionsPanel;
 import panels.data.TablesPanel;
 import panels.info.InfoOptionsPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class OptionsPresenter {
+public class AdminOptionsPresenter {
 
-    private final OptionsPanel optionsPanel;
+    private final AdminOptionsPanel adminOptionsPanel;
     private final DatabaseApi databaseApi;
     private final Container container;
 
-    public OptionsPresenter(Container container, OptionsPanel optionsPanel) {
+    public AdminOptionsPresenter(Container container, AdminOptionsPanel adminOptionsPanel) {
         this.container = container;
-        this.optionsPanel = optionsPanel;
+        this.adminOptionsPanel = adminOptionsPanel;
         this.databaseApi = DatabaseApi.getInstance();
     }
 
     public void recreateTables() {
         Runnable runnable = () -> {
             try {
-                optionsPanel.setIsLoading(true);
+                adminOptionsPanel.setIsLoading(true);
                 databaseApi.recreateTables();
-                optionsPanel.setIsLoading(false);
+                adminOptionsPanel.setIsLoading(false);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 onError("Невозможно создать БД");
@@ -38,8 +38,8 @@ public class OptionsPresenter {
     }
 
     public void onError(String message) {
-        optionsPanel.setIsLoading(false);
-        optionsPanel.showMessageDialog(message);
+        adminOptionsPanel.setIsLoading(false);
+        adminOptionsPanel.showMessageDialog(message);
     }
 
     public void openInfoFrame() {
@@ -70,9 +70,9 @@ public class OptionsPresenter {
     public void deleteDatabase() {
         Runnable runnable = () -> {
             try {
-                optionsPanel.setIsLoading(true);
+                adminOptionsPanel.setIsLoading(true);
                 databaseApi.deleteDatabase();
-                optionsPanel.setIsLoading(false);
+                adminOptionsPanel.setIsLoading(false);
             } catch (Exception ex) {
                 onError("Невозможно удалить БД");
             }

@@ -2,8 +2,7 @@ package presenters;
 
 import database.DatabaseApi;
 import panels.MainMenuPanel;
-import panels.data.OptionsPanel;
-import panels.data.TablesPanel;
+import panels.data.RolesPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,10 +42,10 @@ public class MainMenuPresenter {
     private void onConnected() {
         mainMenuPanel.setIsConnecting(false);
         container.removeAll();
-        JPanel tablesPanel = new OptionsPanel(container);
-        container.add(tablesPanel);
+        JPanel rolesPanel = new RolesPanel(container);
+        container.add(rolesPanel);
         container.revalidate();
-        tablesPanel.requestFocus();
+        rolesPanel.requestFocus();
     }
 
     private boolean checkValidData(String name, String password) {
