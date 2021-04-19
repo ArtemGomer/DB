@@ -1,5 +1,6 @@
 package presenters.info;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import panels.info.InfoPanel;
 import presenters.BasePresenter;
 import utils.ColumnNameType;
@@ -18,13 +19,13 @@ public final class InfoPresenter extends BasePresenter {
         super(panel, container);
     }
 
-    public void setTable(String tableName) throws SQLException {
+    public void setTable(String tableName) throws SQLException, InvalidArgumentException {
         if (tableName.equalsIgnoreCase("Поставщики")) {
-            ((InfoPanel)panel).openDealersAndDetailsTypeChooser(this.getType(tableName));
+            ((InfoPanel) panel).openDealersAndDetailsTypeChooser(this.getType(tableName));
         } else if (tableName.equalsIgnoreCase("Поставляемые")) {
-            ((InfoPanel)panel).openDealersAndDetailsTypeChooser(this.getType("Типы_товаров"));
+            ((InfoPanel) panel).openDealersAndDetailsTypeChooser(this.getType("Типы_товаров"));
         } else if (tableName.equalsIgnoreCase("Продажи")) {
-            ((InfoPanel)panel).openSellsChooser(this.getType("Типы_товаров"));
+            ((InfoPanel) panel).openSellsChooser(this.getType("Типы_товаров"));
         } else if (tableName.equalsIgnoreCase("Ячейки")) {
             this.convertData(api.getCellsInfo());
         } else if (tableName.equalsIgnoreCase("Заказы")) {
@@ -72,7 +73,7 @@ public final class InfoPresenter extends BasePresenter {
         for (ColumnNameType columnNameType : columnNameTypes) {
             columns.add(columnNameType.getName());
         }
-        ((InfoPanel)panel).setDataTable(data, columns);
+        ((InfoPanel) panel).setDataTable(data, columns);
     }
 
     public Vector<String> getType(String tableName) throws SQLException {

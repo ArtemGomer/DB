@@ -1,5 +1,6 @@
 package presenters.data;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import frames.BaseFrame;
 import frames.InfoFrame;
 import panels.MainMenuPanel;
@@ -39,6 +40,7 @@ public final class CustomerOptionsPresenter extends BasePresenter {
         } catch (SQLException ex) {
             ex.printStackTrace();
             onError("Невозможно посмотреть заказы");
+        } catch (InvalidArgumentException ignored) {
         }
     }
 

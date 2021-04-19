@@ -1,5 +1,6 @@
 package panels.info;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import tables.DataTable;
 import panels.BasePanel;
 import presenters.info.InfoPresenter;
@@ -18,7 +19,7 @@ public class InfoPanel extends BasePanel {
     private final InfoPresenter presenter;
     private final String tableName;
 
-    public InfoPanel(String tableName, Container container) throws SQLException {
+    public InfoPanel(String tableName, Container container) throws SQLException, InvalidArgumentException {
         super(container);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.presenter = new InfoPresenter(this, container);
@@ -26,7 +27,7 @@ public class InfoPanel extends BasePanel {
         initViews();
     }
 
-    public void initViews() throws SQLException {
+    public void initViews() throws SQLException, InvalidArgumentException {
         presenter.setTable(tableName);
     }
 
@@ -37,13 +38,17 @@ public class InfoPanel extends BasePanel {
         add(new JScrollPane(dataTable));
     }
 
-    public void openDealersAndDetailsTypeChooser(Vector<String> items) throws SQLException {
+    public void openDealersAndDetailsTypeChooser(Vector<String> items) throws SQLException, InvalidArgumentException {
         JComboBox<String> comboBox = new JComboBox<>(items);
-        JOptionPane.showConfirmDialog(null, comboBox, "Выберите тип", JOptionPane.DEFAULT_OPTION);
-        presenter.setOneItemTable(Objects.requireNonNull(comboBox.getSelectedItem()).toString(), tableName);
+        int ans = JOptionPane.showConfirmDialog(null, comboBox, "Выберите тип", JOptionPane.YES_NO_OPTION);
+        if (ans == JOptionPane.YES_OPTION) {
+            presenter.setOneItemTable(Objects.requireNonNull(comboBox.getSelectedItem()).toString(), tableName);
+        } else if (ans == JOptionPane.CLOSED_OPTION) {
+            throw new InvalidArgumentException(new String[]{"ignore"});
+        }
     }
 
-    public void openSellsChooser(Vector<String> items) throws SQLException {
+    public void openSellsChooser(Vector<String> items) throws SQLException, InvalidArgumentException {
         JComboBox<String> comboBox1 = new JComboBox<>(items);
         JFormattedTextField jFormattedTextField1 = new JFormattedTextField();
         jFormattedTextField1.setFormatterFactory(new DefaultFormatterFactory(new NumberFormatter(NumberFormat.getIntegerInstance())));
@@ -51,8 +56,12 @@ public class InfoPanel extends BasePanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(comboBox1);
         panel.add(jFormattedTextField1);
-        JOptionPane.showConfirmDialog(null, panel, "Выберите", JOptionPane.DEFAULT_OPTION);
-        presenter.setTwoItemsTable(Objects.requireNonNull(comboBox1.getSelectedItem()).toString(), jFormattedTextField1.getText(), tableName);
+        int ans = JOptionPane.showConfirmDialog(null, panel, "Выберите", JOptionPane.YES_NO_OPTION);
+        if (ans == JOptionPane.YES_OPTION) {
+            presenter.setTwoItemsTable(Objects.requireNonNull(comboBox1.getSelectedItem()).toString(), jFormattedTextField1.getText(), tableName);
+        } else if (ans == JOptionPane.CLOSED_OPTION) {
+            throw new InvalidArgumentException(new String[]{"ignore"});
+        }
     }
 
 }

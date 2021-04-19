@@ -163,7 +163,7 @@ public final class DatabaseApi {
     }
 
     public ResultSet getOrdersInfo() throws SQLException {
-        String query = "SELECT Заказы.имя, Заказы.тип, Заказы.количество FROM Заказы ";
+        String query = "SELECT Заказы.имя, Заказы.тип, Заказы.количество, Заказы.дата_заказа FROM Заказы ";
         return statement.executeQuery(query);
     }
 
