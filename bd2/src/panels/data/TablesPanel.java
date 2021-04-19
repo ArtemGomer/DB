@@ -1,5 +1,7 @@
 package panels.data;
 
+import frames.data.TableFrame;
+import panels.BasePanel;
 import presenters.data.TablesPresenter;
 
 import javax.swing.*;
@@ -7,18 +9,19 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class TablesPanel extends JPanel {
+public final class TablesPanel extends BasePanel {
 
     private final TablesPresenter tablesPresenter;
     private final Font font = new Font(Font.SERIF, Font.BOLD, 25);
 
-    public TablesPanel() {
+    public TablesPanel(Container container) {
+        super(container);
         setLayout(new GridLayout(4, 2));
-        tablesPresenter = new TablesPresenter(this);
+        tablesPresenter = new TablesPresenter(this, container);
         initViews();
     }
 
-    private void initViews() {
+    protected void initViews() {
 
         JButton deliveredGoodsBtn = new JButton("Поставляемые товары");
         deliveredGoodsBtn.setFont(font);
@@ -26,7 +29,12 @@ public class TablesPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Поставляемые");
+                try {
+                    tablesPresenter.openFrame(new TableFrame("Поставляемые"), new DataTablePanel("Поставляемые", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    tablesPresenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -36,7 +44,12 @@ public class TablesPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Поставщики");
+                try {
+                    tablesPresenter.openFrame(new TableFrame("Поставщики"), new DataTablePanel("Поставщики", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    tablesPresenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -46,7 +59,12 @@ public class TablesPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Типы_товаров");
+                try {
+                    tablesPresenter.openFrame(new TableFrame("Типы товаров"), new DataTablePanel("Типы_товаров", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    tablesPresenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -56,7 +74,12 @@ public class TablesPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Пошлина");
+                try {
+                    tablesPresenter.openFrame(new TableFrame("Пошлина"), new DataTablePanel("Пошлина", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    tablesPresenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -66,7 +89,12 @@ public class TablesPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Поставки");
+                try {
+                    tablesPresenter.openFrame(new TableFrame("Поставки"), new DataTablePanel("Поставки", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    tablesPresenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -76,7 +104,12 @@ public class TablesPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Заказы");
+                try {
+                    tablesPresenter.openFrame(new TableFrame("Заказы"), new DataTablePanel("Заказы", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    tablesPresenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -86,7 +119,12 @@ public class TablesPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Продажи");
+                try {
+                    tablesPresenter.openFrame(new TableFrame("Продажи"), new DataTablePanel("Продажи", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    tablesPresenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -96,7 +134,12 @@ public class TablesPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tablesPresenter.openDataTable("Ячейки");
+                try {
+                    tablesPresenter.openFrame(new TableFrame("Ячейки"), new DataTablePanel("Ячейки", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    tablesPresenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -108,10 +151,6 @@ public class TablesPanel extends JPanel {
         add(sellsBtn);
         add(ordersBtn);
         add(cellBtn);
-    }
-
-    public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
 }

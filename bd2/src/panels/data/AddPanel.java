@@ -1,5 +1,6 @@
 package panels.data;
 
+import panels.BasePanel;
 import presenters.data.AddPresenter;
 import utils.ColumnNameType;
 
@@ -11,15 +12,16 @@ import java.awt.event.MouseEvent;
 import java.sql.Types;
 import java.util.Vector;
 
-public class AddPanel extends JPanel {
+public final class AddPanel extends BasePanel {
 
     private final AddPresenter addPresenter;
     private final String tableName;
     private final Font font = new Font(Font.SERIF, Font.BOLD, 20);
     private final Vector<ColumnNameType> columnNameTypes;
 
-    public AddPanel(String tableName, Vector<ColumnNameType> columnNameTypes) {
-        addPresenter = new AddPresenter(this);
+    public AddPanel(String tableName, Vector<ColumnNameType> columnNameTypes, Container container) {
+        super(container);
+        addPresenter = new AddPresenter(container, this);
         this.tableName = tableName;
         this.columnNameTypes = columnNameTypes;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -70,10 +72,6 @@ public class AddPanel extends JPanel {
 
         panel.add(commitBtn);
         add(panel);
-    }
-
-    public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message, "Failure", JOptionPane.ERROR_MESSAGE);
     }
 
 }

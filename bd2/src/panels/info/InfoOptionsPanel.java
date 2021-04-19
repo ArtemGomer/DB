@@ -1,5 +1,7 @@
 package panels.info;
 
+import frames.info.MyInfoFrame;
+import panels.BasePanel;
 import presenters.info.InfoOptionsPresenter;
 
 import javax.swing.*;
@@ -7,18 +9,19 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class InfoOptionsPanel extends JPanel {
+public final class InfoOptionsPanel extends BasePanel {
 
     private final InfoOptionsPresenter presenter;
     private final Font font = new Font(Font.SERIF, Font.BOLD, 30);
 
-    public InfoOptionsPanel() {
-        this.presenter = new InfoOptionsPresenter(this);
+    public InfoOptionsPanel(Container container) {
+        super(container);
+        this.presenter = new InfoOptionsPresenter(this, container);
         setLayout(new GridLayout(4, 4));
         initViews();
     }
 
-    public void initViews() {
+    protected void initViews() {
 
         JButton dealersInfoBtn = new JButton("Поставщики по категориям");
         dealersInfoBtn.setAlignmentX(CENTER_ALIGNMENT);
@@ -26,7 +29,13 @@ public class InfoOptionsPanel extends JPanel {
         dealersInfoBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                presenter.openInfoFrame("Поставщики");
+                super.mouseClicked(e);
+                try {
+                    presenter.openFrame(new MyInfoFrame("Поставщики по категориям", new Dimension(600, 400)), new InfoPanel("Поставщики", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    presenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -37,7 +46,12 @@ public class InfoOptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                presenter.openInfoFrame("Поставляемые");
+                try {
+                    presenter.openFrame(new MyInfoFrame("Детали по категориям", new Dimension(600, 400)), new InfoPanel("Поставляемые", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    presenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -48,7 +62,12 @@ public class InfoOptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                presenter.openInfoFrame("Продажи");
+                try {
+                    presenter.openFrame(new MyInfoFrame("Продажи по типу", new Dimension(600, 400)), new InfoPanel("Продажи", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    presenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -59,7 +78,12 @@ public class InfoOptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                presenter.openInfoFrame("Ячейки");
+                try {
+                    presenter.openFrame(new MyInfoFrame("Все ячейки склада", new Dimension(600, 400)), new InfoPanel("Ячейки", container));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    presenter.onError("Невозможно открыть таблицу");
+                }
             }
         });
 
@@ -68,10 +92,6 @@ public class InfoOptionsPanel extends JPanel {
         add(sellsInfoBtn);
         add(cellsInfoBtn);
 
-    }
-
-    public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
 }

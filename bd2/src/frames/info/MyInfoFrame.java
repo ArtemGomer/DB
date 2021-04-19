@@ -1,21 +1,26 @@
 package frames.info;
 
+import frames.BaseFrame;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class MyInfoFrame extends JFrame {
+public final class MyInfoFrame extends BaseFrame {
 
-    public MyInfoFrame(String name, Dimension dimension, JPanel panel) {
+    private final Dimension dimension;
+
+
+    public MyInfoFrame(String name, Dimension dimension) {
         super(name);
+        this.dimension = dimension;
+        initViews();
+    }
+
+    @Override
+    protected void initViews() {
         setSize(dimension);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
-        initViews(panel);
-        setVisible(true);
-    }
-
-    public void initViews(JPanel panel) {
-        add(panel);
     }
 }

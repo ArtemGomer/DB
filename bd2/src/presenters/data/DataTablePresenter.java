@@ -1,26 +1,24 @@
 package presenters.data;
 
-import database.DatabaseApi;
 import panels.data.DataTablePanel;
+import presenters.BasePresenter;
 import utils.ColumnNameType;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Types;
 import java.util.Vector;
 
-public class DataTablePresenter {
+public final class DataTablePresenter extends BasePresenter {
 
     private final String tableName;
-    private final DataTablePanel dataTablePanel;
-    private final DatabaseApi api;
 
-    public DataTablePresenter(DataTablePanel dataTablePanel, String tableName) {
+    public DataTablePresenter(DataTablePanel dataTablePanel, String tableName, Container container) {
+        super(dataTablePanel, container);
         this.tableName = tableName;
-        this.dataTablePanel = dataTablePanel;
-        this.api = DatabaseApi.getInstance();
     }
 
     public boolean getAllDataFrom(String sorting, String sortingBy, String tableName) {
@@ -43,7 +41,7 @@ public class DataTablePresenter {
                 }
                 data.add(row);
             }
-            dataTablePanel.setDataTable(data, columnNameTypes);
+            ((DataTablePanel)panel).setDataTable(data, columnNameTypes);
         } catch (Exception ex) {
             ex.printStackTrace();
             onError("Невозможно выполнить запрос");
@@ -52,9 +50,6 @@ public class DataTablePresenter {
         return true;
     }
 
-    public void onError(String message) {
-        dataTablePanel.showMessageDialog(message);
-    }
 
     public JComboBox<String> setSortingByData(Vector<ColumnNameType> columnNameTypes) {
         Vector<String> vectorColumnNames = new Vector<>();
@@ -62,7 +57,7 @@ public class DataTablePresenter {
             vectorColumnNames.add(columnNameType.getName());
         }
         String[] strings = vectorColumnNames.toArray(new String[0]);
-        return dataTablePanel.setSortingByComboBox(strings);
+        return ((DataTablePanel)panel).setSortingByComboBox(strings);
     }
 
     public int updateItem(String keyName,
@@ -72,23 +67,19 @@ public class DataTablePresenter {
         try {
             return api.updateItemIn(tableName, keyName, newValue, columnName, id);
         } catch (Exception ex) {
-            dataTablePanel.showMessageDialog("Невозможно обновить элемент");
+            panel.showMessageDialog("Невозможно обновить элемент");
             return 0;
         }
-    }
-
-    public void openAddFrame(Vector<ColumnNameType> columnNameTypes) {
-        dataTablePanel.openAddFrame(columnNameTypes);
     }
 
     public void deleteSelectedRows(int[] selectedRows) {
         try {
             for (int row: selectedRows) {
-                int num = api.deleteDataFrom(tableName, dataTablePanel.dataTable.getColumnName(0), dataTablePanel.dataTable.getValueAt(row, 0).toString());
+                int num = api.deleteDataFrom(tableName, ((DataTablePanel)panel).dataTable.getColumnName(0), ((DataTablePanel)panel).dataTable.getValueAt(row, 0).toString());
                 if (num == 0) {
                     onError("Невозможно удалить элемент");
                 } else {
-                    ((DefaultTableModel) dataTablePanel.dataTable.getModel()).removeRow(row);
+                    ((DefaultTableModel) ((DataTablePanel)panel).dataTable.getModel()).removeRow(row);
                 }
             }
         } catch (Exception ex) {

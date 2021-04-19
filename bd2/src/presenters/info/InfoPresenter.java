@@ -1,32 +1,30 @@
 package presenters.info;
 
-import database.DatabaseApi;
 import panels.info.InfoPanel;
+import presenters.BasePresenter;
 import utils.ColumnNameType;
 
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Vector;
 
-public class InfoPresenter {
+public class InfoPresenter extends BasePresenter {
 
-    private final InfoPanel panel;
-    private final DatabaseApi api;
 
-    public InfoPresenter(InfoPanel panel) {
-        this.panel = panel;
-        api = DatabaseApi.getInstance();
+    public InfoPresenter(InfoPanel panel, Container container) {
+        super(panel, container);
     }
 
     public void setTable(String tableName) throws SQLException {
         if (tableName.equalsIgnoreCase("Поставщики")) {
-            panel.openDealersAndDetailsTypeChooser(this.getType(tableName));
+            ((InfoPanel)panel).openDealersAndDetailsTypeChooser(this.getType(tableName));
         } else if (tableName.equalsIgnoreCase("Поставляемые")) {
-            panel.openDealersAndDetailsTypeChooser(this.getType("Типы_товаров"));
+            ((InfoPanel)panel).openDealersAndDetailsTypeChooser(this.getType("Типы_товаров"));
         } else if (tableName.equalsIgnoreCase("Продажи")) {
-            panel.openSellsChooser(this.getType("Типы_товаров"));
+            ((InfoPanel)panel).openSellsChooser(this.getType("Типы_товаров"));
         } else if (tableName.equalsIgnoreCase("Ячейки")) {
             this.convertData(api.getCellsInfo());
         } else if (tableName.equalsIgnoreCase("Заказы")) {
@@ -74,7 +72,7 @@ public class InfoPresenter {
         for (ColumnNameType columnNameType : columnNameTypes) {
             columns.add(columnNameType.getName());
         }
-        panel.setDataTable(data, columns);
+        ((InfoPanel)panel).setDataTable(data, columns);
     }
 
     public Vector<String> getType(String tableName) throws SQLException {

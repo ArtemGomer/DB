@@ -1,29 +1,21 @@
 package presenters;
 
-import database.DatabaseApi;
 import panels.MainMenuPanel;
 import panels.data.RolesPanel;
 
-import javax.swing.*;
 import java.awt.*;
 
 
-public class MainMenuPresenter {
-
-    private final Container container;
-    private final MainMenuPanel mainMenuPanel;
-    private final DatabaseApi api;
+public class MainMenuPresenter extends BasePresenter{
 
     public MainMenuPresenter(Container container, MainMenuPanel mainMenuPanel) {
-        this.api = DatabaseApi.getInstance();
-        this.container = container;
-        this.mainMenuPanel = mainMenuPanel;
+        super(mainMenuPanel, container);
     }
 
     public void connectToServer(String ip, String port, String username, String password) {
         Runnable connect = () -> {
             try {
-                mainMenuPanel.setIsConnecting(true);
+                ((MainMenuPanel)panel).setIsConnecting(true);
                 if (checkValidData(username, password)) {
                     api.connectToDatabase(ip, port, username, password);
                     onConnected();
@@ -40,12 +32,8 @@ public class MainMenuPresenter {
     }
 
     private void onConnected() {
-        mainMenuPanel.setIsConnecting(false);
-        container.removeAll();
-        JPanel rolesPanel = new RolesPanel(container);
-        container.add(rolesPanel);
-        container.revalidate();
-        rolesPanel.requestFocus();
+        ((MainMenuPanel)panel).setIsConnecting(false);
+        openPanel(new RolesPanel(container));
     }
 
     private boolean checkValidData(String name, String password) {
@@ -53,8 +41,8 @@ public class MainMenuPresenter {
     }
 
     public void onError(String message) {
-        mainMenuPanel.setIsConnecting(false);
-        mainMenuPanel.showMessageDialog(message);
+        ((MainMenuPanel)panel).setIsConnecting(false);
+        panel.showMessageDialog(message);
     }
 
 }

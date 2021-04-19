@@ -1,5 +1,7 @@
 package panels.data;
 
+import frames.info.MyInfoFrame;
+import panels.BasePanel;
 import presenters.data.AdminOptionsPresenter;
 
 import javax.swing.*;
@@ -7,7 +9,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AdminOptionsPanel extends JPanel {
+public final class AdminOptionsPanel extends BasePanel {
 
     private final AdminOptionsPresenter adminOptionsPresenter;
     private final Font font = new Font(Font.SERIF, Font.BOLD, 25);
@@ -17,12 +19,13 @@ public class AdminOptionsPanel extends JPanel {
     private JButton openTablesBtn;
 
     public AdminOptionsPanel(Container container) {
+        super(container);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         adminOptionsPresenter = new AdminOptionsPresenter(container, this);
         initViews();
     }
 
-    private void initViews() {
+    protected void initViews() {
 
         openTablesBtn = new JButton("Открыть таблицы");
         openTablesBtn.setMaximumSize(new Dimension(350, 40));
@@ -32,7 +35,7 @@ public class AdminOptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                adminOptionsPresenter.openTables();
+                adminOptionsPresenter.openFrame(new MyInfoFrame("Таблицы", new Dimension(600, 400)), new TablesPanel(container));
             }
         });
 

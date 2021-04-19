@@ -1,24 +1,27 @@
 package panels.info;
 
 import customTables.DataTable;
+import panels.BasePanel;
 import presenters.info.InfoPresenter;
 
 import javax.swing.*;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
+import java.awt.*;
 import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.Objects;
 import java.util.Vector;
 
-public class InfoPanel extends JPanel {
+public class InfoPanel extends BasePanel {
 
     private final InfoPresenter presenter;
     private final String tableName;
 
-    public InfoPanel(String tableName) throws SQLException {
+    public InfoPanel(String tableName, Container container) throws SQLException {
+        super(container);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.presenter = new InfoPresenter(this);
+        this.presenter = new InfoPresenter(this, container);
         this.tableName = tableName;
         initViews();
     }

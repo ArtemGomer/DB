@@ -1,24 +1,30 @@
 package panels.data;
 
+import frames.info.MyInfoFrame;
+import panels.BasePanel;
+import panels.info.InfoOptionsPanel;
+import panels.info.InfoPanel;
 import presenters.data.CustomerOptionsPresenter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
-public class CustomerOptionsPanel extends JPanel {
+public final class CustomerOptionsPanel extends BasePanel {
 
     private final CustomerOptionsPresenter optionsPresenter;
     private final Font font = new Font(Font.SERIF, Font.BOLD, 25);
 
     public CustomerOptionsPanel(Container container) {
+        super(container);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         optionsPresenter = new CustomerOptionsPresenter(container, this);
         initViews();
     }
 
-    private void initViews() {
+    protected void initViews() {
 
         JButton makeOrderBtn = new JButton("Сделать заказ");
         makeOrderBtn.setFont(font);
@@ -40,7 +46,12 @@ public class CustomerOptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                optionsPresenter.openOrdersTable();
+                try {
+                    optionsPresenter.openFrame(new MyInfoFrame("Заказы", new Dimension(600, 400)), new InfoPanel("Заказы", container));
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    optionsPresenter.onError("Невозможно посмотреть заказы");
+                }
             }
         });
 
@@ -52,7 +63,7 @@ public class CustomerOptionsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                optionsPresenter.openInfoFrame();
+                optionsPresenter.openFrame(new MyInfoFrame("Информация", new Dimension(700, 800)), new InfoOptionsPanel(container));
             }
         });
 
@@ -73,10 +84,5 @@ public class CustomerOptionsPanel extends JPanel {
         add(infoBtn);
         add(disconnectBtn);
     }
-
-    public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
-    }
-
 }
 

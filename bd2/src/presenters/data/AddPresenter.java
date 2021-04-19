@@ -1,21 +1,19 @@
 package presenters.data;
 
-import database.DatabaseApi;
 import panels.data.AddPanel;
+import presenters.BasePresenter;
 import utils.ColumnNameType;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Vector;
 
-public class AddPresenter {
+public final class AddPresenter extends BasePresenter {
 
-    private final DatabaseApi api;
     private final Vector<JTextField> textFields;
-    private final AddPanel addPanel;
 
-    public AddPresenter(AddPanel addPanel) {
-        this.addPanel = addPanel;
-        api = DatabaseApi.getInstance();
+    public AddPresenter(Container container, AddPanel addPanel) {
+        super(addPanel, container);
         textFields = new Vector<>();
     }
 
@@ -38,10 +36,5 @@ public class AddPresenter {
             onError("Невозможно добавить элемент");
         }
     }
-
-    public void onError(String message) {
-        addPanel.showMessageDialog(message);
-    }
-
 
 }

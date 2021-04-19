@@ -1,4 +1,5 @@
 import frames.MainFrame;
+import panels.MainMenuPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,5 +14,6 @@ public class Main {
             ex.printStackTrace();
         }
         MainFrame mainFrame = new MainFrame();
+        mainFrame.open(new MainMenuPanel(mainFrame.getContentPane()));
     }
 }

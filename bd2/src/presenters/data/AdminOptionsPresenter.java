@@ -1,33 +1,24 @@
 package presenters.data;
 
-import database.DatabaseApi;
-import frames.info.MyInfoFrame;
 import panels.MainMenuPanel;
 import panels.data.AdminOptionsPanel;
-import panels.data.TablesPanel;
-import panels.info.InfoOptionsPanel;
+import panels.BasePanel;
+import presenters.BasePresenter;
 
-import javax.swing.*;
 import java.awt.*;
 
-public class AdminOptionsPresenter {
+public final class AdminOptionsPresenter extends BasePresenter {
 
-    private final AdminOptionsPanel adminOptionsPanel;
-    private final DatabaseApi databaseApi;
-    private final Container container;
-
-    public AdminOptionsPresenter(Container container, AdminOptionsPanel adminOptionsPanel) {
-        this.container = container;
-        this.adminOptionsPanel = adminOptionsPanel;
-        this.databaseApi = DatabaseApi.getInstance();
+    public AdminOptionsPresenter(Container container, BasePanel panel) {
+        super(panel, container);
     }
 
     public void recreateTables() {
         Runnable runnable = () -> {
             try {
-                adminOptionsPanel.setIsLoading(true);
-                databaseApi.recreateTables();
-                adminOptionsPanel.setIsLoading(false);
+                ((AdminOptionsPanel)panel).setIsLoading(true);
+                api.recreateTables();
+                ((AdminOptionsPanel)panel).setIsLoading(false);
             } catch (Exception ex) {
                 ex.printStackTrace();
                 onError("Невозможно создать БД");
@@ -37,42 +28,23 @@ public class AdminOptionsPresenter {
         thread.start();
     }
 
+    @Override
     public void onError(String message) {
-        adminOptionsPanel.setIsLoading(false);
-        adminOptionsPanel.showMessageDialog(message);
-    }
-
-    public void openInfoFrame() {
-        Runnable runnable = () -> {
-            try {
-                MyInfoFrame myInfoFrame = new MyInfoFrame("Информация о магазине", new Dimension(700, 800), new InfoOptionsPanel());
-            } catch (Exception ex) {
-                onError("Невозможно открыть информацию");
-            }
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
+        ((AdminOptionsPanel)panel).setIsLoading(false);
+        panel.showMessageDialog(message);
     }
 
     public void exit() {
-        databaseApi.disconnect();
-        onExit();
-    }
-
-    private void onExit() {
-        container.removeAll();
-        JPanel mainMenuPanel = new MainMenuPanel(container);
-        container.add(mainMenuPanel);
-        container.revalidate();
-        mainMenuPanel.requestFocus();
+        api.disconnect();
+        openPanel(new MainMenuPanel(container));
     }
 
     public void deleteDatabase() {
         Runnable runnable = () -> {
             try {
-                adminOptionsPanel.setIsLoading(true);
-                databaseApi.deleteDatabase();
-                adminOptionsPanel.setIsLoading(false);
+                ((AdminOptionsPanel)panel).setIsLoading(true);
+                api.deleteDatabase();
+                ((AdminOptionsPanel)panel).setIsLoading(false);
             } catch (Exception ex) {
                 onError("Невозможно удалить БД");
             }
@@ -81,7 +53,4 @@ public class AdminOptionsPresenter {
         thread.start();
     }
 
-    public void openTables() {
-        MyInfoFrame myInfoFrame = new MyInfoFrame("Таблицы", new Dimension(600, 400), new TablesPanel());
-    }
 }

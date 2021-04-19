@@ -2,6 +2,7 @@ package panels.data;
 
 import customTables.DataTable;
 import frames.data.AddFrame;
+import panels.BasePanel;
 import presenters.data.DataTablePresenter;
 import utils.ColumnNameType;
 
@@ -14,7 +15,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.Vector;
 
-public class DataTablePanel extends JPanel {
+public final class DataTablePanel extends BasePanel {
 
     private final DataTablePresenter dataTablePresenter;
     public DataTable dataTable = null;
@@ -24,17 +25,18 @@ public class DataTablePanel extends JPanel {
 
     private final Font fontBig = new Font(Font.SERIF, Font.BOLD, 15);
 
-    public DataTablePanel(String tableName) throws SQLException {
+    public DataTablePanel(String tableName, Container container) throws SQLException {
+        super(container);
         this.tableName = tableName;
-        dataTablePresenter = new DataTablePresenter(this, tableName);
+        dataTablePresenter = new DataTablePresenter(this, tableName, container);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         if (!dataTablePresenter.getAllDataFrom(null, null, tableName)) {
             throw new SQLException("Таблица не существует");
         }
-        initViews(tableName);
+        initViews();
     }
 
-    private void initViews(String tableName) {
+    protected void initViews() {
         JPanel optionPanel = new JPanel(new FlowLayout());
         optionPanel.setMaximumSize(new Dimension(500, 50));
 
@@ -63,7 +65,7 @@ public class DataTablePanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dataTablePresenter.openAddFrame(columnNameTypes);
+                dataTablePresenter.openFrame(new AddFrame("Добавить", columnNameTypes), new AddPanel(tableName, columnNameTypes, container));
             }
         });
 
@@ -90,10 +92,6 @@ public class DataTablePanel extends JPanel {
         add(dataTableScrollPane);
     }
 
-    public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
-    }
-
     public void setDataTable(Vector<Vector<String>> data, Vector<ColumnNameType> columnNameTypes) {
         Vector<String> vectorColumnNames = new Vector<>();
         for (ColumnNameType columnNameType: columnNameTypes) {
@@ -114,10 +112,6 @@ public class DataTablePanel extends JPanel {
 
     public JComboBox<String> setSortingByComboBox(String[] data) {
         return new JComboBox<>(data);
-    }
-
-    public void openAddFrame(Vector<ColumnNameType> columnNameTypes) {
-        AddFrame addFrame = new AddFrame(tableName, columnNameTypes);
     }
 
 }

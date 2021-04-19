@@ -1,20 +1,14 @@
 package presenters.data;
 
-import javax.swing.*;
+import panels.data.RolesPanel;
+import presenters.BasePresenter;
+
 import java.awt.*;
 
-public class RolesPresenter {
+public class RolesPresenter extends BasePresenter {
 
-    private final Container container;
-
-    public RolesPresenter(Container container) {
-        this.container = container;
+    public RolesPresenter(RolesPanel panel, Container container) {
+        super(panel, container);
     }
 
-    public void openPanel(JPanel panel) {
-        container.removeAll();
-        container.add(panel);
-        container.revalidate();
-        panel.requestFocus();
-    }
 }

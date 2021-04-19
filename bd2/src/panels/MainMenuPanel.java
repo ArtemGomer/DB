@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class MainMenuPanel extends JPanel {
+public final class MainMenuPanel extends BasePanel {
 
     MainMenuPresenter mainMenuPresenter;
     private JLabel connecting;
@@ -15,12 +15,13 @@ public class MainMenuPanel extends JPanel {
     private JButton connectToLocalhostBtn;
 
     public MainMenuPanel(Container container) {
+        super(container);
         mainMenuPresenter = new MainMenuPresenter(container, this);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         initViews();
     }
 
-    private void initViews() {
+    protected void initViews() {
 
         connectToServerBtn = new JButton("Подключиться к серверу");
         connectToServerBtn.setFont(new Font(Font.SERIF, Font.BOLD, 30));
@@ -97,10 +98,6 @@ public class MainMenuPanel extends JPanel {
         add(passwordTxt);
         add(connectToLocalhostBtn);
         add(connecting);
-    }
-
-    public void showMessageDialog(String message) {
-        JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 
     public void setIsConnecting(boolean connecting) {

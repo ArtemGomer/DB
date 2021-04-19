@@ -1,25 +1,22 @@
 package frames.data;
 
-import panels.data.DataTablePanel;
+import frames.BaseFrame;
 
 import javax.swing.*;
-import java.sql.SQLException;
 
-public class TableFrame extends JFrame {
+public final class TableFrame extends BaseFrame {
 
-    public TableFrame(String tableName) throws SQLException {
+    public TableFrame(String tableName) {
         super(tableName);
+        initViews();
+    }
+
+    @Override
+    protected void initViews() {
         setSize(600, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
-        initViews(tableName);
-        setVisible(true);
-    }
-
-    private void initViews(String tableName) throws SQLException {
-        DataTablePanel panel = new DataTablePanel(tableName);
-        add(panel);
     }
 
 }
