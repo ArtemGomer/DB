@@ -1,6 +1,5 @@
 package panels.data;
 
-import frames.data.TableFrame;
 import panels.BasePanel;
 import presenters.data.TablesPresenter;
 

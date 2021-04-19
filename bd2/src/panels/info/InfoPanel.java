@@ -1,6 +1,6 @@
 package panels.info;
 
-import customTables.DataTable;
+import tables.DataTable;
 import panels.BasePanel;
 import presenters.info.InfoPresenter;
 

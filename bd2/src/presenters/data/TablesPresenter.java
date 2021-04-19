@@ -1,6 +1,6 @@
 package presenters.data;
 
-import frames.data.TableFrame;
+import frames.InfoFrame;
 import panels.data.DataTablePanel;
 import panels.data.TablesPanel;
 import presenters.BasePresenter;
@@ -17,7 +17,7 @@ public final class TablesPresenter extends BasePresenter {
 
     public void openTable(String name) {
         try {
-            openFrame(new TableFrame(name), new DataTablePanel(name, container));
+            openFrame(new InfoFrame(name, new Dimension(600, 400)), new DataTablePanel(name, container));
         } catch (Exception ex) {
             ex.printStackTrace();
             onError("Невозможно открыть таблицу");

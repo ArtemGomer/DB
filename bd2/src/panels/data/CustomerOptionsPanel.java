@@ -1,16 +1,14 @@
 package panels.data;
 
-import frames.info.MyInfoFrame;
+import frames.InfoFrame;
 import panels.BasePanel;
 import panels.info.InfoOptionsPanel;
-import panels.info.InfoPanel;
 import presenters.data.CustomerOptionsPresenter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 
 public final class CustomerOptionsPanel extends BasePanel {
 
@@ -58,7 +56,7 @@ public final class CustomerOptionsPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                optionsPresenter.openFrame(new MyInfoFrame("Информация", new Dimension(700, 800)), new InfoOptionsPanel(container));
+                optionsPresenter.openFrame(new InfoFrame("Информация", new Dimension(700, 800)), new InfoOptionsPanel(container));
             }
         });
 

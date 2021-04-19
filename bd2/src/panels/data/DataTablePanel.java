@@ -1,7 +1,7 @@
 package panels.data;
 
-import customTables.DataTable;
-import frames.data.AddFrame;
+import tables.DataTable;
+import frames.InfoFrame;
 import panels.BasePanel;
 import presenters.data.DataTablePresenter;
 import utils.ColumnNameType;
@@ -65,7 +65,7 @@ public final class DataTablePanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dataTablePresenter.openFrame(new AddFrame(), new AddPanel(tableName, columnNameTypes, container));
+                dataTablePresenter.openFrame(new InfoFrame("Добавить", new Dimension(400, 300)), new AddPanel(tableName, columnNameTypes, container));
             }
         });
 

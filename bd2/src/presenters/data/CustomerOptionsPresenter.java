@@ -1,7 +1,7 @@
 package presenters.data;
 
-import frames.data.AddFrame;
-import frames.info.MyInfoFrame;
+import frames.BaseFrame;
+import frames.InfoFrame;
 import panels.MainMenuPanel;
 import panels.data.AddPanel;
 import panels.data.CustomerOptionsPanel;
@@ -29,13 +29,13 @@ public final class CustomerOptionsPresenter extends BasePresenter {
                 new ColumnNameType("количество", Types.INTEGER),
                 new ColumnNameType("дата_заказа", Types.TIMESTAMP)
         ));
-        AddFrame frame = new AddFrame();
+        BaseFrame frame = new InfoFrame("Заказы", new Dimension(400, 300));
         openFrame(frame, new AddPanel("Заказы", fields, frame.getContentPane()));
     }
 
     public void openOrdersFrame() {
         try {
-            openFrame(new MyInfoFrame("Заказы", new Dimension(600, 400)), new InfoPanel("Заказы", container));
+            openFrame(new InfoFrame("Заказы", new Dimension(600, 400)), new InfoPanel("Заказы", container));
         } catch (SQLException ex) {
             ex.printStackTrace();
             onError("Невозможно посмотреть заказы");

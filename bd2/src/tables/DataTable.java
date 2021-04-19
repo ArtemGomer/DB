@@ -1,4 +1,4 @@
-package customTables;
+package tables;
 
 import presenters.data.DataTablePresenter;
 

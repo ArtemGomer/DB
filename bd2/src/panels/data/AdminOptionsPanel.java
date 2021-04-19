@@ -1,6 +1,6 @@
 package panels.data;
 
-import frames.info.MyInfoFrame;
+import frames.InfoFrame;
 import panels.BasePanel;
 import presenters.data.AdminOptionsPresenter;
 
@@ -35,7 +35,7 @@ public final class AdminOptionsPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                adminOptionsPresenter.openFrame(new MyInfoFrame("Таблицы", new Dimension(600, 400)), new TablesPanel(container));
+                adminOptionsPresenter.openFrame(new InfoFrame("Таблицы", new Dimension(600, 400)), new TablesPanel(container));
             }
         });
 
