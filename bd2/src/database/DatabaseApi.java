@@ -14,7 +14,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.Vector;
 
-public class DatabaseApi {
+public final class DatabaseApi {
 
     private Connection connection;
     private Statement statement;
@@ -75,7 +75,6 @@ public class DatabaseApi {
             }
         }
         query.replace(query.length() - 1, query.length(), ")");
-        System.out.println(query);
         return statement.executeUpdate(query.toString());
     }
 

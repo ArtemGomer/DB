@@ -26,7 +26,7 @@ public final class CustomerOptionsPresenter extends BasePresenter {
                 new ColumnNameType("количество", Types.INTEGER),
                 new ColumnNameType("дата_заказа", Types.TIMESTAMP)
         ));
-        AddFrame frame = new AddFrame("Заказы", fields);
+        AddFrame frame = new AddFrame();
         openFrame(frame, new AddPanel("Заказы", fields, frame.getContentPane()));
     }
 

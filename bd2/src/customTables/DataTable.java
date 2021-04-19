@@ -7,7 +7,7 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.Vector;
 
-public class DataTable extends JTable {
+public final class DataTable extends JTable {
 
     private boolean editable = true;
     private final DataTablePresenter presenter;

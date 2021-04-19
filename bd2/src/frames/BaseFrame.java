@@ -3,14 +3,13 @@ package frames;
 import panels.BasePanel;
 
 import javax.swing.*;
-import java.sql.SQLException;
 
 public abstract class BaseFrame extends JFrame {
     public BaseFrame(String name) {
         super(name);
     }
 
-    protected abstract void initViews() throws SQLException;
+    protected abstract void initViews();
 
     public void open(BasePanel panel) {
         openPanel(panel);

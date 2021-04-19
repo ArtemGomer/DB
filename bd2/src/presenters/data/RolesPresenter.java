@@ -5,7 +5,7 @@ import presenters.BasePresenter;
 
 import java.awt.*;
 
-public class RolesPresenter extends BasePresenter {
+public final class RolesPresenter extends BasePresenter {
 
     public RolesPresenter(RolesPanel panel, Container container) {
         super(panel, container);

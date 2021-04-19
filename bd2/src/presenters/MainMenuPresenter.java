@@ -6,7 +6,7 @@ import panels.data.RolesPanel;
 import java.awt.*;
 
 
-public class MainMenuPresenter extends BasePresenter{
+public final class MainMenuPresenter extends BasePresenter{
 
     public MainMenuPresenter(Container container, MainMenuPanel mainMenuPanel) {
         super(mainMenuPanel, container);

@@ -1,6 +1,5 @@
 package panels.info;
 
-import frames.info.MyInfoFrame;
 import panels.BasePanel;
 import presenters.info.InfoOptionsPresenter;
 
@@ -30,12 +29,7 @@ public final class InfoOptionsPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    presenter.openFrame(new MyInfoFrame("Поставщики по категориям", new Dimension(600, 400)), new InfoPanel("Поставщики", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    presenter.onError("Невозможно открыть таблицу");
-                }
+                presenter.openTable("Поставщики");
             }
         });
 
@@ -46,12 +40,7 @@ public final class InfoOptionsPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    presenter.openFrame(new MyInfoFrame("Детали по категориям", new Dimension(600, 400)), new InfoPanel("Поставляемые", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    presenter.onError("Невозможно открыть таблицу");
-                }
+                presenter.openTable("Поставляемые");
             }
         });
 
@@ -62,12 +51,7 @@ public final class InfoOptionsPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    presenter.openFrame(new MyInfoFrame("Продажи по типу", new Dimension(600, 400)), new InfoPanel("Продажи", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    presenter.onError("Невозможно открыть таблицу");
-                }
+                presenter.openTable("Продажи");
             }
         });
 
@@ -78,12 +62,7 @@ public final class InfoOptionsPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    presenter.openFrame(new MyInfoFrame("Все ячейки склада", new Dimension(600, 400)), new InfoPanel("Ячейки", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    presenter.onError("Невозможно открыть таблицу");
-                }
+                presenter.openTable("Ячейки");
             }
         });
 

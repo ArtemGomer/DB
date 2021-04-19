@@ -29,12 +29,7 @@ public final class TablesPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    tablesPresenter.openFrame(new TableFrame("Поставляемые"), new DataTablePanel("Поставляемые", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    tablesPresenter.onError("Невозможно открыть таблицу");
-                }
+                tablesPresenter.openTable("Поставляемые");
             }
         });
 
@@ -44,12 +39,7 @@ public final class TablesPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    tablesPresenter.openFrame(new TableFrame("Поставщики"), new DataTablePanel("Поставщики", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    tablesPresenter.onError("Невозможно открыть таблицу");
-                }
+                tablesPresenter.openTable("Поставщики");
             }
         });
 
@@ -59,12 +49,7 @@ public final class TablesPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    tablesPresenter.openFrame(new TableFrame("Типы товаров"), new DataTablePanel("Типы_товаров", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    tablesPresenter.onError("Невозможно открыть таблицу");
-                }
+                tablesPresenter.openTable("Типы_товаров");
             }
         });
 
@@ -74,12 +59,7 @@ public final class TablesPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    tablesPresenter.openFrame(new TableFrame("Пошлина"), new DataTablePanel("Пошлина", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    tablesPresenter.onError("Невозможно открыть таблицу");
-                }
+                tablesPresenter.openTable("Пошлина");
             }
         });
 
@@ -89,12 +69,7 @@ public final class TablesPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    tablesPresenter.openFrame(new TableFrame("Поставки"), new DataTablePanel("Поставки", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    tablesPresenter.onError("Невозможно открыть таблицу");
-                }
+                tablesPresenter.openTable("Поставки");
             }
         });
 
@@ -104,12 +79,7 @@ public final class TablesPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    tablesPresenter.openFrame(new TableFrame("Заказы"), new DataTablePanel("Заказы", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    tablesPresenter.onError("Невозможно открыть таблицу");
-                }
+                tablesPresenter.openTable("Заказы");
             }
         });
 
@@ -119,12 +89,7 @@ public final class TablesPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    tablesPresenter.openFrame(new TableFrame("Продажи"), new DataTablePanel("Продажи", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    tablesPresenter.onError("Невозможно открыть таблицу");
-                }
+                tablesPresenter.openTable("Продажи");
             }
         });
 
@@ -134,12 +99,7 @@ public final class TablesPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    tablesPresenter.openFrame(new TableFrame("Ячейки"), new DataTablePanel("Ячейки", container));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    tablesPresenter.onError("Невозможно открыть таблицу");
-                }
+                tablesPresenter.openTable("Ячейки");
             }
         });
 

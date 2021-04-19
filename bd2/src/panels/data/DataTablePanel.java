@@ -65,7 +65,7 @@ public final class DataTablePanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dataTablePresenter.openFrame(new AddFrame("Добавить", columnNameTypes), new AddPanel(tableName, columnNameTypes, container));
+                dataTablePresenter.openFrame(new AddFrame(), new AddPanel(tableName, columnNameTypes, container));
             }
         });
 

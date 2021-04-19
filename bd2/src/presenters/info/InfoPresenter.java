@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Vector;
 
-public class InfoPresenter extends BasePresenter {
+public final class InfoPresenter extends BasePresenter {
 
 
     public InfoPresenter(InfoPanel panel, Container container) {
