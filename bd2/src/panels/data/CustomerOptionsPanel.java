@@ -46,12 +46,7 @@ public final class CustomerOptionsPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                try {
-                    optionsPresenter.openFrame(new MyInfoFrame("Заказы", new Dimension(600, 400)), new InfoPanel("Заказы", container));
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    optionsPresenter.onError("Невозможно посмотреть заказы");
-                }
+                optionsPresenter.openOrdersFrame();
             }
         });
 

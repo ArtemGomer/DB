@@ -1,13 +1,16 @@
 package presenters.data;
 
 import frames.data.AddFrame;
+import frames.info.MyInfoFrame;
 import panels.MainMenuPanel;
 import panels.data.AddPanel;
 import panels.data.CustomerOptionsPanel;
+import panels.info.InfoPanel;
 import presenters.BasePresenter;
 import utils.ColumnNameType;
 
 import java.awt.*;
+import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Arrays;
 import java.util.Vector;
@@ -28,6 +31,15 @@ public final class CustomerOptionsPresenter extends BasePresenter {
         ));
         AddFrame frame = new AddFrame();
         openFrame(frame, new AddPanel("Заказы", fields, frame.getContentPane()));
+    }
+
+    public void openOrdersFrame() {
+        try {
+            openFrame(new MyInfoFrame("Заказы", new Dimension(600, 400)), new InfoPanel("Заказы", container));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            onError("Невозможно посмотреть заказы");
+        }
     }
 
     public void exit() {
