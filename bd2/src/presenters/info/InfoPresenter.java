@@ -1,6 +1,7 @@
 package presenters.info;
 
 import com.sun.javaws.exceptions.InvalidArgumentException;
+import panels.BasePanel;
 import panels.info.InfoPanel;
 import presenters.BasePresenter;
 import utils.ColumnNameType;
@@ -15,7 +16,7 @@ import java.util.Vector;
 public final class InfoPresenter extends BasePresenter {
 
 
-    public InfoPresenter(InfoPanel panel, Container container) {
+    public InfoPresenter(BasePanel panel, Container container) {
         super(panel, container);
     }
 

@@ -15,19 +15,29 @@ public final class RolesPanel extends BasePanel {
 
     public RolesPanel(Container container) {
         super(container);
-        setLayout(new GridLayout(1, 2));
+        setLayout(new FlowLayout(FlowLayout.CENTER));
         this.rolesPresenter = new RolesPresenter(this, container);
         initViews();
     }
 
     protected void initViews() {
-        JButton adminBtn = new JButton("Администратор");
+        JButton adminBtn = new JButton("Админ");
         adminBtn.setFont(font);
         adminBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 rolesPresenter.openPanel(new AdminOptionsPanel(container));
+            }
+        });
+
+        JButton traderBtn = new JButton("Продавец");
+        traderBtn.setFont(font);
+        traderBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                rolesPresenter.openPanel(new TraderOptionsPanel(container));
             }
         });
 
@@ -42,6 +52,7 @@ public final class RolesPanel extends BasePanel {
         });
 
         add(adminBtn);
+        add(traderBtn);
         add(customerBtn);
 
     }

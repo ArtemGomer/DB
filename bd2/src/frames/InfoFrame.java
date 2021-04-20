@@ -7,7 +7,6 @@ public final class InfoFrame extends BaseFrame {
 
     private final Dimension dimension;
 
-
     public InfoFrame(String name, Dimension dimension) {
         super(name);
         this.dimension = dimension;

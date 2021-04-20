@@ -3,9 +3,9 @@ package presenters.data;
 import com.sun.javaws.exceptions.InvalidArgumentException;
 import frames.BaseFrame;
 import frames.InfoFrame;
+import panels.BasePanel;
 import panels.MainMenuPanel;
 import panels.data.AddPanel;
-import panels.data.CustomerOptionsPanel;
 import panels.info.InfoPanel;
 import presenters.BasePresenter;
 import utils.ColumnNameType;
@@ -18,7 +18,7 @@ import java.util.Vector;
 
 public final class CustomerOptionsPresenter extends BasePresenter {
 
-    public CustomerOptionsPresenter(Container container, CustomerOptionsPanel optionsPanel) {
+    public CustomerOptionsPresenter(Container container, BasePanel optionsPanel) {
         super(optionsPanel, container);
     }
 

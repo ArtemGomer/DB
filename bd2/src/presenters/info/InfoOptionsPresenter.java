@@ -2,7 +2,7 @@ package presenters.info;
 
 import com.sun.javaws.exceptions.InvalidArgumentException;
 import frames.InfoFrame;
-import panels.info.InfoOptionsPanel;
+import panels.BasePanel;
 import panels.info.InfoPanel;
 import presenters.BasePresenter;
 
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public final class InfoOptionsPresenter extends BasePresenter {
 
-    public InfoOptionsPresenter(InfoOptionsPanel panel, Container container){
+    public InfoOptionsPresenter(BasePanel panel, Container container){
         super(panel, container);
     }
 

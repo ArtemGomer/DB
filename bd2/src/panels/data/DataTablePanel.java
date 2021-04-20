@@ -23,7 +23,7 @@ public final class DataTablePanel extends BasePanel {
     private Vector<ColumnNameType> columnNameTypes;
     private JScrollPane dataTableScrollPane;
 
-    private final Font fontBig = new Font(Font.SERIF, Font.BOLD, 15);
+    private final Font fontBig = new Font(Font.SERIF, Font.BOLD, 13);
 
     public DataTablePanel(String tableName, Container container) throws SQLException {
         super(container);

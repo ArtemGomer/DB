@@ -1,30 +1,35 @@
 package panels.data;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import frames.InfoFrame;
 import panels.BasePanel;
 import panels.info.InfoCustomerOptionsPanel;
+import panels.info.InfoPanel;
+import panels.info.InfoTraderOptionsPanel;
 import presenters.data.CustomerOptionsPresenter;
+import presenters.data.TraderOptionsPresenter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
-public final class CustomerOptionsPanel extends BasePanel {
+public final class TraderOptionsPanel extends BasePanel {
 
-    private final CustomerOptionsPresenter optionsPresenter;
+    private final TraderOptionsPresenter optionsPresenter;
     private final Font font = new Font(Font.SERIF, Font.BOLD, 25);
 
-    public CustomerOptionsPanel(Container container) {
+    public TraderOptionsPanel(Container container) {
         super(container);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        optionsPresenter = new CustomerOptionsPresenter(container, this);
+        optionsPresenter = new TraderOptionsPresenter(container, this);
         initViews();
     }
 
     protected void initViews() {
 
-        JButton makeOrderBtn = new JButton("Сделать заказ");
+        JButton makeOrderBtn = new JButton("Выполнить заказ");
         makeOrderBtn.setFont(font);
         makeOrderBtn.setMaximumSize(new Dimension(350, 40));
         makeOrderBtn.setAlignmentX(CENTER_ALIGNMENT);
@@ -32,19 +37,19 @@ public final class CustomerOptionsPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                optionsPresenter.openAddOrderFrame();
+//                optionsPresenter.openAddOrderFrame();
             }
         });
 
-        JButton allOrdersBtn = new JButton("Посмотреть заказы");
-        allOrdersBtn.setFont(font);
-        allOrdersBtn.setMaximumSize(new Dimension(350, 40));
-        allOrdersBtn.setAlignmentX(CENTER_ALIGNMENT);
-        allOrdersBtn.addMouseListener(new MouseAdapter() {
+        JButton allCellsBtn = new JButton("Посмотреть склад");
+        allCellsBtn.setFont(font);
+        allCellsBtn.setMaximumSize(new Dimension(350, 40));
+        allCellsBtn.setAlignmentX(CENTER_ALIGNMENT);
+        allCellsBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                optionsPresenter.openOrdersFrame();
+                optionsPresenter.openCellsFrame();
             }
         });
 
@@ -56,7 +61,7 @@ public final class CustomerOptionsPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                optionsPresenter.openFrame(new InfoFrame("Информация", new Dimension(400, 300)), new InfoCustomerOptionsPanel(container));
+                optionsPresenter.openFrame(new InfoFrame("Информация", new Dimension(700, 800)), new InfoTraderOptionsPanel(container));
             }
         });
 
@@ -73,7 +78,7 @@ public final class CustomerOptionsPanel extends BasePanel {
         });
 
         add(makeOrderBtn);
-        add(allOrdersBtn);
+        add(allCellsBtn);
         add(infoBtn);
         add(disconnectBtn);
     }
