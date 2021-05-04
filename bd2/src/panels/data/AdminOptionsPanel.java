@@ -82,7 +82,7 @@ public final class AdminOptionsPanel extends BasePanel {
         add(disconnectBtn);
     }
 
-    public void showMessageDialog(String message) {
+    public void onError(String message) {
         JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
     }
 

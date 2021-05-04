@@ -1,19 +1,14 @@
 package panels.data;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import frames.InfoFrame;
 import panels.BasePanel;
-import panels.info.InfoCustomerOptionsPanel;
-import panels.info.InfoPanel;
 import panels.info.InfoTraderOptionsPanel;
-import presenters.data.CustomerOptionsPresenter;
 import presenters.data.TraderOptionsPresenter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 
 public final class TraderOptionsPanel extends BasePanel {
 

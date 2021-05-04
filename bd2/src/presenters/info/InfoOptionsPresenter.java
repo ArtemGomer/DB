@@ -1,6 +1,5 @@
 package presenters.info;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import frames.InfoFrame;
 import panels.BasePanel;
 import panels.info.InfoPanel;
@@ -21,7 +20,6 @@ public final class InfoOptionsPresenter extends BasePresenter {
         } catch (SQLException ex) {
             ex.printStackTrace();
             onError("Невозможно открыть таблицу");
-        } catch (InvalidArgumentException ignored) {
         }
     }
 

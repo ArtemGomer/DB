@@ -1,6 +1,5 @@
 package presenters.info;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import panels.BasePanel;
 import panels.info.InfoPanel;
 import presenters.BasePresenter;
@@ -20,7 +19,7 @@ public final class InfoPresenter extends BasePresenter {
         super(panel, container);
     }
 
-    public void setTable(String tableName) throws SQLException, InvalidArgumentException {
+    public void setTable(String tableName) throws SQLException {
         if (tableName.equalsIgnoreCase("Поставщики")) {
             ((InfoPanel) panel).openDealersAndDetailsTypeChooser(this.getType(tableName));
         } else if (tableName.equalsIgnoreCase("Поставляемые")) {

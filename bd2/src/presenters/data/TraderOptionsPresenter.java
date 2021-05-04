@@ -1,20 +1,13 @@
 package presenters.data;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-import frames.BaseFrame;
 import frames.InfoFrame;
 import panels.BasePanel;
 import panels.MainMenuPanel;
-import panels.data.AddPanel;
 import panels.info.InfoPanel;
 import presenters.BasePresenter;
-import utils.ColumnNameType;
 
 import java.awt.*;
 import java.sql.SQLException;
-import java.sql.Types;
-import java.util.Arrays;
-import java.util.Vector;
 
 public final class TraderOptionsPresenter extends BasePresenter {
 
@@ -28,7 +21,6 @@ public final class TraderOptionsPresenter extends BasePresenter {
         } catch (SQLException ex) {
             ex.printStackTrace();
             onError("Невозможно открыть таблицу");
-        } catch (InvalidArgumentException ignored) {
         }
     }
 

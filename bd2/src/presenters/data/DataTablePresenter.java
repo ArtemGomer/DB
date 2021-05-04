@@ -67,7 +67,7 @@ public final class DataTablePresenter extends BasePresenter {
         try {
             return api.updateItemIn(tableName, keyName, newValue, columnName, id);
         } catch (Exception ex) {
-            panel.showMessageDialog("Невозможно обновить элемент");
+            panel.onError("Невозможно обновить элемент");
             return 0;
         }
     }

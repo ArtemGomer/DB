@@ -31,7 +31,7 @@ public final class AdminOptionsPresenter extends BasePresenter {
     @Override
     public void onError(String message) {
         ((AdminOptionsPanel)panel).setIsLoading(false);
-        panel.showMessageDialog(message);
+        panel.onError(message);
     }
 
     public void exit() {

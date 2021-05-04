@@ -172,6 +172,21 @@ public final class DatabaseApi {
         return statement.executeQuery(query);
     }
 
+    public ResultSet getUser(String login, String password) throws SQLException {
+        login = "'" + login + "'";
+        password = "'" + password + "'";
+        String query = "SELECT * FROM Users WHERE login = " + login + " AND password = " + password;
+        return statement.executeQuery(query);
+    }
+
+    public int addUser(String login, String password, String role) throws SQLException {
+        login = "'" + login + "'";
+        password = "'" + password + "'";
+        role = "'" + role + "'";
+        String query = "INSERT INTO Users VALUES(" + login + "," + role + "," + password + ")";
+        return statement.executeUpdate(query);
+    }
+
     public void disconnect() {
         try {
             if (connection != null && !connection.isClosed()) {

@@ -1,10 +1,9 @@
 package presenters;
 
+import panels.LoginPanel;
 import panels.MainMenuPanel;
-import panels.data.RolesPanel;
 
 import java.awt.*;
-
 
 public final class MainMenuPresenter extends BasePresenter{
 
@@ -33,7 +32,7 @@ public final class MainMenuPresenter extends BasePresenter{
 
     private void onConnected() {
         ((MainMenuPanel)panel).setIsConnecting(false);
-        openPanel(new RolesPanel(container));
+        openPanel(new LoginPanel(container));
     }
 
     private boolean checkValidData(String name, String password) {
@@ -42,7 +41,7 @@ public final class MainMenuPresenter extends BasePresenter{
 
     public void onError(String message) {
         ((MainMenuPanel)panel).setIsConnecting(false);
-        panel.showMessageDialog(message);
+        panel.onError(message);
     }
 
 }

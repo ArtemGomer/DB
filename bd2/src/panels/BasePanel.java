@@ -1,7 +1,5 @@
 package panels;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
@@ -14,8 +12,13 @@ public abstract class BasePanel extends JPanel {
         this.container = container;
     }
 
-    protected abstract void initViews() throws SQLException, InvalidArgumentException;
-    public void showMessageDialog(String message) {
+    protected abstract void initViews() throws SQLException;
+
+    public void onError(String message) {
         JOptionPane.showMessageDialog(null, message, "Ошибка", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void onSuccess(String message) {
+        JOptionPane.showMessageDialog(null, message, "Успех", JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -25,7 +25,11 @@ public abstract class BasePresenter {
     }
 
     public void onError(String message) {
-        panel.showMessageDialog(message);
+        panel.onError(message);
+    }
+
+    public void onSuccess(String message) {
+        panel.onSuccess(message);
     }
 
     public void openFrame(BaseFrame frame, BasePanel panel) {
