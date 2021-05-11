@@ -21,7 +21,7 @@ public class RegisterPanel extends BasePanel{
 
     @Override
     protected void initViews(){
-        JLabel label = new JLabel("Регистрация");
+        JLabel label = new JLabel("Новый пользователь");
         label.setFont(new Font(Font.SERIF, Font.BOLD, 40));
         label.setAlignmentX(CENTER_ALIGNMENT);
 
@@ -35,7 +35,7 @@ public class RegisterPanel extends BasePanel{
         passwordTextField.setAlignmentX(CENTER_ALIGNMENT);
         passwordTextField.setMaximumSize(new Dimension(400, 50));
 
-        JComboBox<String> rolesComboBox = new JComboBox<>(new String[]{"Админ", "Продавец", "Посетитель"});
+        JComboBox<String> rolesComboBox = new JComboBox<>(new String[]{"Продавец", "Посетитель"});
         rolesComboBox.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         rolesComboBox.setAlignmentX(CENTER_ALIGNMENT);
         rolesComboBox.setMaximumSize(new Dimension(400, 50));

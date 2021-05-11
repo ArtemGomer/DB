@@ -1,9 +1,13 @@
 package presenters;
 
-import panels.LoginPanel;
 import panels.MainMenuPanel;
+import panels.data.AdminOptionsPanel;
+import panels.data.CustomerOptionsPanel;
+import panels.data.TraderOptionsPanel;
 
 import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public final class MainMenuPresenter extends BasePresenter{
 
@@ -17,7 +21,7 @@ public final class MainMenuPresenter extends BasePresenter{
                 ((MainMenuPanel)panel).setIsConnecting(true);
                 if (checkValidData(username, password)) {
                     api.connectToDatabase(ip, port, username, password);
-                    onConnected();
+                    onConnected(username);
                 } else {
                     onError("Заполните все поля");
                 }
@@ -30,10 +34,32 @@ public final class MainMenuPresenter extends BasePresenter{
         connectionThread.start();
     }
 
-    private void onConnected() {
+    private void onConnected(String username) {
         ((MainMenuPanel)panel).setIsConnecting(false);
-        openPanel(new LoginPanel(container));
+        openUser(username);
     }
+
+    private void openUser(String username) {
+        try {
+            ResultSet user = api.getUser(username);
+            if (!user.last()) {
+                onError("Нет такого пользователя!");
+            } else {
+                user.first();
+                String role = user.getString(2);
+                if (role.equalsIgnoreCase("Админ")) {
+                    openPanel(new AdminOptionsPanel(container));
+                } else if (role.equalsIgnoreCase("Продавец")) {
+                    openPanel(new TraderOptionsPanel(container));
+                } else {
+                    openPanel(new CustomerOptionsPanel(container));
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
     private boolean checkValidData(String name, String password) {
         return !name.isEmpty() && !password.isEmpty();

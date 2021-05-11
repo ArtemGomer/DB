@@ -38,14 +38,14 @@ public final class DatabaseApi {
                             String columnName,
                             String id) throws SQLException {
         String valueToUpdate = " = '" + newValue + "'";
-        String query = "UPDATE " + tableName + " SET " + columnName + valueToUpdate + "WHERE " + keyName + "=" + id;
+        String query = "UPDATE " + "GOMER." + tableName + " SET " + columnName + valueToUpdate + "WHERE " + keyName + "=" + id;
         return statement.executeUpdate(query);
     }
 
     public int deleteDataFrom(String tableName,
                               String keyName,
                               String key) throws SQLException {
-        String query = "DELETE FROM " + tableName + " WHERE " + keyName + " = " + key;
+        String query = "DELETE FROM " + "GOMER." + tableName + " WHERE " + keyName + " = " + key;
         return statement.executeUpdate(query);
     }
 
@@ -53,7 +53,7 @@ public final class DatabaseApi {
                          Vector<ColumnNameType> columnNameTypes,
                          Vector<String> data) throws SQLException {
         StringBuilder query = new StringBuilder();
-        query.append("INSERT INTO ").append(tableName).append("(");
+        query.append("INSERT INTO ").append("GOMER.").append(tableName).append("(");
         for (int i = 1; i < columnNameTypes.size(); i++) {
             query.append(columnNameTypes.get(i).getName()).append(",");
         }
@@ -65,7 +65,7 @@ public final class DatabaseApi {
                     Date date = new Date();
                     String strDateFormat = "MMdy";
                     DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
-                    String formattedDate= dateFormat.format(date);
+                    String formattedDate = dateFormat.format(date);
                     query.append("TO_DATE(").append("'").append(formattedDate).append("', 'MMDDYYYY'),");
                 } else {
                     query.append("TO_DATE(").append("'").append(data.get(i - 1).replaceAll("-", "")).append("', 'MMDDYYYY'),");
@@ -83,9 +83,9 @@ public final class DatabaseApi {
                                  String tableName) throws SQLException {
         String query;
         if (sorting == null || sortingBy == null || sorting.equalsIgnoreCase("no")) {
-            query = "SELECT * FROM " + tableName;
+            query = "SELECT * FROM " + "GOMER." + tableName;
         } else {
-            query = "SELECT * FROM " + tableName + " ORDER BY " + sortingBy + " " + sorting;
+            query = "SELECT * FROM " + "GOMER." + tableName + " ORDER BY " + sortingBy + " " + sorting;
         }
 
         return statement.executeQuery(query);
@@ -127,19 +127,19 @@ public final class DatabaseApi {
 
     public ResultSet getDealersInfo(String type) throws SQLException {
         type = "'" + type + "'";
-        String query = "SELECT имя, тип, страна, пошлина FROM Поставщики" +
-                " INNER JOIN Пошлина ON Поставщики.пошлина_id = Пошлина.id" +
+        String query = "SELECT имя, тип, страна, пошлина FROM GOMER.Поставщики" +
+                " INNER JOIN GOMER.Пошлина ON Поставщики.пошлина_id = Пошлина.id" +
                 " WHERE тип = " + type;
         return statement.executeQuery(query);
     }
 
     public ResultSet getDeliveredGoodsInfo(String type) throws SQLException {
         type = "'" + type + "'";
-        String query = "SELECT Типы_товаров.тип as Тип_товара, Поставщики.тип as Тип_поставщика," +
-                " Поставщики.имя as Имя_поставщика, цена FROM Поставляемые" +
-                " INNER JOIN Типы_товаров ON Поставляемые.типы_товаров_id = Типы_товаров.id" +
-                " INNER JOIN Поставщики ON Поставляемые.поставщики_id = поставщики.id " +
-                " WHERE Типы_товаров.тип = " + type;
+        String query = "SELECT GOMER.Типы_товаров.тип as Тип_товара, GOMER.Поставщики.тип as Тип_поставщика," +
+                " GOMER.Поставщики.имя as Имя_поставщика, цена FROM GOMER.Поставляемые" +
+                " INNER JOIN GOMER.Типы_товаров ON GOMER.Поставляемые.типы_товаров_id = GOMER.Типы_товаров.id" +
+                " INNER JOIN GOMER.Поставщики ON GOMER.Поставляемые.поставщики_id = GOMER.поставщики.id " +
+                " WHERE GOMER.Типы_товаров.тип = " + type;
         return statement.executeQuery(query);
     }
 
@@ -148,43 +148,63 @@ public final class DatabaseApi {
         if (amount.isEmpty()) {
             amount = "0";
         }
-        String query = "SELECT имя, тип, количество, дата_продажи FROM Продажи" +
-                " INNER JOIN Заказы ON Продажи.заказы_id = Заказы.id WHERE тип = " +
+        String query = "SELECT имя, тип, количество, дата_продажи FROM GOMER.Продажи" +
+                " INNER JOIN GOMER.Заказы ON GOMER.Продажи.заказы_id = GOMER.Заказы.id WHERE тип = " +
                 type + " AND количество > " + amount;
         return statement.executeQuery(query);
     }
 
     public ResultSet getCellsInfo() throws SQLException {
-        String query = "SELECT Ячейки.id, Типы_товаров.тип, Поставщики.имя as производитель, Ячейки.количество, Поставляемые.размер_товара * Ячейки.количество AS заполненность, 20 AS вместимость" +
-                " FROM Ячейки INNER JOIN Поставляемые ON Поставляемые.id = Ячейки.поставляемые_id" +
-                " INNER JOIN Поставщики ON Поставщики.id = Поставляемые.поставщики_id" +
-                " INNER JOIN Типы_товаров ON Поставляемые.типы_товаров_id = Типы_товаров.id";
+        String query = "SELECT GOMER.Ячейки.id, GOMER.Типы_товаров.тип, GOMER.Поставщики.имя as производитель, GOMER.Ячейки.количество, GOMER.Поставляемые.размер_товара * GOMER.Ячейки.количество AS заполненность, 20 AS вместимость" +
+                " FROM GOMER.Ячейки INNER JOIN GOMER.Поставляемые ON GOMER.Поставляемые.id = GOMER.Ячейки.поставляемые_id" +
+                " INNER JOIN GOMER.Поставщики ON GOMER.Поставщики.id = GOMER.Поставляемые.поставщики_id" +
+                " INNER JOIN GOMER.Типы_товаров ON GOMER.Поставляемые.типы_товаров_id = GOMER.Типы_товаров.id";
         return statement.executeQuery(query);
     }
 
     public ResultSet getOrdersInfo() throws SQLException {
-        String query = "SELECT Заказы.имя, Заказы.тип, Заказы.количество, Заказы.дата_заказа FROM Заказы ";
+        String query = "SELECT GOMER.Заказы.имя, GOMER.Заказы.тип, GOMER.Заказы.количество, GOMER.Заказы.исполнен, GOMER.Заказы.дата_заказа FROM GOMER.Заказы ";
+        return statement.executeQuery(query);
+    }
+
+    public ResultSet getIncompleteOrders() throws SQLException {
+        String query = "SELECT * FROM GOMER.Заказы WHERE GOMER.Заказы.исполнен = 0";
         return statement.executeQuery(query);
     }
 
     public ResultSet getTypes(String tableName) throws SQLException {
-        String query = "SELECT DISTINCT тип FROM " + tableName;
+        String query = "SELECT DISTINCT тип FROM " + "GOMER." + tableName;
         return statement.executeQuery(query);
     }
 
-    public ResultSet getUser(String login, String password) throws SQLException {
-        login = "'" + login + "'";
-        password = "'" + password + "'";
-        String query = "SELECT * FROM Users WHERE login = " + login + " AND password = " + password;
+    public ResultSet getUser(String username) throws SQLException {
+        username = "'" + username + "'";
+        String query = "SELECT * FROM GOMER.Пользователи WHERE username = " + username;
         return statement.executeQuery(query);
     }
 
-    public int addUser(String login, String password, String role) throws SQLException {
-        login = "'" + login + "'";
-        password = "'" + password + "'";
-        role = "'" + role + "'";
-        String query = "INSERT INTO Users VALUES(" + login + "," + role + "," + password + ")";
-        return statement.executeUpdate(query);
+
+    public void addUser(String login, String password, String role) throws SQLException {
+
+        String newLogin = "'" + login + "'";
+        String newRole = "'" + role + "'";
+        String query3 = "INSERT INTO GOMER.ПОЛЬЗОВАТЕЛИ VALUES(" + newLogin + "," + newRole + ")";
+        statement.executeQuery(query3);
+
+        String query1 = "CREATE USER " + login +
+                " IDENTIFIED BY " + password +
+                " DEFAULT TABLESPACE USERS" +
+                " TEMPORARY TABLESPACE TEMP";
+        statement.executeQuery(query1);
+
+        String query2 = "";
+        if (role.equalsIgnoreCase("Продавец")) {
+            query2 = "GRANT trader_g4 to " + login;
+        } else if (role.equalsIgnoreCase("Посетитель")) {
+            query2 = "GRANT customer_g4 to " + login;
+        }
+        statement.executeQuery(query2);
+
     }
 
     public void disconnect() {

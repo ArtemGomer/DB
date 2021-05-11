@@ -2,6 +2,7 @@ package panels.data;
 
 import frames.InfoFrame;
 import panels.BasePanel;
+import panels.RegisterPanel;
 import presenters.data.AdminOptionsPresenter;
 
 import javax.swing.*;
@@ -76,9 +77,22 @@ public final class AdminOptionsPanel extends BasePanel {
             }
         });
 
+        JButton registerBtn = new JButton("Добавить пользователя");
+        registerBtn.setFont(font);
+        registerBtn.setAlignmentX(CENTER_ALIGNMENT);
+        registerBtn.setMaximumSize(new Dimension(350, 40));
+        registerBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                adminOptionsPresenter.openFrame(new InfoFrame("Регистрация", new Dimension(500, 300)), new RegisterPanel(container));
+            }
+        });
+
         add(openTablesBtn);
         add(recreateTablesBtn);
         add(deleteDatabaseBtn);
+        add(registerBtn);
         add(disconnectBtn);
     }
 

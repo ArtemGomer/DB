@@ -55,6 +55,7 @@ CREATE TABLE Заказы
     id         INTEGER PRIMARY KEY,
     имя       VARCHAR(100) NOT NULL,
     тип       VARCHAR(100) NOT NULL,
+    исполнен         INTEGER CHECK (исполнен >= 0 AND исполнен <= 1) NOT NULL,
     количество     INTEGER CHECK (количество > 0),
     дата_заказа DATE         NOT NULL
 );

@@ -1,5 +1,6 @@
 package tables;
 
+import presenters.BasePresenter;
 import presenters.data.DataTablePresenter;
 
 import javax.swing.*;
@@ -10,11 +11,11 @@ import java.util.Vector;
 public final class DataTable extends JTable {
 
     private boolean editable = true;
-    private final DataTablePresenter presenter;
+    private final BasePresenter presenter;
 
     public DataTable(Vector<Vector<String>> data,
                      Vector<String> columnNames,
-                     DataTablePresenter presenter) {
+                     BasePresenter presenter) {
         super(data, columnNames);
         this.presenter = presenter;
         setFont(new Font(Font.SERIF, Font.BOLD, 18));
@@ -24,7 +25,6 @@ public final class DataTable extends JTable {
 
     public void setEditable(boolean editable) {
         this.editable = editable;
-        rowSelectionAllowed = editable;
     }
 
     @Override
@@ -42,7 +42,7 @@ public final class DataTable extends JTable {
         String id = model.getValueAt(row, 0).toString();
         String keyName = model.getColumnName(0);
         String columnName = model.getColumnName(column);
-        if ((presenter.updateItem(keyName, aValue.toString(), columnName, id) > 0)) {
+        if ((((DataTablePresenter)presenter).updateItem(keyName, aValue.toString(), columnName, id) > 0)) {
             super.setValueAt(aValue, row, column);
         }
     }

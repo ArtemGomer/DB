@@ -32,7 +32,7 @@ public final class TraderOptionsPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-//                optionsPresenter.openAddOrderFrame();
+                optionsPresenter.openOrdersFrame();
             }
         });
 

@@ -46,7 +46,6 @@ public final class InfoCustomerOptionsPanel extends BasePanel {
             }
         });
 
-
         add(dealersInfoBtn);
         add(detailsInfoBtn);
 

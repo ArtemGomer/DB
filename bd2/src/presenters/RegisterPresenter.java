@@ -13,13 +13,9 @@ public class RegisterPresenter extends BasePresenter {
 
     public void addUser(String login, String password, String role) {
         try {
-            int er = api.addUser(login, password, role);
-            if (er == 0) {
-                onError("Не вышло добавить пользователя!");
-            } else {
-                onSuccess("Регистрация прошла успешно!");
-            }
+            api.addUser(login, password, role);
         } catch (SQLException ex) {
+            ex.printStackTrace();
             onError("Не вышло добавить пользователя!");
         }
     }

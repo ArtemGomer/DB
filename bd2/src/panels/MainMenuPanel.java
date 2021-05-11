@@ -23,6 +23,16 @@ public final class MainMenuPanel extends BasePanel {
 
     protected void initViews() {
 
+        JLabel usernameLabel = new JLabel("Имя пользователя");
+        usernameLabel.setFont(new Font(Font.SERIF, Font.ITALIC, 25));
+        usernameLabel.setAlignmentX(CENTER_ALIGNMENT);
+        usernameLabel.setMaximumSize(new Dimension(400, 50));
+
+        JLabel passwordLabel = new JLabel("Пароль");
+        passwordLabel.setFont(new Font(Font.SERIF, Font.ITALIC, 25));
+        passwordLabel.setAlignmentX(CENTER_ALIGNMENT);
+        passwordLabel.setMaximumSize(new Dimension(400, 50));
+
         connectToServerBtn = new JButton("Подключиться к серверу");
         connectToServerBtn.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         connectToServerBtn.setAlignmentX(CENTER_ALIGNMENT);
@@ -33,7 +43,7 @@ public final class MainMenuPanel extends BasePanel {
         infoLabel.setAlignmentX(CENTER_ALIGNMENT);
         infoLabel.setMaximumSize(new Dimension(400, 50));
 
-        JTextField usernameTxt = new JTextField("18204_Gomer");
+        JTextField usernameTxt = new JTextField("GOMER");
         usernameTxt.setFont(new Font(Font.SERIF, Font.BOLD, 30));
         usernameTxt.setAlignmentX(CENTER_ALIGNMENT);
         usernameTxt.setMaximumSize(new Dimension(400, 50));
@@ -53,17 +63,6 @@ public final class MainMenuPanel extends BasePanel {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 mainMenuPresenter.connectToServer("84.237.50.81",
-                        "1521",
-                        "18204_Gomer",
-                        "artemgonka2000");
-            }
-        });
-
-        connectToLocalhostBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                mainMenuPresenter.connectToServer("127.0.0.1",
                         "1521",
                         usernameTxt.getText(),
                         new String(passwordTxt.getPassword()));
@@ -92,11 +91,11 @@ public final class MainMenuPanel extends BasePanel {
         connecting.setAlignmentX(CENTER_ALIGNMENT);
         connecting.setVisible(false);
 
-        add(connectToServerBtn);
-        add(infoLabel);
+        add(usernameLabel);
         add(usernameTxt);
+        add(passwordLabel);
         add(passwordTxt);
-        add(connectToLocalhostBtn);
+        add(connectToServerBtn);
         add(connecting);
     }
 

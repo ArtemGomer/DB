@@ -3,6 +3,7 @@ package presenters.data;
 import frames.InfoFrame;
 import panels.BasePanel;
 import panels.MainMenuPanel;
+import panels.data.CompleteOrdersPanel;
 import panels.info.InfoPanel;
 import presenters.BasePresenter;
 
@@ -21,6 +22,14 @@ public final class TraderOptionsPresenter extends BasePresenter {
         } catch (SQLException ex) {
             ex.printStackTrace();
             onError("Невозможно открыть таблицу");
+        }
+    }
+
+    public void openOrdersFrame() {
+        try {
+            openFrame(new InfoFrame("Заказы", new Dimension(600, 400)), new CompleteOrdersPanel(container));
+        } catch (SQLException throwables) {
+            onError("Невозможно открыть заказы");
         }
     }
 
