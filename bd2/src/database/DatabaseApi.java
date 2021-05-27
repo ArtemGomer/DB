@@ -183,12 +183,26 @@ public final class DatabaseApi {
         return statement.executeQuery(query);
     }
 
+    public void completeOrder(int id) throws SQLException {
+        String query1 = "UPDATE GOMER.ЗАКАЗЫ SET исполнен = 1 WHERE id = " + id;
+        statement.executeQuery(query1);
+        Date date = new Date();
+        String strDateFormat = "MMdy";
+        DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+        String formattedDate = dateFormat.format(date);
+        formattedDate = "'" + formattedDate + "'";
+        String query2 = "INSERT INTO Gomer.Продажи(заказы_id, дата_продажи) VALUES(" + id + "," + "TO_DATE(" + formattedDate + "," + "'MMDDYYYY'))";
+        statement.executeQuery(query2);
+    }
+
 
     public void addUser(String login, String password, String role) throws SQLException {
 
         String newLogin = "'" + login + "'";
         String newRole = "'" + role + "'";
-        String query3 = "INSERT INTO GOMER.ПОЛЬЗОВАТЕЛИ VALUES(" + newLogin + "," + newRole + ")";
+        String query3 = "INSERT INTO GOMER.ПОЛЬЗОВАТЕЛИ VALUES("
+                + newLogin + ","
+                + newRole + ")";
         statement.executeQuery(query3);
 
         String query1 = "CREATE USER " + login +
@@ -205,6 +219,14 @@ public final class DatabaseApi {
         }
         statement.executeQuery(query2);
 
+    }
+
+    public void rollbackChanges() throws SQLException {
+        connection.rollback();
+    }
+
+    public void commitChanges() throws SQLException {
+        connection.commit();
     }
 
     public void disconnect() {

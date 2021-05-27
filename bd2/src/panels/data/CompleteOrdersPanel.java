@@ -41,6 +41,8 @@ public class CompleteOrdersPanel extends BasePanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                System.out.println(dataTable.getModel().getValueAt(dataTable.getSelectedRow(), 0));
+                completeOrdersPresenter.completeOrder(Integer.parseInt((String) dataTable.getModel().getValueAt(dataTable.getSelectedRow(), 0)));
             }
         });
 

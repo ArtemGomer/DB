@@ -8,6 +8,7 @@ import utils.ColumnNameType;
 import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Vector;
 
@@ -44,6 +45,15 @@ public class CompleteOrdersPresenter extends BasePresenter {
             return false;
         }
         return true;
+    }
+
+    public void completeOrder(int id) {
+        try {
+            api.completeOrder(id);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            onError("Невозможно выполнить заказ");
+        }
     }
 
 

@@ -39,8 +39,4 @@ BEGIN
     INSERT INTO Заказы(имя, тип, количество, исполнен, дата_заказа) VALUES ('Иван', 'молоток', 3, 0, TO_DATE('07222019', 'MMDDYYYY'));
     INSERT INTO Заказы(имя, тип, количество, исполнен, дата_заказа) VALUES ('Артем', 'гвоздь', 2, 0, TO_DATE('07222019', 'MMDDYYYY'));
     INSERT INTO Заказы(имя, тип, количество, исполнен, дата_заказа) VALUES ('Максим', 'дрель', 7, 0, TO_DATE('07222019', 'MMDDYYYY'));
-
-    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (1, TO_DATE('07262019', 'MMDDYYYY'));
-    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (2, TO_DATE('08262019', 'MMDDYYYY'));
-    INSERT INTO Продажи(заказы_id, дата_продажи) VALUES (3, TO_DATE('09162019', 'MMDDYYYY'));
 END;
