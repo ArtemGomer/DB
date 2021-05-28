@@ -213,9 +213,9 @@ public final class DatabaseApi {
 
         String query2 = "";
         if (role.equalsIgnoreCase("Продавец")) {
-            query2 = "GRANT trader_g4 to " + login;
+            query2 = "GRANT trader_gomer to " + login;
         } else if (role.equalsIgnoreCase("Посетитель")) {
-            query2 = "GRANT customer_g4 to " + login;
+            query2 = "GRANT customer_gomer to " + login;
         }
         statement.executeQuery(query2);
 

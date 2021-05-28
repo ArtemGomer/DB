@@ -55,7 +55,7 @@ CREATE TABLE Заказы
     id         INTEGER PRIMARY KEY,
     имя       VARCHAR(100) NOT NULL,
     тип       VARCHAR(100) NOT NULL,
-    исполнен         INTEGER CHECK (исполнен >= 0 AND исполнен <= 1) NOT NULL,
+    исполнен         INTEGER DEFAULT 0,
     количество     INTEGER CHECK (количество > 0),
     дата_заказа DATE         NOT NULL
 );
@@ -75,3 +75,15 @@ CREATE TABLE Ячейки
     количество        INTEGER CHECK (количество > 0),
     CONSTRAINT cell_delivered_goods_fk FOREIGN KEY (поставляемые_id) REFERENCES Поставляемые (id) ON DELETE CASCADE
 );
+
+CREATE ROLE trader_gomer;
+GRANT CONNECT TO trader_gomer;
+GRANT SELECT ANY TABLE TO trader_gomer;
+GRANT INSERT ANY TABLE TO trader_gomer;
+GRANT UPDATE ANY TABLE TO trader_gomer;
+
+CREATE ROLE customer_gomer;
+GRANT CONNECT TO customer_gomer;
+GRANT SELECT ANY TABLE TO customer_gomer;
+GRANT INSERT ON Заказы TO customer_gomer;
+
